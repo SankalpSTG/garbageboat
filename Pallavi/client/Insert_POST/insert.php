@@ -1,9 +1,7 @@
 <?php
 
- header("Access-Control-Allow-Origin: *");
- header("Content-Type: application/json; charset=UTF-8");
-
- //Creating Array for JSON response
+ 
+ 
  $response = array();
 
  // Check if we got the field from the user
@@ -12,15 +10,10 @@ if (isset($_GET['id']) && isset($_GET['name']) && isset($_GET['age'])) {
 $id = $_GET['id'];
 $name = $_GET['name'];
 $age = $_GET['age'];
-// Include data base connect class
-//$filepath = realpath (dirname(_FILE_));
+
 include("DBConnection.php");
 
 
-// Connecting to database 
-//$dbo = new Connect();
-
-// Fire SQL query to insert data in weather
 $query = "INSERT INTO users(id, name,age) VALUES('$id', '$name', '$age')";
  
 
