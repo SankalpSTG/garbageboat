@@ -11,6 +11,6 @@ import time
 millis = lambda: int(round(time.time() * 1000))
 currenttime = millis()
 timedata = {'time': currenttime}
-url = "http://192.168.43.88/garbageboat/api/v1/latency_test/uploadtime.php"
+url = "http://192.168.43.31/garbageboat/api/v1/latency_test/uploadtime.php"
 response = req.post(url, data=timedata)
 print(response.text)

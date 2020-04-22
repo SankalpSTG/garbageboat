@@ -12,7 +12,7 @@ import json
 
 millis = lambda: int(round(time.time() * 1000))
 lastsendtime = 0
-url = "http://192.168.43.88/garbageboat/api/v1/latency_test/gettime.php"
+url = "http://192.168.43.31/garbageboat/api/v1/latency_test/gettime.php"
 while True:
     try:
         json_response = req.get(url)
