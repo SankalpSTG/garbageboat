@@ -15,15 +15,21 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     Button btRequest,btCheck;
+    /*TextView varText;*/
+    ArrayList<String> arrayList;
     static final int REQUEST_CODE=123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         btRequest= findViewById(R.id.bt_request);
         btCheck=findViewById(R.id.bt_check);
@@ -33,15 +39,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                     if(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.CAMERA)+
-                            ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.READ_CONTACTS)+
+                            ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.READ_PHONE_NUMBERS)+
+                            ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.READ_PHONE_STATE)+
+                            ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.ACCESS_COARSE_LOCATION)+
                             ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE) !=
                             PackageManager.PERMISSION_GRANTED){
                         if(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.CAMERA)||
-                                ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.READ_CONTACTS) ||
+                                ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.READ_PHONE_NUMBERS) ||
+                                ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.READ_PHONE_STATE) ||
+                                ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.ACCESS_COARSE_LOCATION)||
                                 ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE)){
                             AlertDialog.Builder builder= new AlertDialog.Builder(MainActivity.this);
                             builder.setTitle("Grant those permission");
-                            builder.setMessage("Camera , Read Contacts and Storage");
+                            builder.setMessage("Camera , Read phone numbers, state and Location and Storage");
                             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -49,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
                                             MainActivity.this,
                                             new String[]{
                                                     Manifest.permission.CAMERA,
-                                                    Manifest.permission.READ_CONTACTS,
+                                                    Manifest.permission.READ_PHONE_NUMBERS,
+                                                    Manifest.permission.READ_PHONE_STATE,
+                                                    Manifest.permission.ACCESS_COARSE_LOCATION,
                                                     Manifest.permission.READ_EXTERNAL_STORAGE
                                             },
                                             REQUEST_CODE
@@ -64,7 +76,9 @@ public class MainActivity extends AppCompatActivity {
                                     MainActivity.this,
                                     new String[]{
                                             Manifest.permission.CAMERA,
-                                            Manifest.permission.READ_CONTACTS,
+                                            Manifest.permission.READ_PHONE_NUMBERS,
+                                            Manifest.permission.READ_PHONE_STATE,
+                                            Manifest.permission.ACCESS_COARSE_LOCATION,
                                             Manifest.permission.READ_EXTERNAL_STORAGE
                                     },
                                     REQUEST_CODE
@@ -104,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
             }
     }
     }
+
+
+
 }
 
 
