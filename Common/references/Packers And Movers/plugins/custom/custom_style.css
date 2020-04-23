@@ -1,0 +1,65 @@
+head, body{
+	position:relative;
+	text-align:center;
+	width:100%;
+	margin:0 auto;
+	background:url("../../resources/images/general/truck2_blur.png");
+	background-size:auto 100%;
+	background-position:fixed;
+	background-repeat:no repeat;
+}
+a, a:hover{
+	color:#fff;
+	text-decoration:none;
+}
+header{
+	position:relative;
+	text-align:center;
+	width:100%;
+	margin:0 auto;
+	background:rgba(0, 0, 0, 0.5);
+}
+.header-cont{
+	position:relative;
+	text-align:left;
+	width:100%;
+	margin:0 auto;
+	padding:6px;
+}
+.c-container{
+	position:relative;
+	text-align:center;
+	width:100%;
+	min-height:750px;
+	margin-top:50px;
+}
+.card-container{
+	position:relative;
+	text-align:center;
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+}
+.xcard{
+	position:relative;
+	text-align:center;
+	width:100%;
+	margin: 0 auto;
+	padding: 75px 0;
+	background:rgba(0, 0, 0, 0.5);
+	font-family:calisto mt;
+	font-size:30px;
+	color:#fff;
+	transition:0.25s;
+}
+.xcard:hover{
+	background:rgba(254, 139, 1, 0.5);
+}
+footer{
+	position:relative;
+	text-align:center;
+	width:100%;
+	background:rgba(254, 139, 1, 0.2);
+	border-top:1px solid;
+	border-color:#fe8b01;
+}

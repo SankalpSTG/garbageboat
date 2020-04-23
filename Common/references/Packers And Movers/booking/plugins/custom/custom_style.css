@@ -1,0 +1,121 @@
+head, body{
+	position:relative;
+	text-align:center;
+	width:100%;
+	margin:0 auto;
+	background:url("../../resources/images/general/truck2_blur.png");
+	background-size:auto 100%;
+	background-position:fixed;
+	background-repeat:no repeat;
+}
+header{
+	position:relative;
+	text-align:center;
+	width:100%;
+	margin:0 auto;
+	background:rgba(0, 0, 0, 0.5);
+}
+.header-cont{
+	position:relative;
+	text-align:left;
+	width:100%;
+	margin:0 auto;
+	padding:6px;
+}
+.c-container{
+	position:relative;
+	text-align:center;
+	width:100%;
+	min-height:750px;
+	margin-top:50px;
+}
+.form-container{
+	position:relative;
+	text-align:center;
+	width:100%;
+	max-width:480px;
+	margin:0 auto;
+	background:rgba(0, 0, 0, 0.5);
+}
+.form-header{
+	color:rgba(255, 255, 255, 0.5);
+	padding:12px;
+}
+.simpleinput{
+	position:relative;
+	text-align:left;
+	width:250px;
+	background:rgba(0, 0, 0, 0);
+	color:rgba(255, 255, 255, 0.5);
+	font-size:16px;
+	border:0px;
+	padding:6px;
+	padding-top:9px;
+	margin:6px;
+	transition:0.25s;
+}
+.simpleinput:hover{
+	background:rgba(0, 0, 0, 0);
+	border-bottom:1px solid;
+	border-bottom-color:rgba(0, 0, 0, 0.8);
+}
+.simpleinput:focus{
+	background:rgba(0, 0, 0, 0.8);
+}
+.simpledateinput{
+	position:relative;
+	text-align:left;
+	width:75px;
+	background:rgba(0, 0, 0, 0);
+	color:rgba(255, 255, 255, 0.5);
+	font-size:16px;
+	border:0px;
+	padding:6px;
+	padding-top:9px;
+	margin:6px;
+	transition:0.25s;
+}
+.simpledateinput:hover{
+	background:rgba(0, 0, 0, 0);
+	border-bottom:1px solid;
+	border-bottom-color:rgba(0, 0, 0, 0.8);
+}
+.simpledateinput:focus{
+	background:rgba(0, 0, 0, 0.8);
+}
+.form-footer{
+	position:relative;
+	text-align:center;
+	width:100%;
+}
+.simpleinputsubmit{
+	position:relative;
+	text-align:center;
+	width:100%;
+	background:rgba(0, 0, 0, 0);
+	border:0px;
+	padding:8px;
+	font-size:16px;
+	transition:0.25s;
+}
+.simpleinputsubmit:hover{
+	background:rgba(0, 0, 0, 0.8);
+	color:rgba(255, 255, 255, 0.5);
+}
+.simpleinputsubmit:focus{
+	background:rgba(0, 0, 0, 1);
+	color:#fff;
+}
+label{
+	position:relative;
+	text-align:center;
+	color:rgba(255, 255, 255, 0.5);
+}
+footer{
+	position:relative;
+	text-align:center;
+	width:100%;
+	background:rgba(254, 139, 1, 0.2);
+	border-top:1px solid;
+	border-color:#fe8b01;
+}
