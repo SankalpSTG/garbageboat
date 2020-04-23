@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2020 at 09:10 AM
+-- Generation Time: Apr 23, 2020 at 10:38 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -20,6 +20,23 @@ SET time_zone = "+00:00";
 --
 -- Database: `garbageboat`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `credentials`
+--
+
+CREATE TABLE `credentials` (
+  `serial_id` bigint(20) NOT NULL,
+  `email_id` varchar(50) NOT NULL,
+  `mobile_no` int(10) NOT NULL,
+  `account_level` tinyint(4) NOT NULL DEFAULT 0,
+  `verification_level` tinyint(4) NOT NULL DEFAULT 0,
+  `token` text DEFAULT NULL,
+  `token_key` varchar(20) DEFAULT NULL,
+  `token_iv` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -47,14 +64,29 @@ INSERT INTO `latencytest` (`testid`, `sendtime`) VALUES
 
 CREATE TABLE `testtable` (
   `serial_id` bigint(20) NOT NULL,
-  `stringdata` bigint(20) NOT NULL,
+  `stringdata` text NOT NULL,
   `intdata` int(11) NOT NULL,
-  `floatdata` decimal(10,0) NOT NULL
+  `floatdata` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `testtable`
+--
+
+INSERT INTO `testtable` (`serial_id`, `stringdata`, `intdata`, `floatdata`) VALUES
+(1, 'hello world', 500, 5.4),
+(2, 'hello world', 500, 5.4),
+(3, 'hello world', 500, 5.4);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `credentials`
+--
+ALTER TABLE `credentials`
+  ADD PRIMARY KEY (`serial_id`);
 
 --
 -- Indexes for table `latencytest`
@@ -63,14 +95,32 @@ ALTER TABLE `latencytest`
   ADD PRIMARY KEY (`testid`);
 
 --
+-- Indexes for table `testtable`
+--
+ALTER TABLE `testtable`
+  ADD PRIMARY KEY (`serial_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `credentials`
+--
+ALTER TABLE `credentials`
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `latencytest`
 --
 ALTER TABLE `latencytest`
   MODIFY `testid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `testtable`
+--
+ALTER TABLE `testtable`
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
