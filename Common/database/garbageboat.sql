@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 23, 2020 at 10:38 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.4
+-- Host: localhost
+-- Generation Time: Apr 23, 2020 at 12:11 PM
+-- Server version: 5.7.11
+-- PHP Version: 5.6.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -31,12 +30,21 @@ CREATE TABLE `credentials` (
   `serial_id` bigint(20) NOT NULL,
   `email_id` varchar(50) NOT NULL,
   `mobile_no` int(10) NOT NULL,
-  `account_level` tinyint(4) NOT NULL DEFAULT 0,
-  `verification_level` tinyint(4) NOT NULL DEFAULT 0,
-  `token` text DEFAULT NULL,
+  `account_level` tinyint(4) NOT NULL DEFAULT '0',
+  `verification_level` tinyint(4) NOT NULL DEFAULT '0',
+  `token` text,
   `token_key` varchar(20) DEFAULT NULL,
   `token_iv` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `credentials`
+--
+
+INSERT INTO `credentials` (`serial_id`, `email_id`, `mobile_no`, `account_level`, `verification_level`, `token`, `token_key`, `token_iv`) VALUES
+(1, 'omkar.prayag@gmail.com', 1234567890, 0, 0, NULL, NULL, NULL),
+(2, 'sankalp.pol@gmail.com', 1234567890, 0, 0, NULL, NULL, NULL),
+(3, 'rushi.kale@gmail.com', 1234567890, 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -86,7 +94,8 @@ INSERT INTO `testtable` (`serial_id`, `stringdata`, `intdata`, `floatdata`) VALU
 -- Indexes for table `credentials`
 --
 ALTER TABLE `credentials`
-  ADD PRIMARY KEY (`serial_id`);
+  ADD PRIMARY KEY (`serial_id`),
+  ADD UNIQUE KEY `email_id` (`email_id`);
 
 --
 -- Indexes for table `latencytest`
@@ -108,21 +117,17 @@ ALTER TABLE `testtable`
 -- AUTO_INCREMENT for table `credentials`
 --
 ALTER TABLE `credentials`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `latencytest`
 --
 ALTER TABLE `latencytest`
   MODIFY `testid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `testtable`
 --
 ALTER TABLE `testtable`
   MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
