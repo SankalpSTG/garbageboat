@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 23, 2020 at 12:12 PM
+-- Generation Time: Apr 24, 2020 at 10:09 AM
 -- Server version: 5.7.11
 -- PHP Version: 5.6.18
 
@@ -44,7 +44,8 @@ CREATE TABLE `credentials` (
 INSERT INTO `credentials` (`serial_id`, `email_id`, `mobile_no`, `account_level`, `verification_level`, `token`, `token_key`, `token_iv`) VALUES
 (1, 'omkar.prayag@gmail.com', 1234567890, 0, 0, NULL, NULL, NULL),
 (2, 'sankalp.pol@gmail.com', 1234567890, 0, 0, NULL, NULL, NULL),
-(3, 'rushi.kale@gmail.com', 1234567890, 0, 0, NULL, NULL, NULL);
+(3, 'rushi.kale@gmail.com', 1234567890, 0, 0, NULL, NULL, NULL),
+(4, 'pallavi.kamble@gmail.com', 1234567890, 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -117,7 +118,7 @@ ALTER TABLE `testtable`
 -- AUTO_INCREMENT for table `credentials`
 --
 ALTER TABLE `credentials`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `latencytest`
 --
