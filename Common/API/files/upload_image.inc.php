@@ -28,5 +28,14 @@
 			}
 		}
 	}
-	echo uploadFile($_FILES["fileToUpload"], 1, "");
+	function fileUploaded($filekey){
+		if(empty($_FILES)) {
+			return false;       
+		} 
+		$filetocheck = $_FILES[$filekey];
+		if(!file_exists($filetocheck['tmp_name']) || !is_uploaded_file($filetocheck['tmp_name'])){
+			return false;
+		}   
+		return true;
+	}
 ?>
