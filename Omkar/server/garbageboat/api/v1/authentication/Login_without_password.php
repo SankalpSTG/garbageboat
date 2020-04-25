@@ -8,7 +8,7 @@ require ("../database/dbh.inc.php");
 		$email_id = mysqli_real_escape_string($conn, $_POST["email_id"]);
 		if(empty($email_id)){
 			$message["error"] = true;
-			$message["error_message"] = "Invalid email";
+			$message["error_message"] = "Invalid e-mail";
 			die(json_encode($message));	
 		}else{
 			if((filter_var($email_id, FILTER_VALIDATE_EMAIL) === false)){
