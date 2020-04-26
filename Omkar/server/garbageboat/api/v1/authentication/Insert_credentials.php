@@ -6,7 +6,6 @@
 		if(isset($_POST["email_id"]) && isset($_POST["mobile_no"])){
 			$email_id = mysqli_real_escape_string($conn, $_POST["email_id"]);
 			$mobile_no = mysqli_real_escape_string($conn, $_POST["mobile_no"]);
-			
 			if(empty($email_id) || empty($mobile_no)){
 				$message["error"] = true;
 				$message["error_message"] = "Invalid e-mail or mobile no.";
