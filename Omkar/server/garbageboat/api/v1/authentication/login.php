@@ -11,9 +11,9 @@ require("../database/dbh.inc.php");
 			$message["error_message"] = "Required all parameters";
 			die(json_encode($message));
 		}else{
-		if((filter_var($email_id, FILTER_VALIDATE_EMAIL) === false) || !preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=ยง!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=ยง!\?]{8,20}$/',$user_password)){
+		if((filter_var($email_id, FILTER_VALIDATE_EMAIL) === false) || !preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=ยง!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=ยง!\?]{8,20}$/', $user_password)){
 				$message["error"] = true;
-				$message["error_message"] = "Invalid parameters";	
+				$message["error_message"] = "Invalid Email or Password";	
 				die(json_encode($message));
 			}else{
 				$stmt = $conn->prepare("SELECT cred.serial_id, usr.password FROM users as usr, credentials as cred WHERE usr.credential_id = cred.serial_id and email_id = ?");
