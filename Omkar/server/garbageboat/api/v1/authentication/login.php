@@ -23,8 +23,8 @@ require("../database/dbh.inc.php");
 				$stmt->close();
 				if(mysqli_num_rows($result) == 1){
 					$row = mysqli_fetch_assoc($result);
-					$serial_id = $row["serial_id"];
-					$password = $row["password"];
+					$serial_id = (int) $row["serial_id"];
+					$password = (string) $row["password"];
 					if(password_verify($user_password, $password)==true){
 						$message["data"] = $serial_id;
 						$message["error"] = false;

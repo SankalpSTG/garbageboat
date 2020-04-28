@@ -21,7 +21,7 @@ require ("../database/dbh.inc.php");
 				$stmt->execute();
 				$result = $stmt->get_result();
 				$stmt->close();
-				if(mysqli_num_rows($result) > 0){	
+				if(mysqli_num_rows($result) == 1){	
 					$row = mysqli_fetch_assoc($result);
 					$message["error"] = false;
 					$message["error_message"] = "Success";
