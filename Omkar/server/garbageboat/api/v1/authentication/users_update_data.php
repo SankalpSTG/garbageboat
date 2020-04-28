@@ -27,7 +27,7 @@ require("../files/upload_image.inc.php");
 				$stmt->close();
 				if(mysqli_num_rows($result) == 1){
 					$row = mysqli_fetch_assoc($result);
-					$serial_id = $row["serial_id"];
+					$serial_id = (int) $row["serial_id"];
 					$row = mysqli_fetch_assoc($result);
 					$hash_password = password_hash($password, PASSWORD_DEFAULT);
 					$stmt = $conn->prepare("INSERT INTO users (company_name, pincode, address, credential_id, password) VALUES (?, ?, ?, ?, ?)");

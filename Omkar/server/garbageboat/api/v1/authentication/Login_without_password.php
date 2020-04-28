@@ -26,7 +26,7 @@ require ("../database/dbh.inc.php");
 					$message["error"] = false;
 					$message["error_message"] = "Success";
 					$data["email_id"] = $email_id;
-					$data["serial_id"] = $row["serial_id"];
+					$data["serial_id"] = (int) $row["serial_id"];
 					$message["data"]= $data;
 					die(json_encode($message));
 				}else{

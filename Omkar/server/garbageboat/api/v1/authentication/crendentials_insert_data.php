@@ -43,7 +43,7 @@
 							$row = mysqli_fetch_assoc($result);
 							$message["error"] = false;
 							$message["error_message"] = "Success";
-							$data["serial_id"] = $row["serial_id"];
+							$data["serial_id"] = (int) $row["serial_id"];
 							$data["email_id"] = $email_id;
 							$message["data"]=$data;
 							die(json_encode($message));
