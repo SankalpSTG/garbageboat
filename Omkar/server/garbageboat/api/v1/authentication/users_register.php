@@ -15,7 +15,7 @@ require("../files/upload_image.inc.php");
 			$message["error_message"] = "Invalid parameters";
 			die(json_encode($message));	
 		}else{
-			if(!is_numeric($serial_id) || !preg_match('/^[0-9]{6}+$/', $pincode) || !preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$password)){
+			if(!is_numeric($serial_id) || !preg_match('/^[0-9]{6}+$/', $pincode)){
 				$message["error"] = true;
 				$message["error_message"] = "Invalid parameters";
 				die(json_encode($message));
