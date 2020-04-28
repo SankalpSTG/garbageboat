@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1
--- http://www.phpmyadmin.net
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 27, 2020 at 04:25 PM
--- Server version: 5.7.11
--- PHP Version: 5.6.18
+-- Host: 127.0.0.1
+-- Generation Time: Apr 28, 2020 at 12:45 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,18 +24,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `boat_purchases`
+-- Table structure for table `admin_credentials`
 --
 
-CREATE TABLE `boat_purchases` (
-  `serial_id` bigint(20) NOT NULL,
-  `boat_type` int(11) NOT NULL,
-  `pet_name` int(11) NOT NULL,
-  `registration_number` int(11) NOT NULL,
-  `internet_id` int(11) NOT NULL,
-  `verified` tinyint(1) NOT NULL DEFAULT '0',
-  `company_id` bigint(20) NOT NULL
+CREATE TABLE `admin_credentials` (
+  `serial_id` int(11) NOT NULL,
+  `email_address` varchar(50) NOT NULL,
+  `password` text NOT NULL,
+  `admin_type` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin_credentials`
+--
+
+INSERT INTO `admin_credentials` (`serial_id`, `email_address`, `password`, `admin_type`) VALUES
+(1, 'sankalppolk123@gmail.com', '$2y$10$UipHMffeHkxjMM.lAH2oSunUfEPOdrpKkMeyuvRRGMx7gzM9M.q1q', NULL),
+(2, 'pallavikamble264@gmail.com', '$2y$10$UWeEeDEihnxaS0twXaWDoeB1rdGj225N6QijiixS0w8pWt8xx7nEu', NULL);
 
 -- --------------------------------------------------------
 
@@ -45,10 +51,10 @@ CREATE TABLE `boat_purchases` (
 CREATE TABLE `credentials` (
   `serial_id` bigint(20) NOT NULL,
   `email_id` varchar(50) NOT NULL,
-  `mobile_no` bigint(10) NOT NULL,
-  `account_level` tinyint(4) NOT NULL DEFAULT '0',
-  `verification_level` tinyint(4) NOT NULL DEFAULT '0',
-  `token` text,
+  `mobile_no` int(10) NOT NULL,
+  `account_level` tinyint(4) NOT NULL DEFAULT 0,
+  `verification_level` tinyint(4) NOT NULL DEFAULT 0,
+  `token` text DEFAULT NULL,
   `token_key` varchar(20) DEFAULT NULL,
   `token_iv` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -58,11 +64,16 @@ CREATE TABLE `credentials` (
 --
 
 INSERT INTO `credentials` (`serial_id`, `email_id`, `mobile_no`, `account_level`, `verification_level`, `token`, `token_key`, `token_iv`) VALUES
-(1, 'omkar.prayag@gmail.com', 8698847932, 0, 0, NULL, NULL, NULL),
-(2, 'sankalp.pol@gmail.com', 1234567899, 0, 0, NULL, NULL, NULL),
+(1, 'omkar.prayag@gmail.com', 1234567890, 0, 0, NULL, NULL, NULL),
+(2, 'sankalp.pol@gmail.com', 1234567890, 0, 0, NULL, NULL, NULL),
 (3, 'rushi.kale@gmail.com', 1234567890, 0, 0, NULL, NULL, NULL),
 (4, 'pallavi.kamble@gmail.com', 1234567890, 0, 0, NULL, NULL, NULL),
-(5, 'useless@gmail.com', 9967348445, 0, 0, NULL, NULL, NULL);
+(5, 'useless@gmail.com', 996726844, 0, 0, NULL, NULL, NULL),
+(6, 'sankalppolk123@gmail.com', 2147483647, 0, 0, NULL, NULL, NULL),
+(7, 'sankalppolk1234@gmail.com', 2147483647, 0, 0, NULL, NULL, NULL),
+(8, 'faizal@gmail.com', 2147483647, 0, 0, NULL, NULL, NULL),
+(9, 'hello', 11111, 0, 0, NULL, NULL, NULL),
+(10, 'jshesj', 646944, 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -94,7 +105,22 @@ CREATE TABLE `maintenance_schedules` (
   `month` tinyint(4) NOT NULL,
   `year` tinyint(4) NOT NULL,
   `boat_id` bigint(20) NOT NULL,
-  `maintenance_costs` int(11) NOT NULL DEFAULT '0'
+  `maintenance_costs` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projects`
+--
+
+CREATE TABLE `projects` (
+  `serial_id` bigint(20) NOT NULL,
+  `credential_id` bigint(20) NOT NULL,
+  `project_name` varchar(25) NOT NULL,
+  `project_description` varchar(200) NOT NULL,
+  `location_lat` text NOT NULL,
+  `location_lng` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -115,7 +141,7 @@ CREATE TABLE `running_numbers` (
 
 INSERT INTO `running_numbers` (`serial_id`, `keyname`, `running_number`) VALUES
 (3, 'random_images', 1000),
-(4, 'profile_images', 1020),
+(4, 'profile_images', 1014),
 (5, 'other_images', 1000);
 
 -- --------------------------------------------------------
@@ -149,11 +175,11 @@ INSERT INTO `testtable` (`serial_id`, `stringdata`, `intdata`, `floatdata`) VALU
 CREATE TABLE `users` (
   `serial_id` bigint(20) NOT NULL,
   `company_name` varchar(50) NOT NULL,
-  `logo_url` text,
+  `logo_url` text NOT NULL,
   `pincode` int(11) NOT NULL,
   `address` varchar(255) NOT NULL,
-  `location_lat` text,
-  `location_lng` text,
+  `location_lat` text DEFAULT NULL,
+  `location_lng` text DEFAULT NULL,
   `credential_id` bigint(20) NOT NULL,
   `password` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -163,13 +189,20 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`serial_id`, `company_name`, `logo_url`, `pincode`, `address`, `location_lat`, `location_lng`, `credential_id`, `password`) VALUES
-(1, 'Sankalp', NULL, 410202, 'mumbai', NULL, NULL, 2, 'Sankalppol'),
-(2, 'Latencot', NULL, 431001, 'N-4, Aurangabad', NULL, NULL, 1, '$2y$10$U/amEx7JseFsuuVykyBQROeeyvGiplmdwQH4rVqB8BwFqLpD8.B.O'),
-(12, 'Google', NULL, 431001, 'MIT', NULL, NULL, 3, '$2y$10$bbdt2St74oE2wy751IA.eOUUHB7/TJVonSCQRTdoJMHShbU853xPq');
+(1, 'Sankalp', 'useless.com', 41020, 'mumbai', NULL, NULL, 2, 'Sankalppol'),
+(2, 'Latencot', 'profilepic/1002.jpg', 431001, 'MIT', NULL, NULL, 1, '$2y$10$U/amEx7JseFsuuVykyBQROeeyvGiplmdwQH4rVqB8BwFqLpD8.B.O'),
+(12, 'HUB', 'profilepic/1012.jpg', 431001, 'MIT', NULL, NULL, 3, '$2y$10$bbdt2St74oE2wy751IA.eOUUHB7/TJVonSCQRTdoJMHShbU853xPq');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin_credentials`
+--
+ALTER TABLE `admin_credentials`
+  ADD PRIMARY KEY (`serial_id`),
+  ADD UNIQUE KEY `email_address` (`email_address`);
 
 --
 -- Indexes for table `credentials`
@@ -188,6 +221,12 @@ ALTER TABLE `latencytest`
 -- Indexes for table `maintenance_schedules`
 --
 ALTER TABLE `maintenance_schedules`
+  ADD PRIMARY KEY (`serial_id`);
+
+--
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
   ADD PRIMARY KEY (`serial_id`);
 
 --
@@ -215,35 +254,54 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `admin_credentials`
+--
+ALTER TABLE `admin_credentials`
+  MODIFY `serial_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `credentials`
 --
 ALTER TABLE `credentials`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `latencytest`
 --
 ALTER TABLE `latencytest`
   MODIFY `testid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `maintenance_schedules`
 --
 ALTER TABLE `maintenance_schedules`
   MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `projects`
+--
+ALTER TABLE `projects`
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `running_numbers`
 --
 ALTER TABLE `running_numbers`
   MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `testtable`
 --
 ALTER TABLE `testtable`
   MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
