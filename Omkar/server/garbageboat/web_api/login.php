@@ -56,7 +56,6 @@ require("../api/v1/database/dbh.inc.php");
 				}
 			}
 		}
-		
 	}
 	die(json_encode($message));
 ?>
