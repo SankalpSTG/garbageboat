@@ -5,7 +5,7 @@ require("../files/upload_image.inc.php");
 	$message["error"] = true;
 	$message["error_message"] = "Required all parameters";
 	if(isset($_POST["serial_id"])&& isset($_POST["company_name"]) && isset($_POST["pincode"]) && isset($_POST["address"]) && isset($_POST["password"])){
-		$serial_id = mysqli_real_escape_string($conn, $_POST["serial_id"]);
+		$serial_id = (int)$_POST["serial_id"];
 		$company_name = mysqli_real_escape_string($conn, $_POST["company_name"]);
 		$pincode = mysqli_real_escape_string($conn, $_POST["pincode"]);
 		$address = mysqli_real_escape_string($conn, $_POST["address"]);
@@ -21,17 +21,12 @@ require("../files/upload_image.inc.php");
 				die(json_encode($message));
 			}else{
 				$hash_password = password_hash($password, PASSWORD_DEFAULT);
-				echo $serial_id;
-				echo $company_name;
-				echo $pincode;
-				echo $address;
-				echo $password;
 				$stmt = $conn->prepare("INSERT INTO users (company_name, pincode, address, credential_id, password) VALUES (?, ?, ?, ?, ?)");
 				$stmt->bind_param("sisis", $company_name, $pincode, $address, $serial_id, $hash_password);
 				$stmt->execute();
 				$stmt->close();
 				$message["error"] = false;
-				$message["error_message"] = "Success";
+				$message["error_message"] = "Successful";
 				die(json_encode($message));
 			}
 		}

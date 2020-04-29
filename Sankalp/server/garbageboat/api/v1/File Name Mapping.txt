@@ -46,3 +46,19 @@ register_user
 	OUTPUT:
 		error
 		error_message
+
+update_location
+	"authentication/users_update_location.php";
+	INPUT: serial_id, location_lat, location_lng
+	OPERATION: UPDATE
+	OUTPUT:
+		error
+		error_message
+
+upload_image
+	"authentication/upload_logo_image.php";
+	INPUT: serial_id, $_FILES["logo"]
+	OPERATION: UPDATE
+	OUTPUT:
+		error
+		error_message
