@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Platoon</string>
+    <string name="title_activity_map_point_center_location">Map</string>
+</resources>

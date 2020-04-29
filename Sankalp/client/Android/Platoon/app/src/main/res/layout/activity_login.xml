@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.authentication.LoginActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/al_login_image"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@drawable/boat_logo"
+            android:layout_marginVertical="30dp"
+            android:layout_centerHorizontal="true"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/al_login_text"
+                android:layout_marginVertical="6dp"
+                android:layout_below="@id/al_login_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Login"
+                    android:textSize="36dp"
+                    android:paddingHorizontal="60dp"/>
+            </androidx.cardview.widget.CardView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/al_email_text_input_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/al_login_text">
+
+                <EditText
+                    android:id="@+id/al_emailid"
+                    android:layout_width="270dp"
+                    android:inputType="textEmailAddress"
+                    android:layout_height="54dp"
+                    android:layout_marginVertical="6dp"
+                    android:hint="Email Address"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/al_password_text_input_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/al_email_text_input_layout">
+
+                <EditText
+                    android:id="@+id/al_password"
+                    android:layout_width="270dp"
+                    android:inputType="textPassword"
+                    android:layout_height="54dp"
+                    android:layout_marginVertical="6dp"
+                    android:hint="Password"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/al_submit"
+                android:layout_below="@id/al_password_text_input_layout"
+                android:layout_centerHorizontal="true"
+                android:layout_width="180dp"
+                android:layout_height="36dp"
+                android:layout_marginVertical="6dp"
+                android:text="Login"
+                android:background="@drawable/cutom_round_button"/>
+
+    </RelativeLayout>
+
+</ScrollView>
