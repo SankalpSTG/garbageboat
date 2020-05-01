@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2020 at 09:29 PM
+-- Generation Time: May 01, 2020 at 11:07 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -118,6 +118,32 @@ CREATE TABLE `maintenance_schedules` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `problems_sumbitted`
+--
+
+CREATE TABLE `problems_sumbitted` (
+  `serial_id` bigint(20) NOT NULL,
+  `credential_id` bigint(20) NOT NULL,
+  `problem` varchar(255) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `problem_solutions`
+--
+
+CREATE TABLE `problem_solutions` (
+  `serial_id` bigint(20) NOT NULL,
+  `problem_id` bigint(20) NOT NULL,
+  `solution_header` varchar(255) NOT NULL,
+  `solution_description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `projects`
 --
 
@@ -211,9 +237,17 @@ CREATE TABLE `user_feedback` (
   `credential_id` bigint(20) NOT NULL,
   `header` varchar(80) NOT NULL,
   `description` text NOT NULL,
-  `rating` tinyint(4) NOT NULL,
+  `rating` double NOT NULL,
   `category` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_feedback`
+--
+
+INSERT INTO `user_feedback` (`serial_id`, `credential_id`, `header`, `description`, `rating`, `category`) VALUES
+(11, 35, 'dsdasd', 'adsasdsa', 2, 'App User Interfacing'),
+(12, 35, 'hello', 'asdasd', 3.5, 'App User Interfacing');
 
 --
 -- Indexes for dumped tables
@@ -253,6 +287,18 @@ ALTER TABLE `maintenance_schedules`
   ADD PRIMARY KEY (`serial_id`);
 
 --
+-- Indexes for table `problems_sumbitted`
+--
+ALTER TABLE `problems_sumbitted`
+  ADD PRIMARY KEY (`serial_id`);
+
+--
+-- Indexes for table `problem_solutions`
+--
+ALTER TABLE `problem_solutions`
+  ADD PRIMARY KEY (`serial_id`);
+
+--
 -- Indexes for table `projects`
 --
 ALTER TABLE `projects`
@@ -277,6 +323,12 @@ ALTER TABLE `testtable`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`serial_id`),
   ADD UNIQUE KEY `credential_id` (`credential_id`);
+
+--
+-- Indexes for table `user_feedback`
+--
+ALTER TABLE `user_feedback`
+  ADD PRIMARY KEY (`serial_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -307,6 +359,18 @@ ALTER TABLE `maintenance_schedules`
   MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `problems_sumbitted`
+--
+ALTER TABLE `problems_sumbitted`
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `problem_solutions`
+--
+ALTER TABLE `problem_solutions`
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
@@ -329,6 +393,12 @@ ALTER TABLE `testtable`
 --
 ALTER TABLE `users`
   MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT for table `user_feedback`
+--
+ALTER TABLE `user_feedback`
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
