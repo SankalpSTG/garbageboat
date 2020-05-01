@@ -5,7 +5,7 @@ require ("../other/encdec.php");
 	$message["error"] = true;
 	$message["error_message"] = "Required all parameters";	
 	if(isset($_POST["serial_id"])){
-		$serial_id = mysqli_real_escape_string($conn, $_POST["serial_id"]);
+		$serial_id = (int) $_POST["serial_id"];
 		if(empty($serial_id)){
 			$$message["error"] = true;
 			$message["error_message"] = "Required all parameters";

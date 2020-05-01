@@ -4,7 +4,7 @@ require("../database/dbh.inc.php");
 	$message["error"] = true;
 	$message["error_message"] = "Require all parameters";
 	if(isset($_POST["serial_id"]) && isset($_POST["location_lat"]) && isset($_POST["location_lng"])){
-		$serial_id = mysqli_real_escape_string($conn, $_POST["serial_id"]);
+		$serial_id = (int) $_POST["serial_id"];
 		$location_lat = mysqli_real_escape_string($conn, $_POST["location_lat"]);
 		$location_lng = mysqli_real_escape_string($conn, $_POST["location_lng"]);
 		if(empty($serial_id) || empty($location_lat) || empty($location_lng)){

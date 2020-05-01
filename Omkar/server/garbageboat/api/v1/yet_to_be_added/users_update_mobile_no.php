@@ -4,8 +4,8 @@ require("../database/dbh.inc.php");
 	$message["error"] = true;
 	$message["error_message"] = "Require all parameters";
 	if(isset($_POST["serial_id"]) && isset($_POST["mobile_no"])){
-		$serial_id = mysqli_real_escape_string($conn, $_POST["serial_id"]);
-		$mobile_no = mysqli_real_escape_string($conn, $_POST["mobile_no"]);
+		$serial_id = (int) $_POST["serial_id"];
+		$mobile_no = (int) $_POST["mobile_no"];
 		if(empty($serial_id) || empty($mobile_no)){
 			$message["error"] = true;
 			$message["error_message"] = "Invalid parameters";

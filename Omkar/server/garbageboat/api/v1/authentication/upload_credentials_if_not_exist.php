@@ -5,7 +5,7 @@ require("../database/dbh.inc.php");
 	$message["error_message"] = "Required all parameters";
 	if(isset($_POST["email_id"]) && isset($_POST["mobile_no"])){
 		$email_id = mysqli_real_escape_string($conn, $_POST["email_id"]);
-		$mobile_no = mysqli_real_escape_string($conn, $_POST["mobile_no"]);
+		$mobile_no = (int) $_POST["mobile_no"];
 		
 		if(empty($email_id) && empty($mobile_no)){
 			$message["error"] = true;

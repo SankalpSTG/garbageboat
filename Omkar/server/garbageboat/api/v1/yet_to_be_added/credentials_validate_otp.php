@@ -5,8 +5,8 @@ require ("../other/encdec.php");
 	$message["error"] = true;
 	$message["error_message"] = "Required all parameters";
 	if(isset($_POST["serial_id"]) && isset($_POST["user_otp"])){
-		$serial_id = mysqli_real_escape_string($conn, $_POST["serial_id"]);
-		$user_otp = mysqli_real_escape_string($conn, $_POST["user_otp"]);
+		$serial_id = (int) $_POST["serial_id"];
+		$user_otp = (int) $_POST["user_otp"];
 		if(empty($serial_id) && empty($user_otp)){
 			$message["error"] = true;
 			$message["error_message"] = "Required all parameters";
