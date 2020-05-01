@@ -1,0 +1,139 @@
+<html>
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>VLabs Physics Exp-2: Diffraction Grating</title>
+        <style>
+            .container{
+                position: relative;
+                text-align: center;
+                margin: 0 auto;
+                width: 100%;
+            }
+            table{
+                position: relative;
+                text-align: center;
+                margin: 0 auto;
+            }
+            th{
+                background: rgba(0, 0, 255, 0.9);
+                color: #fff;
+                transition: 0.2s;
+                border-radius: 0px 10px;
+                padding: 10px;
+            }
+            th:hover{
+                background: #0f0;
+            }
+            tr{
+                background: #eee;
+                transition: 0.2s;
+            }
+            td{
+                padding: 10px;
+                border-radius: 0px 5px;
+            }
+            tr:hover{
+                background: #ddf;
+            }
+            .centerPoints{
+                position: relative;
+                text-align: left;
+                width: 720px;
+                max-width: 100%;
+                margin: 0px auto;
+            }
+            li{
+                font-size: 16px;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Observations Table</h1>
+            <table id="observationsTable">
+                <tr>
+                    <th rowspan="2">Reading No</th>
+                    <th colspan="2">Distance</th>
+                    <th rowspan="2">y/x</th>
+                    <th rowspan="2">&theta; = Tan<sup>-1</sup>(y/x)</th>
+                    <th rowspan="2">n&lambda;N = sin(&theta;)</th>
+                    <th rowspan="2">Calculated Wavelength(&#8491;)<br>&lambda; = sin(&theta;) / nN</th>
+                </tr>
+                <tr>
+                    <th>Grating - Screen</th>
+                    <th>Center to n<sup>th</sup> point</th>
+                </tr>
+            </table>
+            <h1>Conclusion</h1>
+            <div class="centerPoints">
+                <ul>
+                    <li>Hence in this experiment, we studied, how to calculate the wavelength of light</li>
+                    <li>The average of experimental Value of the wavelength of light was found out to be <span id="experimentalWavelength"></span> &#8491;</li>
+                    <li>The actual value of wavelength of the monochromatic light, used in this experiment is <span id="actualWavelength"></span> &#8491;</li>
+                    <li>The % of error in experimental value and actual value is <span id="percentError"></span>%</li>
+                </ul>
+            </div>
+        </div>
+        <script>
+            function begin(){
+                var adjacentDistanceString = localStorage.getItem("adjacentDistance");
+                var tanThetaString = localStorage.getItem("tanTheta");
+                var thetaString = localStorage.getItem("theta");
+                var calculatedWavelengthString = localStorage.getItem("calculatedWavelength");
+                var nLambdaNString = localStorage.getItem("nLambdaN");
+                var numberOfLinesString = localStorage.getItem("numberOfLines");
+                var actualWavelengthString = localStorage.getItem("actualWavelength");
+                
+                var adjacentDistance = adjacentDistanceString.split(',');
+                var adjDist = [];
+                adjDist.push([adjacentDistance[0], adjacentDistance[1]]);
+                adjDist.push([adjacentDistance[2], adjacentDistance[3]]);
+                adjDist.push([adjacentDistance[4], adjacentDistance[5]]);
+                var tanTheta = tanThetaString.split(',');
+                var theta = thetaString.split(',');
+                var calculatedWavelength = calculatedWavelengthString.split(',');
+                var nLambdaN = nLambdaNString.split(',');
+                var numberOfLines = numberOfLinesString;
+                var actualWavelength = parseInt(actualWavelengthString);
+                //alert(numberOfLines);
+                for(var i = 0; i < theta.length; i++){
+                    var tableRow = document.createElement("tr");
+                    var tableData = document.createElement("td");
+                    tableData.innerHTML = i + 1;
+                    tableRow.appendChild(tableData);
+                    tableData = document.createElement("td");
+                    tableData.innerHTML = parseFloat(adjDist[i][0]).toFixed(4);
+                    tableRow.appendChild(tableData);
+                    tableData = document.createElement("td");
+                    tableData.innerHTML = parseFloat(adjDist[i][1]).toFixed(4);
+                    tableRow.appendChild(tableData);
+                    tableData = document.createElement("td");
+                    tableData.innerHTML = parseFloat(tanTheta[i]).toFixed(4);
+                    tableRow.appendChild(tableData);
+                    tableData = document.createElement("td");
+                    tableData.innerHTML = parseFloat(theta[i]).toFixed(4);
+                    tableRow.appendChild(tableData);
+                    tableData = document.createElement("td");
+                    tableData.innerHTML = parseFloat(nLambdaN[i]).toFixed(4);
+                    tableRow.appendChild(tableData);
+                    tableData = document.createElement("td");
+                    tableData.innerHTML = (parseFloat(calculatedWavelength[i]) * Math.pow(10, 8)).toFixed(4);
+                    tableRow.appendChild(tableData);
+                    document.getElementById("observationsTable").appendChild(tableRow);
+                }
+                var avgWavelength = 0;
+                for(var i = 0; i < calculatedWavelength.length; i++){
+                    avgWavelength += (parseFloat(calculatedWavelength[i]) * Math.pow(10, 8));
+                    //alert(avgWavelength);
+                }
+                avgWavelength /= calculatedWavelength.length;
+                document.getElementById("experimentalWavelength").innerHTML = avgWavelength.toFixed(4);
+                document.getElementById("actualWavelength").innerHTML = actualWavelength;
+                document.getElementById("percentError").innerHTML = ((Math.abs(avgWavelength - actualWavelength))/actualWavelength).toFixed(4);
+            }
+            window.addEventListener('load', begin, false);
+        </script>
+    </body>
+</html>

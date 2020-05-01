@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>VLabs Physics Exp-2: Diffraction Grating</title>
+        <style>
+            button{
+                position: relative;
+                text-align: center;
+                width: 180px;
+                height: 36px;
+                max-width: 40%;
+                background: blue;
+                color: white;
+                font-size: 14px;
+                transition: 0.2s;
+            }
+            select{
+                position: relative;
+                text-align: center;
+                width: 270px;
+                height: 36px;
+                max-width: 100%;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                text-indent: 1px;
+                text-overflow: '';
+                background: blue;
+                color: white;
+                font-size: 14px;
+                transition: 0.2s;
+            }
+            select:hover, button:hover{
+                background: #0f0;
+            }
+            button, select{
+                border: none;
+                border-radius:5px;
+            }
+            .switchButton{
+                background: #000;
+                color: #fff;
+            }
+            head, body{
+                position: relative;
+                text-align: center;
+                width: 100%;
+                height:100vh;
+                margin: 0 auto;
+            }
+            #mainCanvas{
+                border:1px solid;
+            }
+            .canvascontainer{
+                position: relative;
+                text-align: center;
+                width: 100%;
+                height: 65%;
+            }
+            .controlpanel{
+                position: relative;
+                text-align: center;
+                width: 100%;
+                height: 34%;
+                padding: 1% auto;
+                margin-top: 5px;
+            }
+            .elementheader{
+                position: relative;
+                text-align: center;
+                width: 100%;
+                font-size: 20px;
+                font-weight: 600;
+                padding: 5px;
+            }
+            .controlelements{
+                position: relative;
+                text-align: center;
+                width: 24%;
+                height: 95%;
+                border-radius:5px;
+                border: 1px solid;
+                overflow: hidden;
+                display: inline-block;
+                transition: 0.5s;
+            }
+            .controlelements:hover{
+                border-color: #f00;
+            }
+            .preslide{
+                position: fixed;
+                text-align: center;
+                width: 100%;
+            }
+        </style>
+	</head>
+	<body>
+        <div class="preslide">
+            
+        </div>
+        <div class="container">
+            
+        </div>
+        <div class="canvascontainer">
+            <canvas id="mainCanvas">
+                
+            </canvas>
+        </div>
+        <div class="controlpanel">
+            <div class="lasercontrols controlelements">
+                <div class="elementheader">Laser Panel</div>
+                <button onclick="changeLaserPosition(-10);">Left</button>
+                <button onclick="changeLaserPosition(10);">Right</button><br><br>
+                <button onclick="changeLaserPosition(-1);">Fine Left</button>
+                <button onclick="changeLaserPosition(1);">Fine Right</button>
+                <br><br>
+                <button id="laserButton" class="switchButton" onclick="laserButtonClicked();">Turn On</button>
+            </div>
+            <div class="gratingcontrols controlelements">
+                <div class="elementheader">Grating Panel</div>
+                <button onclick="changeGratingPosition(-10);">Left</button>
+                <button onclick="changeGratingPosition(10);">Right</button><br><br>
+                <button onclick="changeGratingPosition(-1);">Fine Left</button>
+                <button onclick="changeGratingPosition(1);">Fine Right</button><br><br>
+            </div>
+            <div class="screencontrols controlelements">
+                <div class="elementheader">Screen Panel</div>
+                <button onclick="changeScreenPosition(-10);">Left</button>
+                <button onclick="changeScreenPosition(10);">Right</button><br><br>
+                <button onclick="changeScreenPosition(-1);">Fine Left</button>
+                <button onclick="changeScreenPosition(1);">Fine Right</button><br><br>
+            </div>
+            <div class="gratingdetails controlelements">
+                <div class="elementheader">Grating Details</div>
+                <select id="numberOfLines" class="customSelect" onchange="numberOfLinesChanged();">
+                    <option value=0>Select Number of lines</option>
+                    <option value=2500>2500</option>
+                    <option value=5500>5500</option>
+                    <option value=10000>10000</option>
+                    <option value=15000>15000</option>
+                    <option value=10000000000>1000000000</option>
+                </select><br>
+                Click to select number of rulings on the grating.<br>
+                <button onclick="refreshView();">Refresh View</button>
+                <button onclick="resetView();">Reset View</button><br>
+                Click Next to move to next view. 
+                <button onclick="moveToNext();">Next</button>
+            </div>
+        </div>
+        <img id="img_laser" src="images/svg/laser.svg" style="display:none;">
+        <img id="img_grating" src="Images/svg/grating.svg" style="display: none;">
+        <img id="img_screen" src="Images/svg/screen.svg" style="display: none;">
+        <script>
+            var gcanvas;
+            class Laser{
+                constructor(laserelem, wavelength){
+                    this.laserelem = laserelem;
+                    this.x_co = 0;
+                    this.y_co = 0;
+                    this.x_orig = 0;
+                    this.y_orig = 0;
+                    this.laserturnedon = false;
+                    this.wavelength = wavelength;
+                }
+                setOrigin(x_orig, y_orig){
+                    this.x_orig = x_orig;
+                    this.y_orig = y_orig;
+                }
+                setOriginWithReset(x_orig, y_orig){
+                    this.x_orig = x_orig;
+                    this.y_orig = y_orig;
+                    this.x_co = x_orig;
+                    this.y_co = y_orig;
+                }
+                flipLaserState(){
+                    this.laserturnedon = !this.laserturnedon;
+                }
+                getLaserState(){
+                    return this.laserturnedon;
+                }
+                moveLaser(coordinates){
+                    this.x_co = this.x_co + coordinates[0];
+                    this.y_co = this.y_co + coordinates[1];
+                }
+                point(myCanvas, pgrating, pscreen, pixelRatio){
+                    if(this.getLaserState()){
+                        var context = myCanvas.getContext("2d");
+                        var laserco = this.getCenter();
+                        var gratingco = pgrating.getCenter();
+                        var screenco = pscreen.getCenter();
+                        context.beginPath();
+                        context.lineWidth = 6;
+                        context.moveTo(laserco[0], laserco[1]);
+                        context.lineTo(gratingco[0], gratingco[1]);
+                        context.strokeStyle = "red";
+                        context.stroke();
+                        context.beginPath();
+                        context.lineWidth = 1;
+                        context.moveTo(gratingco[0], gratingco[1]);
+                        context.lineTo(screenco[0], screenco[1]);
+                        context.strokeStyle = "red";
+                        context.stroke();
+                        if(pgrating.getNumberOfLines() > 0){
+                            context.lineWidth = 1;
+                            var N = pgrating.getNumberOfLines();
+                            var lambda = this.wavelength;
+                            var angle = N * lambda * Math.pow(10, -8);
+                            var x = (screenco[0] - gratingco[0]) / pixelRatio;
+                            for(var n = 1; n < 100; n++){
+                                var N = pgrating.getNumberOfLines();
+                                var arcAngle = n * angle;
+                                var arcInverseSine = Math.asin(arcAngle);
+                                if(arcInverseSine === undefined){
+                                    break;
+                                }
+                                var aisTan = Math.tan(arcInverseSine);
+                                var y = aisTan * x * pixelRatio;
+                                context.beginPath();
+                                context.moveTo(gratingco[0], gratingco[1]);
+                                context.lineTo(screenco[0], screenco[1] - y);
+                                context.stroke();
+                                context.beginPath();
+                                context.moveTo(gratingco[0], gratingco[1]);
+                                context.lineTo(screenco[0], screenco[1] + y);
+                                context.stroke();
+                                
+                            }
+                        }
+                    }
+                }
+                getCenter(){
+                    var x = Math.floor(this.laserelem.width / 2) + this.getX();
+                    var y = Math.floor(this.laserelem.height / 2) + this.getY();
+                    return [x, y];
+                }
+                getX(){
+                    return this.x_co;
+                }
+                getY(){
+                    return this.y_co;
+                }
+                getImage(){
+                    return this.laserelem;
+                }
+                resetPosition(){
+                    this.x_co = this.x_orig;
+                    this.y_co = this.y_orig;
+                }
+            }
+            //This Grating class contains all the Grating related functions such as movement functions, control functions.
+            //Variables: grating x, y coordinates, origin x and y, numberOfLines on grating.
+            //Functions: setOrigin, setOriginWithReset, moveGrating, setNumberOfLines, getNumberOfLines, getCenter, getX, getY, getImage, resetPosition.
+            class Grating{
+                constructor(gratingelem){
+                    this.gratingelem = gratingelem;
+                    this.x_co = 0;
+                    this.y_co = 0;
+                    this.x_orig = 0;
+                    this.y_orig = 0;
+                    this.numberOfLines = 0;
+                }
+                setOrigin(x_orig, y_orig){
+                    this.x_orig = x_orig;
+                    this.y_orig = y_orig;
+                }
+                setOriginWithReset(x_orig, y_orig){
+                    this.x_orig = x_orig;
+                    this.y_orig = y_orig;
+                    this.x_co = x_orig;
+                    this.y_co = y_orig;
+                }
+                moveGrating(coordinates){
+                    this.x_co = this.x_co + coordinates[0];
+                    this.y_co = this.y_co + coordinates[1];
+                }
+                setNumberOfLines(numberOfLines){
+                    if(numberOfLines < 10000000){
+                        this.numberOfLines = numberOfLines;
+                        return true;
+                    }else{
+                        alert("X-Rays will need these many rulings to show appreciable diffraction. It is practically not possible to have these many rulings on a grating surface.");
+                        return false;
+                    }
+                }
+                getNumberOfLines(){
+                    return this.numberOfLines;
+                }
+                getCenter(){
+                    var x = Math.floor(this.gratingelem.width / 2) + this.getX();
+                    var y = Math.floor(this.gratingelem.height / 2) + this.getY();
+                    return [x, y];
+                }
+                getX(){
+                    return this.x_co;
+                }
+                getY(){
+                    return this.y_co;
+                }
+                getImage(){
+                    return this.gratingelem;
+                }
+                resetPosition(){
+                    this.x_co = this.x_orig;
+                    this.y_co = this.y_orig;
+                }
+			}
+            //This Screen class contains all the Screen related functions such as movement functions, control functions.
+            //Variables: screen x, y coordinates, origin x and y
+            //Functions: setOrigin, setOriginWithReset, moveScreen, getCenter, getX, getY, getImage, resetPosition.
+            class Screen{
+                constructor(screenelem){
+                    this.screenelem = screenelem;
+                    this.x_co = 0;
+                    this.y_co = 0;
+                    this.x_orig = 0;
+                    this.y_orig = 0;
+                }
+                setOrigin(x_orig, y_orig){
+                    this.x_orig = x_orig;
+                    this.y_orig = y_orig;
+                    this.x_co = x_orig;
+                    this.y_co = y_orig;
+                }
+                setOriginWithReset(x_orig, y_orig){
+                    this.x_orig = x_orig;
+                    this.y_orig = y_orig;
+                    this.x_co = x_orig;
+                    this.y_co = y_orig;
+                }
+                moveScreen(coordinates){
+                    this.x_co = this.x_co + coordinates[0];
+                    this.y_co = this.y_co + coordinates[1];
+                }
+                getCenter(){
+                    var x = Math.floor(this.screenelem.width / 2) + this.getX();
+                    var y = Math.floor(this.screenelem.height / 2) + this.getY();
+                    return [x, y];
+                }
+                getX(){
+                    return this.x_co;
+                }
+                getOrigX(){
+                    return this.x_orig;
+                }
+                getOrigY(){
+                    return this.y_orig;
+                }
+                getY(){
+                    return this.y_co;
+                }
+                getImage(){
+                    return this.screenelem;
+                }
+                resetPosition(){
+                    this.x_co = this.x_orig;
+                    this.y_co = this.y_orig;
+                }
+            }
+            //This Canvas class contains all the Canvas Elements related functions such as movement functions, control functions,.
+            //Variables: canvas element, canvas name, laser grating screen objects, canvas pixel ratio(1cm = pixelRatio);
+            //Functions: setOriginForAll, moveElements, getCanvas getLaser getGrating getScreen, getCanvasContext, refreshCanvas, resetView.
+            class Canvas{
+                constructor(canvas, canvasId, laser, grating, screen, width, height, pixelRatio){
+                    this.canvas = canvas;
+                    this.canvasId = canvasId;
+                    this.laser = laser;
+                    this.grating = grating;
+                    this.screen = screen;
+                    this.canvas.width = Math.floor(window.innerWidth * width * 0.98);
+                    this.canvas.height = Math.floor(window.innerHeight * height * 0.98);
+                    this.pixelRatio = pixelRatio;
+                    this.setOriginForAll();
+                }
+                setOriginForAll(){
+                    var totalwidth = this.canvas.width;
+                    var totalheight = this.canvas.height;
+                    var obj_x = 0;
+                    var obj_y = Math.floor((totalheight - this.laser.laserelem.height) / 2);
+                    this.laser.setOriginWithReset(obj_x, obj_y);
+                    obj_x = Math.floor((totalwidth - this.grating.gratingelem.width) / 2);
+                    obj_y = Math.floor((totalheight - this.grating.gratingelem.height) / 2);
+                    this.grating.setOriginWithReset(obj_x, obj_y);
+                    obj_x = Math.floor(totalwidth - this.screen.screenelem.width);
+                    obj_y = Math.floor((totalheight - this.screen.screenelem.height) / 2);
+                    this.screen.setOriginWithReset(obj_x, obj_y);
+                }
+                moveElements(laserco, gratingco, screenco){
+                    if((this.laser.getX() + laserco[0] > 0) && (this.laser.getX() + laserco[0] < this.grating.getX())){
+                        this.laser.moveLaser(laserco);
+                    }
+                    if((this.grating.getX() + gratingco[0] > (this.laser.getX() + this.laser.laserelem.width)) && (this.grating.getX() + gratingco[0] < (this.screen.getX() - this.grating.gratingelem.width))){
+                        this.grating.moveGrating(gratingco);
+                    }
+                    if((this.screen.getX() + screenco[0] > (this.grating.getX() + this.grating.gratingelem.width)) && (this.screen.getX() + screenco[0] < this.screen.getOrigX())){
+                        this.screen.moveScreen(screenco);
+                    }
+                    refreshView();
+                }
+                getCanvas(){
+                    return this.canvas;
+                }
+                getLaser(){
+                    return this.laser;
+                }
+                getGrating(){
+                    return this.grating;
+                }
+                getScreen(){
+                    return this.screen;
+                }
+                getCanvasContext(){
+                    return this.canvas.getContext("2d");
+                }
+                refreshCanvas(){
+                    var context = this.getCanvasContext();
+                    context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                    this.laser.point(this.getCanvas(), this.grating, this.screen, this.pixelRatio);
+                    context.drawImage(this.laser.laserelem, this.laser.getX(), this.laser.getY());
+                    context.drawImage(this.grating.gratingelem, this.grating.getX(), this.grating.getY());
+                    context.drawImage(this.screen.screenelem, this.screen.getX(), this.screen.getY());
+                }
+                resetView(){
+                    var context = this.getCanvasContext();
+                    context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                    this.laser.resetPosition();
+                    this.screen.resetPosition();
+                    this.grating.resetPosition();
+                    this.refreshCanvas();
+                }
+            }
+            function begin(){
+                var laserelem = document.getElementById("img_laser");
+                var glaser = new Laser(laserelem, 6328);
+                var gratingelem = document.getElementById("img_grating");
+                var ggrating = new Grating(gratingelem, [0, 0]);
+                var screenelem = document.getElementById("img_screen");
+                var gscreen = new Screen(screenelem, [0, 0]);
+                var canvasdiv = document.getElementById("mainCanvas");
+                var canvas_dimensions = [1, 0.6, 10];
+                gcanvas = new Canvas(canvasdiv, "mainCanvas", glaser, ggrating, gscreen, canvas_dimensions[0], canvas_dimensions[1], canvas_dimensions[2]); 
+            }
+            function refreshView(){
+                gcanvas.refreshCanvas();
+            }
+            function resetView(){
+                gcanvas.resetView();
+            }
+            function numberOfLinesChanged(){
+                var ggrating = gcanvas.getGrating();
+                var numberOfLines = parseInt(document.getElementById("numberOfLines").value);
+                if(!ggrating.setNumberOfLines(numberOfLines)){
+                    document.getElementById("numberOfLines").options.selectedIndex = 0;
+                    ggrating.setNumberOfLines(0);
+                }
+                gcanvas.refreshCanvas();
+            }
+            function laserButtonClicked(){
+                var glaser = gcanvas.getLaser();
+                glaser.flipLaserState();
+                if(glaser.getLaserState()){
+                    document.getElementById("laserButton").style.background = "#ff0";
+                }else{
+                    document.getElementById("laserButton").style.background = "#000";
+                }
+                gcanvas.refreshCanvas();
+            }
+            function changeLaserPosition(diff){
+                gcanvas.moveElements([diff, 0], [0, 0], [0, 0]);
+            }
+            function changeGratingPosition(diff){
+                gcanvas.moveElements([0, 0], [diff, 0], [0, 0]);
+            }
+            function changeScreenPosition(diff){
+                gcanvas.moveElements([0, 0], [0, 0], [diff, 0]);
+            }
+            function moveToNext(){
+                window.location.href = "simulator_readings.html";
+            }
+            window.addEventListener('load', begin, false );
+        </script>
+	</body>
+</html>

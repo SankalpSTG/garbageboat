@@ -1,0 +1,52 @@
+an artificial intelligence enabled trash boat 
+is being developed 
+which could map the water bodies 
+and travel into urban drains.
+
+The boat will identify 
+floating trash 
+and collect it.
+
+To travel through drainage systems, 
+the boat has to be as small as possible. 
+Hence there will be no trash bin mounted on it.
+
+To solve trash storage problems, 
+a special trash storage boat 
+is designed 
+which could store 
+large amount of trash. 
+
+The storage boat 
+and the trash boat 
+will work as master-slave, 
+where one master could have multiple slaves, 
+and both will track each other’s locations.
+
+this is particularly the slave boat. 
+where the rear has all the electronic modules. 
+the mid part has this empty space where the trash 
+can be trapped. 
+the front part is connected to two motors, 
+which help lift the front part 
+allowing the floating trash 
+to enter the body.
+
+the master boat is yet to be implemented.
+
+For each region of a water body, 
+there will be 1:N master slave system.
+
+The slaves will scan the drainage pipes and tunnels for trash, 
+collect it, 
+and report back to the master.
+
+The master will pick up the trash 
+and put it into its trash bin.
+
+This process will keep repeating until the trash bin on master is not full.
+
+The trash boats will have GPS 
+and camera mounted on it, 
+and use AI / ML algorithms to identify the trash.
+ 

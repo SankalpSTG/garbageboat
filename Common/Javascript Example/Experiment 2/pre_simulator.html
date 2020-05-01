@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>VLabs Physics Exp-2: Diffraction Grating</title>
+        <style>
+            body, head{
+                position: relative;
+                text-align: center;
+                width: 100%;
+                height: auto;
+                margin: 0 auto;
+            }
+            header{
+                position: relative;
+                text-align: center;
+                font-size: 20px;
+            }
+            .question_container{
+                position: relative;
+                text-align: left;
+                margin: 6px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                padding: 6px;
+                box-shadow: 5px 5px 8px rgba(0, 0, 255, 0.2), 5px 5px 8px rgba(0, 255, 0, 0.2);
+            }
+            .question_div{
+                position: relative;
+                text-align: left;
+                font-weight: 600
+            }
+            .answer_container{
+                position: relative;
+                text-align: left;
+            }
+            .question_panel{
+                position: relative;
+                text-align: left;
+            }
+            .hintclass{
+                font-style: italic;
+            }
+        </style>
+	</head>
+	<body>
+        <header>Experiment 2: Diffraction Grating</header>
+        <div class="question_panel" id="question_panel">
+        </div>
+        <script>
+            class Question{
+                constructor(questionId, question, options, correctAnswer, hint){
+                    this.questionId = questionId;
+                    this.question = question;
+                    this.options = options;
+                    this.correctAnswer = correctAnswer;
+                    this.hint = hint;
+                    this.hintVisible = false;
+                }
+                eDiv(eClass, eId){
+                    var elem = document.createElement("div");
+                    elem.setAttribute("class", eClass);
+                    elem.setAttribute("id", eId);
+                    return elem;
+                }
+                eBr(){
+                    var elem = document.createElement("br");
+                    return elem;
+                }
+                checkAnswer(option_no){
+                    return option_no === this.correctAnswer;
+                }
+                getQuestion(divid){
+                    return this.question;
+                }
+                getOptions(){
+                    return this.options;
+                }
+                static createParent(questionId){
+                    var elem = document.createElement("div");
+                    elem.setAttribute("class", "question_container");
+                    elem.setAttribute("id", "question-" + questionId);
+                    return elem;
+                }
+                prepareQuestion(){
+                    this.divElem = document.createElement("div");
+                    this.divElem.setAttribute("class", "question_div");
+                    this.divElem.setAttribute("id", "question-div-" + this.questionId);
+                    this.divElem.innerHTML = this.questionId + " . " + this.question;
+                    return this.divElem;
+                }
+                prepareAnswer(){
+                    var preparedAnswers = [];
+                    for(var i = 0; i < this.options.length; i++){
+                        var pair = [];
+                        
+                        var elemLabel = document.createElement("label");
+                        elemLabel.setAttribute("for", "answer-" + this.questionId + "-" + i);
+                        elemLabel.innerHTML = this.options[i];
+                        
+                        var elem = document.createElement("input");
+                        elem.setAttribute("type", "radio");
+                        elem.setAttribute("id", "answer-" + this.questionId + "-" + i);
+                        elem.setAttribute("name", "answer_" + this.questionId);
+                        elem.setAttribute("class", "answers_input")
+                        elem.setAttribute("onclick", "verifyAnswer(" + this.questionId + ", " + i + ")");
+                        pair.push(elemLabel);
+                        pair.push(elem);
+                        preparedAnswers.push(pair);
+                    }
+                    return preparedAnswers;
+                }
+                idMatches(id){
+                    return this.questionId === id;
+                }
+                getPreparedQuestion(){
+                    var parent = Question.createParent(this.questionId);
+                    
+                    var question = this.prepareQuestion();
+                    var answers = this.prepareAnswer();
+                    
+                    parent.appendChild(question);
+                    var answerDiv = this.eDiv("answer_container", "answer-container-" + this.questionId);
+                    for(var j = 0; j < answers.length; j++){
+                        answerDiv.appendChild(answers[j][1]);
+                        answerDiv.appendChild(answers[j][0]);
+                        answerDiv.appendChild(this.eBr());
+                    }
+                    parent.appendChild(answerDiv);
+                    return parent;
+                }
+                prepareHint(){
+                    var elem = document.createElement("div");
+                    elem.setAttribute("class", "hintclass");
+                    elem.innerHTML = "Hint : " + this.hint;
+                    return elem;
+                }
+                hintShown(){
+                    return this.hintVisible;
+                }
+                flipHintVisibility(){
+                    this.hintVisible = !this.hintVisible;
+                }
+            }
+            var questions = [];
+                questions.push(new Question(1, "If a is the width of the slits and b the distance between the slits, then a + b is called as _________", ["Opacities", "Transparency", "Grating Constant", "Grating value"], 2, "a is the width of the slits and b the distance"));
+                questions.push(new Question(2, "If (a + b) < nλ, then nth order spectrum will be absent.", ["True", "False", "First & Second", "None"], 0, "(a + b) < nλ"));
+                questions.push(new Question(3, "A beam of monochromatic light is incident on a plane transmission grating having 5000 lines/cm and the second order spectral line is found to be diffracted at 30°. The wavelength of the light is _______", ["4000", "5000", "6000", "7000"], 0, "5000 lines/cm"));
+                questions.push(new Question(4, "Wavelength of an incident light when it is incident normally on a diffraction grating having 3000 lines per centimeter angular separation is 10° is", ["500nm", "650nm", "580nm", "600nm"], 2, "3000 lines/cm"));
+                questions.push(new Question(5, "What is the highest order spectrum which may be seen with a monochromatic light of wavelength 5000 Å by means of a diffraction grating with 5000 lines/cm?", ["1", "2", "3", "4"], 3, "5000 lines/cm"));
+            function begin(){
+                var question_panel = document.getElementById("question_panel");
+                for(var i = 0; i < questions.length; i++){
+                    var parent = questions[i].getPreparedQuestion();
+                    question_panel.appendChild(parent);
+                }
+            }
+            function verifyAnswer(question_id, answer_id){
+                for(var i = 0; i < questions.length; i++){
+                    if(questions[i].idMatches(question_id)){
+                       if(questions[i].checkAnswer(answer_id)){
+                           alert("I thought you are dumb");
+                           var question_div = document.getElementById("question-" + question_id);
+                           question_div.parentElement.removeChild(question_div);
+                           for(var i = 0; i < questions.length; i++){
+                               if(questions[i].idMatches(question_id)){
+                                   questions.splice(i, 1);
+                                   break;
+                               }
+                           }
+                           reloadOnOver();
+                       }else{
+                           alert("I thought you to be intelligent");
+                           if(!questions[question_id - 1].hintShown()){
+                               var preparedHint = questions[question_id - 1].prepareHint();
+                               document.getElementById("question-" + question_id).appendChild(preparedHint);
+                               questions[question_id - 1].flipHintVisibility();
+                           }
+                       }
+                    }
+                }
+            }
+            function reloadOnOver(){
+               if(questions.length === 0){
+                   window.location.href = "simulator.html";
+               }
+            }
+            window.addEventListener('load', begin, false )
+        </script>
+	</body>
+</html>
