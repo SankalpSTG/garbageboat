@@ -13,7 +13,7 @@ require("../files/upload_image.inc.php");
 			if(!is_numeric($serial_id)){
 				$message["error"] = true;
 				$message["error_message"] = "Invalid parameters";
-			die(json_encode($message));
+				die(json_encode($message));
 			}else{
 				$file= $_FILES["logo"];
 				$fileextension = pathinfo(basename($file["name"]), PATHINFO_EXTENSION);
