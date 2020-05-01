@@ -8,7 +8,7 @@ require("../database/dbh.inc.php");
 		echo $verification_level;
 		if(!is_numeric($verification_level)){
 			$message["error"] = true;
-			$message["error_message"] = "Require all parameters1";	
+			$message["error_message"] = "Require all parameters";	
 			die(json_encode($message));
 		}else{
 			$stmt = $conn->prepare("SELECT cred.serial_id, cred.email_id, cred.mobile_no, cred.account_level, cred.verification_level, usr.company_name, usr.logo_url, usr.address, usr.pincode FROM credentials as cred, users as usr WHERE cred.account_level = 0 and cred.verification_level = ? and usr.credential_id = cred.serial_id limit 10");
