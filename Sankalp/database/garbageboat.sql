@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2020 at 09:00 PM
+-- Generation Time: May 01, 2020 at 09:02 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -210,7 +210,8 @@ CREATE TABLE `user_feedback` (
   `serial_id` bigint(20) NOT NULL,
   `credential_id` bigint(20) NOT NULL,
   `header` varchar(80) NOT NULL,
-  `description` text NOT NULL
+  `description` text NOT NULL,
+  `rating` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
