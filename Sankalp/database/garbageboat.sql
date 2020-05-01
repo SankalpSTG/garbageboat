@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2020 at 08:45 PM
+-- Generation Time: May 01, 2020 at 09:00 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -45,6 +45,21 @@ INSERT INTO `admin_credentials` (`serial_id`, `email_address`, `password`, `admi
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `boats`
+--
+
+CREATE TABLE `boats` (
+  `serial_id` bigint(20) NOT NULL,
+  `pet_name` varchar(20) NOT NULL,
+  `registration_number` bigint(20) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `credential_id` bigint(20) DEFAULT NULL,
+  `simulator_device_id` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `credentials`
 --
 
@@ -58,6 +73,14 @@ CREATE TABLE `credentials` (
   `token_key` varchar(20) DEFAULT NULL,
   `token_iv` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `credentials`
+--
+
+INSERT INTO `credentials` (`serial_id`, `email_id`, `mobile_no`, `account_level`, `verification_level`, `token`, `token_key`, `token_iv`) VALUES
+(34, 'sankikul@gmail.com', 2147483647, 0, 0, NULL, NULL, NULL),
+(35, 'polskii@gmail.com', 2147483647, 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -104,7 +127,8 @@ CREATE TABLE `projects` (
   `project_name` varchar(25) NOT NULL,
   `project_description` varchar(200) NOT NULL,
   `location_lat` text NOT NULL,
-  `location_lng` text NOT NULL
+  `location_lng` text NOT NULL,
+  `is_anonymous` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -125,7 +149,7 @@ CREATE TABLE `running_numbers` (
 
 INSERT INTO `running_numbers` (`serial_id`, `keyname`, `running_number`) VALUES
 (3, 'random_images', 1000),
-(4, 'profile_images', 1019),
+(4, 'profile_images', 1021),
 (5, 'other_images', 1000);
 
 -- --------------------------------------------------------
@@ -169,6 +193,27 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`serial_id`, `company_name`, `logo_url`, `pincode`, `address`, `location_lat`, `location_lng`, `credential_id`, `password`) VALUES
+(35, 'pompchomo', 'profilepic/1020.jpg', 666666, 'golululu', '19.026795006582017', '73.09539746493103', 34, '$2y$10$lE8A2dmxiNyJz786SdvmT.qF8Syq282.whR0qUG71uEj2sHlZ4owC'),
+(36, 'polskii aviation', 'profilepic/1021.jpg', 400017, 'mumbai, Maharashtra, india', '19.037324358621944', '73.10208488255739', 35, '$2y$10$0aNaIcWt371o0jS/8xtD9eNJnIgXvPgUB.24G7NS3FShn1ObP89xy');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_feedback`
+--
+
+CREATE TABLE `user_feedback` (
+  `serial_id` bigint(20) NOT NULL,
+  `credential_id` bigint(20) NOT NULL,
+  `header` varchar(80) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
 -- Indexes for dumped tables
 --
 
@@ -178,6 +223,13 @@ CREATE TABLE `users` (
 ALTER TABLE `admin_credentials`
   ADD PRIMARY KEY (`serial_id`),
   ADD UNIQUE KEY `email_address` (`email_address`);
+
+--
+-- Indexes for table `boats`
+--
+ALTER TABLE `boats`
+  ADD PRIMARY KEY (`serial_id`),
+  ADD UNIQUE KEY `internet_id` (`registration_number`);
 
 --
 -- Indexes for table `credentials`
@@ -238,7 +290,7 @@ ALTER TABLE `admin_credentials`
 -- AUTO_INCREMENT for table `credentials`
 --
 ALTER TABLE `credentials`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `latencytest`
@@ -274,7 +326,7 @@ ALTER TABLE `testtable`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
