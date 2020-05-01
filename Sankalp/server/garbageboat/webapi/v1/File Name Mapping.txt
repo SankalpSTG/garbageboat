@@ -1,64 +1,89 @@
 BaseURL
 	"http://192.168.43.88/garbageboat/api/v1/";
-login
-	"authentication/login.php";
-	INPUT: email_id, password
-	OPERATION: SELECT
-	OUTPUT:
-		error
-		error_message
-		serial_id
-
-upload_credentials
-	"authentication/upload_credentials_if_not_exist.php";
-	INPUT: email_id, mobile_no
-	OPERATION: INSERT & SELECT
-	OUTPUT:
-		error
-		error_message
-		serial_id
-
-get_user_data
-	"profile/users_get_data.php";
-	INPUT: serial_id
+get_users_with_pending_admin_verification
+	"authentication/users_get_pending_admin_verification_all_levels.php";
+	INPUT: 
 	OPERATION: SELECT
 	OUTPUT:
 		error
 		error_message
 		data:
+			serial_id
+			email_id
+			mobile_no
+			account_level
+			verification_level
 			company_name
-			address
+			logo_url
 			pincode
-			password
+			address
 
-update_user_data
-	"authentication/users_update_primary.php";
-	INPUT: serial_id, company_name, address, pincode, password
+get_users_with_pending_admin_verification
+	"authentication/users_get_specific_pending_admin_verification.php";
+	INPUT: verification_level
+	OPERATION: SELECT
+	OUTPUT:
+		error
+		error_message
+		data:
+			serial_id
+			email_id
+			mobile_no
+			account_level
+			verification_level
+			company_name
+			logo_url
+			pincode
+			address
+
+accept_pending_user
+	"profile/users_accept_pending.php";
+	INPUT: serial_id
+	OPERATION: UPDATE
+	OUTPUT:
+		error
+		error_message
+		
+reject_pending_user
+	"profile/users_reject_pending.php";
+	INPUT: serial_id
 	OPERATION: UPDATE
 	OUTPUT:
 		error
 		error_message
 
-register_user
-	"authentication/users_register.php";
-	INPUT: serial_id, company_name, address, pincode, password
-	OPERATION: INSERT
+get_all_rejected_users
+	"authentication/users_get_rejected.php";
+	INPUT: 
+	OPERATION: SELECT
 	OUTPUT:
 		error
 		error_message
+		data:
+			serial_id
+			email_id
+			mobile_no
+			account_level
+			verification_level
+			company_name
+			logo_url
+			pincode
+			address
 
-update_location
-	"authentication/users_update_location.php";
-	INPUT: serial_id, location_lat, location_lng
-	OPERATION: UPDATE
+get_specific_rejected_user_by_query
+	"authentication/users_get_specific_rejected_by_query.php";
+	INPUT: query
+	OPERATION: SELECT
 	OUTPUT:
 		error
 		error_message
-
-upload_image
-	"authentication/upload_logo_image.php";
-	INPUT: serial_id, $_FILES["logo"]
-	OPERATION: UPDATE
-	OUTPUT:
-		error
-		error_message
+		data:
+			serial_id
+			email_id
+			mobile_no
+			account_level
+			verification_level
+			company_name
+			logo_url
+			pincode
+			address
