@@ -21,13 +21,8 @@ require("../files/upload_image.inc.php");
 				die(json_encode($message));
 			}else{
 				$hash_password = password_hash($password, PASSWORD_DEFAULT);
-				echo $serial_id;
-				echo $company_name;
-				echo $pincode;
-				echo $address;
-				echo $password;
-				$stmt = $conn->prepare("INSERT INTO users (company_name, pincode, address, credential_id, password) VALUES (?, ?, ?, ?, ?)");
-				$stmt->bind_param("sisis", $company_name, $pincode, $address, $serial_id, $hash_password);
+				$stmt = $conn->prepare("UPDATE users SET company_name=?, address=?, pincode=?, password=? WHERE credential_id = ?");
+				$stmt->bind_param("sisis", $company_name, $address, $pincode, $hash_password, $serial_id);
 				$stmt->execute();
 				$stmt->close();
 				$message["error"] = false;

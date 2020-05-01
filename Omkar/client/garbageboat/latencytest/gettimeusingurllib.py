@@ -8,7 +8,7 @@ Created on Fri Apr 17 03:46:00 2020
 from urllib import request
 import json
 import time
-url = "http://192.168.43.31/garbageboat/api/v1/latency_test/gettime.php"
+url = "http://192.168.43.88/garbageboat/api/v1/latency_test/gettime.php"
 data = request.urlopen(url)
 responsestring = data.read().decode('utf-8')
 response = json.loads(responsestring)

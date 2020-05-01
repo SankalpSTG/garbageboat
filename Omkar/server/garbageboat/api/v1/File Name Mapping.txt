@@ -8,6 +8,7 @@ login
 		error
 		error_message
 		serial_id
+
 upload_credentials
 	"authentication/upload_credentials_if_not_exist.php";
 	INPUT: email_id, mobile_no
@@ -16,6 +17,7 @@ upload_credentials
 		error
 		error_message
 		serial_id
+
 get_user_data
 	"profile/users_get_data.php";
 	INPUT: serial_id
@@ -28,15 +30,17 @@ get_user_data
 			address
 			pincode
 			password
+
 update_user_data
-	"authentication/user_update_data.php";
+	"authentication/users_update_primary.php";
 	INPUT: serial_id, company_name, address, pincode, password
 	OPERATION: UPDATE
 	OUTPUT:
 		error
 		error_message
+
 register_user
-	"authentication/users_registration_all_data.php";
+	"authentication/users_register.php";
 	INPUT: serial_id, company_name, address, pincode, password
 	OPERATION: INSERT
 	OUTPUT:
