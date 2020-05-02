@@ -13,7 +13,7 @@ require("../database/dbh.inc.php");
 			$message["error_message"] = "Require all parameters";
 			die(json_encode($message));
 		}else{
-			$stmt = $conn->prepare("INSERT INTO problem_submitted (credential_id, category, problem, description) VALUES (?, ?, ?, ?)");
+			$stmt = $conn->prepare("INSERT INTO problems_submitted (credential_id, category, problem, description) VALUES (?, ?, ?, ?)");
 			$stmt->bind_param("isss", $serial_id, $category, $header, $description);
 			$stmt->execute();
 			$stmt->close();
