@@ -3,7 +3,7 @@ require("../database/dbh.inc.php");
 
 	$message["error"] = true;
 	$message["error_message"] = "Require all parameters";
-	if(isset($_POST["serial_id"]) && isset($_POST["category"]) && isset($_POST["header"]) && isset($_POST["description"]) && isset($_POST["rating"])){
+	if(isset($_POST["serial_id"]) && isset($_POST["category"]) && isset($_POST["header"]) && isset($_POST["description"])&& isset($_POST["rating"])){
 		$serial_id = (int) $_POST["serial_id"];
 		$category = mysqli_real_escape_string($conn, $_POST["category"]);
 		$header = mysqli_real_escape_string($conn, $_POST["header"]);

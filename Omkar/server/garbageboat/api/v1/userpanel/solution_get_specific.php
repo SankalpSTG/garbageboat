@@ -30,7 +30,7 @@ require("../database/dbh.inc.php");
 				die(json_encode($message));
 			}else{
 				$message["error"] = true;
-				$message["error_message"] = "No user found";	
+				$message["error_message"] = "Solution not uploaded";	
 				die(json_encode($message));
 			}
 		}
