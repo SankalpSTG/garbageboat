@@ -10,7 +10,7 @@ require("../database/dbh.inc.php");
 			$message["error_message"] = "Require all parameters";
 			die(json_encode($message));
 		}else{
-			$stmt = $conn->prepare("SELECT serial_id, problem FROM problems_submitted WHERE credential_id = ? ORDER BY DESC serial_id LIMIT 10");
+			$stmt = $conn->prepare("SELECT serial_id, problem FROM problems_submitted WHERE credential_id = ? ORDER BY serial_id DESC LIMIT 10");
 			$stmt->bind_param("i", $serial_id);
 			$stmt->execute();
 			$result = $stmt->get_result();
