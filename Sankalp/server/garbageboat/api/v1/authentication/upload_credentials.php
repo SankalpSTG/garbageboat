@@ -24,7 +24,7 @@ require("../database/dbh.inc.php");
 				$message["data"] = $row["serial_id"];
 				die(json_encode($message));
 			}else{
-				$verification_level = 1;
+				$verification_level = 0;
 				$stmt = $conn->prepare("INSERT INTO credentials(email_id, mobile_no, verification_level)VALUES(?, ?)");
 				$stmt->bind_param("sii", $email_id, $mobile_no, $verification_level);
 				$stmt->execute();
