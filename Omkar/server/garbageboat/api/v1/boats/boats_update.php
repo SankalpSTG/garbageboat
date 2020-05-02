@@ -22,7 +22,7 @@ require("../database/dbh.inc.php");
 			$result = $stmt->get_result();
 			$stmt->close();
 			if(mysqli_num_rows($result) == 1){
-				$stmt = $conn->prepare("UPDATE boats SET pet_name = ?, credential_id  = ?,  simulator_device_id = ?, verified = 1 WHERE registration_number = ?");
+				$stmt = $conn->prepare("UPDATE boats SET pet_name = ?, credential_id  = ?,  simulator_device_id = ?, verified = 0 WHERE registration_number = ?");
 				$stmt->bind_param("sisi", $pet_name, $credential_id, $simulator_device_id, $registration_number);
 				$stmt->execute();
 				$stmt->close();
