@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2020 at 11:54 AM
+-- Generation Time: May 02, 2020 at 12:05 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -79,7 +79,7 @@ CREATE TABLE `credentials` (
 --
 
 INSERT INTO `credentials` (`serial_id`, `email_id`, `mobile_no`, `account_level`, `verification_level`, `token`, `token_key`, `token_iv`) VALUES
-(34, 'sankikul@gmail.com', 2147483647, 1, 0, NULL, NULL, NULL),
+(34, 'sankikul@gmail.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (35, 'polskii@gmail.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (36, 'Q4dC1wAzxd@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (37, 'ddjIzihVtM@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
@@ -109,7 +109,7 @@ INSERT INTO `credentials` (`serial_id`, `email_id`, `mobile_no`, `account_level`
 (61, 'pN1yeBCgn5@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (62, 'p4zc3hP2Gl@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (63, 'mjv86g8S9d@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
-(64, 'BAdzO5emM3@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
+(64, 'BAdzO5emM3@email.com', 2147483647, 1, 0, NULL, NULL, NULL),
 (65, '8oN3FyZ9C1@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (66, 'yJ2Yv6t14s@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (67, 'MZVxvO3CTC@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
@@ -297,7 +297,9 @@ INSERT INTO `problem_solutions` (`serial_id`, `problem_id`, `solution_header`, `
 (25, 3, 'jefiejfif', 'jerfiefjiejf'),
 (26, 3, 'jefiejfif', 'nfnefnefn'),
 (27, 3, 'jefiejfif', 'nfnefnefnvnwe fne fqe f'),
-(28, 3, 'miifev', 'nfnefnefnvnwe fne fqe f');
+(28, 3, 'miifev', 'nfnefnefnvnwe fne fqe f'),
+(29, 3, 'miifev', 'nfnefnefnvnwe fne fqe f'),
+(30, 3, 'miifev', 'nfnefnefnvnwe fne fqe f');
 
 -- --------------------------------------------------------
 
@@ -628,7 +630,7 @@ ALTER TABLE `problems_submitted`
 -- AUTO_INCREMENT for table `problem_solutions`
 --
 ALTER TABLE `problem_solutions`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `projects`
