@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2020 at 03:25 PM
+-- Generation Time: May 02, 2020 at 03:36 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -50,11 +50,12 @@ INSERT INTO `admin_credentials` (`serial_id`, `email_address`, `password`, `admi
 
 CREATE TABLE `boats` (
   `serial_id` bigint(20) NOT NULL,
-  `pet_name` varchar(20) NOT NULL,
+  `pet_name` varchar(20) DEFAULT NULL,
   `registration_number` bigint(20) NOT NULL,
   `type` varchar(10) NOT NULL,
   `credential_id` bigint(20) DEFAULT NULL,
-  `simulator_device_id` text DEFAULT NULL
+  `simulator_device_id` text DEFAULT NULL,
+  `verified` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
