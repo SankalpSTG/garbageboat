@@ -22,14 +22,15 @@ require("../database/dbh.inc.php");
 				$row = mysqli_fetch_assoc($result);
 				$stmt->close();
 				if(mysqli_num_rows($result)==1){
-					$message["company_name"] = (string) $row["company_name"];
-					$message["logo_url"] = (string) $row["logo_url"];
-					$message["pincode"] = (int) $row["pincode"];
-					$message["address"] = (string) $row["address"];
-					$message["location_lat"] = (string) $row["location_lat"];
-					$message["location_lng"] = (string) $row["location_lng"];
+					$data["company_name"] = (string) $row["company_name"];
+					$data["logo_url"] = (string) $row["logo_url"];
+					$data["pincode"] = (int) $row["pincode"];
+					$data["address"] = (string) $row["address"];
+					$data["location_lat"] = (string) $row["location_lat"];
+					$data["location_lng"] = (string) $row["location_lng"];
 					$message["error"] = false;
 					$message["error_message"] = "Success";
+					$message["data"] = $data;
 					die(json_encode($message));
 				}else{
 					$message["error"] = true;

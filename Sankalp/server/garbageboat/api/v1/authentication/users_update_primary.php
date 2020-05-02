@@ -26,7 +26,7 @@ require("../files/upload_image.inc.php");
 				$stmt->execute();
 				$stmt->close();
 				$message["error"] = false;
-				$message["error_message"] = "FucSuccess";
+				$message["error_message"] = "Success";
 				die(json_encode($message));
 			}
 		}
