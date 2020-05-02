@@ -16,7 +16,7 @@ require("../database/dbh.inc.php");
 				$message["error_message"] = "Invalid parameters";	
 				die(json_encode($message));
 			}else{
-				$stmt = $conn->prepare("SELECT cred.serial_id, usr.password FROM users as usr, credentials as cred WHERE usr.credential_id = cred.serial_id and email_id = ?");
+				$stmt = $conn->prepare("SELECT cred.serial_id, cre.account_level, cre.verification_level, usr.password FROM users as usr, credentials as cred WHERE usr.credential_id = cred.serial_id and email_id = ?");
 				$stmt->bind_param("s", $email_id);
 				$stmt->execute();
 				$result = $stmt->get_result();
@@ -26,7 +26,10 @@ require("../database/dbh.inc.php");
 					$serial_id = (int) $row["serial_id"];
 					$password = (string) $row["password"];
 					if(password_verify($user_password, $password)==true){
-						$message["data"] = $serial_id;
+						$data["serial_id"] = $serial_id;
+						$data["account_level"] = $row["account_level"];
+						$data["verification_level"] = $row["verification_level"];
+						$message["data"] = $data;
 						$message["error"] = false;
 						$message["error_message"] = "Success";
 						die(json_encode($message));
