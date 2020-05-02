@@ -3,7 +3,7 @@ require("../database/dbh.inc.php");
 
 	$message["error"] = true;
 	$message["error_message"] = "Require all parameters";
-	$stmt = $conn->prepare("SELECT serial_id, credential_id, category, header, description, rating FROM user_feedback ORDER BY serial_id LIMIT 10");
+	$stmt = $conn->prepare("SELECT serial_id, problem_id, solution_header, solution_description FROM problem_solutions ORDER BY serial_id DESC LIMIT 10");
 	$stmt->execute();
 	$result = $stmt->get_result();
 	$stmt->close();
@@ -12,11 +12,9 @@ require("../database/dbh.inc.php");
 		while ($row = mysqli_fetch_assoc($result)){
 		$responce = [];
 		$responce["serial_id"] = (int)$row["serial_id"];
-		$responce["credential_id"] = (int)$row["credential_id"];
-		$responce["category"] = (string)$row["category"];
-		$responce["header"] = (string)$row["header"];
-		$responce["description"] = (string)$row["description"];
-		$responce["rating"] = (string)$row["rating"];
+		$responce["problem_id"] = (int)$row["problem_id"];
+		$responce["solution_header"] = (string)$row["solution_header"];
+		$responce["solution_description"] = (string)$row["solution_description"];
 		array_push($data, $responce);
 		}
 		$message["data"] = $data;
@@ -25,7 +23,7 @@ require("../database/dbh.inc.php");
 		die(json_encode($message));
 	}else{
 		$message["error"] = true;
-		$message["error_message"] = "No user found";	
+		$message["error_message"] = "Solution not uploaded";	
 		die(json_encode($message));
 	}die(json_encode($message));
 ?>
