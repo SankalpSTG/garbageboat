@@ -1,0 +1,2710 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+	<head>
+		<link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+		<link rel="stylesheet" href="plugins/w3/w3.css">
+		<link rel="stylesheet" href="plugins/custom/custom_style.css">
+		<link rel="stylesheet" href="plugins/custom/custom_kits.css">
+		<script src="plugins/custom/custom_javascript.js"></script>
+		<script src="plugins/custom/java_make.js"></script>
+		<link rel="shortcut icon" href="resources/images/icon/favicon4.ico" />
+		<title>SET ON SITE: Calculator</title>
+	</head>
+	<body onload="init();">
+		<header class="row">
+			<div class="company-header row">
+				<div class="company-logo">
+					<img src="resources/images/setonsitelogo.webp">	
+				</div>
+				<div class="company-name">
+					SET<br>ON SITE<br>ELECTRICALS
+				</div>
+			</div>
+			<div class="section-container row">
+				<a href="#"><div class="section-body">
+					Calculator
+				</div></a>
+				<a href="#"><div class="section-body">
+					Defaults
+				</div></a>
+				<a href="#"><div class="section-body">
+					Instructions
+				</div></a>
+				<a href="#"><div class="section-body">
+					About
+				</div></a>
+			</div>
+		</header>
+		<div class="c-container">
+			<div class="calc-container row">
+				<div class="tab-out">
+					<div class="tab-container">
+						<div class="tab-groups">
+							<div class="tab-group-header">
+								Name Plate Details
+							</div>
+							<div class="tab-list">
+								<div id="tab-1" class="class-tabs" onclick="showwindow(1);">
+									Name Plate
+								</div>
+								<div id="tab-2" class="class-tabs" onclick="showwindow(2);">
+									Specifications
+								</div>
+							</div>
+						</div>
+						<div class="tab-groups">
+							<div class="tab-group-header">
+								Internal Details
+							</div>
+							<div class="tab-list">
+								<div id="tab-3" class="class-tabs" onclick="showwindow(3);">
+									Core Details
+								</div>
+								<div id="tab-4" class="class-tabs" onclick="showwindow(4);">
+									LV Windings
+								</div>
+								<div id="tab-5" class="class-tabs" onclick="showwindow(5);">
+									Insulation Over LV
+								</div>
+								<div id="tab-6" class="class-tabs" onclick="showwindow(6);">
+									HV Windings 1
+								</div>
+								<div id="tab-7" class="class-tabs" onclick="showwindow(7);">
+									HV Windings 2
+								</div>
+								<div id="tab-8" class="class-tabs" onclick="showwindow(8);">
+									HV Windings 3
+								</div>
+								<div id="tab-9" class="class-tabs" onclick="showwindow(9);">
+									Insulation Over HV
+								</div>
+								<div id="tab-10" class="class-tabs" onclick="showwindow(10);">
+									Inner Tap Winding 1
+								</div>
+								<div id="tab-11" class="class-tabs" onclick="showwindow(11);">
+									Inner Tap Winding 2
+								</div>
+								<div id="tab-12" class="class-tabs" onclick="showwindow(12);">
+									Insulation Over In Tap
+								</div>
+								<div id="tab-13" class="class-tabs" onclick="showwindow(13);">
+									Outer Tap Winding
+								</div>
+								<div id="tab-14" class="class-tabs" onclick="showwindow(14);">
+									Calculate Impedance
+								</div>
+								<div id="tab-15" class="class-tabs" onclick="showwindow(15);">
+									Cov. Cu. Wt. Calc.
+								</div>
+								<div id="tab-16" class="class-tabs" onclick="showwindow(16);">
+									Calculate Weight
+								</div>
+							</div>
+						</div>
+						<div class="tab-groups">
+							<div class="tab-group-header">
+								External Details
+							</div>
+							<div class="tab-list">								
+								<div id="tab-17" class="class-tabs" onclick="showwindow(17);">
+									OLTC Details
+								</div>
+								<div id="tab-18" class="class-tabs" onclick="showwindow(18);">
+									Accessories
+								</div>
+								<div id="tab-19" class="class-tabs" onclick="showwindow(19);">
+									Impedance Calculated
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="window-out">
+					<div class="window-container">
+						<div id="window-1" class="windows">
+							<div id="window-header-1" class="window-headers">
+								Name Plate Details
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<td><label for="1-capacity">Capacity(MVA)</label></td>
+										<td><input id="1-capacity" name="1_capacity" type="text" placeholder="Capacity(MVA)" onkeyup="1_capacity_changed();"></td>
+									</tr>
+									<tr>
+										<td><label for="1-make">Make</label></td>
+										<td><input id="1-make" name="1_make" type="text" placeholder="Make" onkeyup="1_make_changed();"></td>
+									</tr>
+									<tr>
+										<td><label for="1-serialnumber">Serial Number</label></td>
+										<td><input id="1-serialnumber" name="1_serialnumber" type="text" placeholder="Serial Number" onkeyup="1_serialnumber_changed();"></td>
+									</tr>
+									<tr>
+										<td><label for="1-manufactureyear">Manufacture Year</label></td>
+										<td><input id="1-manufactureyear" name="1_manufactureyear" type="text" placeholder="Manufacture Year"></td>
+									</tr>
+									<tr>
+										<td><label for="1-hvvoltage">HV Voltage(KV)</label></td>
+										<td><input id="1-hvvoltage" name="1_hvvoltage" type="text" placeholder="HV Voltage(KV)"></td>
+									</tr>
+									<tr>
+										<td><label for="1-lvvoltage">LV Voltage(KV)</label></td>
+										<td><input id="1-lvvoltage" name="1_lvvoltage" type="text" placeholder="LV Voltage(KV)"></td>
+									</tr>
+									<tr>
+										<td><label for="1-hvcurrent">HV Current(A)</label></td>
+										<td><input id="1-hvcurrent" name="1_hvcurrent" type="text" placeholder="HV Current(A)"></td>
+									</tr>
+									<tr>
+										<td><label for="1-lvcurrent">LV Current(A)</label></td>
+										<td><input id="1-lvcurrent" name="1_lvcurrent" type="text" placeholder="LV Current(A)"></td>
+									</tr>
+									<tr>
+										<td><label for="1-impedance">% Impedance - Name Plate</label></td>
+										<td><input id="1-impedance" name="1_impedance" type="text" placeholder="% Impedance - Name Plate"></td>
+									</tr>
+									<tr>
+										<td><label for="1-vectorgroup">Vector Group</label></td>
+										<td><input id="1-vectorgroup" name="1_vectorgroup" type="text" placeholder="Vector Group"></td>
+									</tr>
+									<tr>
+										<td><label for="1-coreandwindingmass">Core & Winding Mass(Kgs)</label></td>
+										<td><input id="1-coreandwindingmass" name="1_coreandwindingmass" type="text" placeholder="Core & Winding Mass(Kgs)"></td>
+									</tr>
+									<tr>
+										<td><label for="1-transportationmass">Transportation Mass(Kgs)</label></td>
+										<td><input id="1-transportationmass" name="1_transportationmass" type="text" placeholder="Transportation Mass(Kgs)"></td>
+									</tr>
+									<tr>
+										<td><label for="1-massofoil">Mass Of Oil(Ltr's)</label></td>
+										<td><input id="1-massofoil" name="1_massofoil" type="text" placeholder="Mass Of Oil(Ltr's)"></td>
+									</tr>
+									<tr>
+										<td><label for="1-volumeofoil">Volume Of Oil(Ltr's)</label></td>
+										<td><input id="1-volumeofoil" name="1_volumeofoil" type="text" placeholder="Volume Of Oil(Ltr's)"></td>
+									</tr>
+									<tr>
+										<td><label for="1-totalweight">Total Weight(Kgs)</label></td>
+										<td><input id="1-totalweight" name="1_totalweight" type="text" placeholder="Total Weight(Kgs)"></td>
+									</tr>
+									<tr>
+										<td><label for="1-tappingrange">Tapping Range</label></td>
+										<td><input id="1-tappingrange" name="1_tappingrange" type="text" placeholder="Tapping Range"></td>
+									</tr>
+									<tr>
+										<td><label for="1-covermountingplain">Cover Mounting / Plain</label></td>
+										<td><input id="1-covermountingplain" name="1_covermountingplain" type="text" placeholder="Cover Mounting / Plain"></td>	
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-2" class="windows">
+							<div id="window-header-1" class="window-headers">
+								Transformer Specifications
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<td><label for="2-make">Make</label></td>
+										<td><input id="2-make" name="2_make" type="text" placeholder="Make"></td>
+									</tr>
+									<tr>
+										<td><label for="2-capacity">Capacity(KVA)</label></td>
+										<td><input id="2-capacity" name="2_capacity" type="text" placeholder="Capacity(KVA)"></td>
+									</tr>
+									<tr>
+										<td><label for="2-hvvoltageoriginal">HV Voltage(Original)(KVA)</label></td>
+										<td><input id="2-hvvoltageoriginal" name="2_hvvoltageoriginal" type="text" placeholder="HV Voltage(Original)(KVA)"></td>
+									</tr>
+									<tr>
+										<td><label for="2-lvvoltageoriginal">LV Voltage(Original)(KVA)</label></td>
+										<td><input id="2-lvvoltageoriginal" name="2_lvvoltageoriginal" type="text" placeholder="LV Voltage(Original)(KVA)"></td>
+									</tr>
+									<tr>
+										<td><label for="2-hvvoltageconverted">HV Voltage(Converted)(KVA)</label></td>
+										<td><input id="2-hvvoltageconverted" name="2_hvvoltageconverted" type="text" placeholder="HV Voltage(Converted)(KVA)"></td>
+									</tr>
+									<tr>
+										<td><label for="2-lvvoltageconverted">LV Voltage(Converted)(KVA)</label></td>
+										<td><input id="2-lvvoltageconverted" name="2_lvvoltageconverted" type="text" placeholder="LV Voltage(Converted)(KVA)"></td>
+									</tr>
+									<tr>
+										<td><label for="2-serialno">Serial No</label></td>
+										<td><input id="2-serialno" name="2_serialno" type="text" placeholder="Serial No"></td>
+									</tr>
+									<tr>
+										<td><label for="2-place">Place</label></td>
+										<td><input id="2-place" name="2_place" type="text" placeholder="Place"></td>
+									</tr>
+									<tr>
+										<td><label for="2-tappings">Tappings</label></td>
+										<td><input id="2-tappings" name="2_tappings" type="text" placeholder="Tappings"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th></th>
+										<th>Existing</th>
+										<th>As Per SOS</th>
+									</tr>
+									<tr>
+										<td><label for="2-windowheight-existing">Window Height</label></td>
+										<td><input id="2-windowheight-existing" name="2_windowheight_existing" type="text" placeholder="Window Height (Existing)"></td>
+										<td><input id="2-windowheight-sos" name="2_windowheight_sos" type="text" placeholder="Window Height (As Per SOS)"></td>
+									</tr>
+									<tr>
+										<td><label for="2-legcentre-existing">Leg Centre</label></td>
+										<td><input id="2-legcentre-existing" name="2_legcentre_existing" type="text" placeholder="Leg Centre (Existing)"></td>
+										<td><input id="2-legcentre-sos" name="2_legcentre_sos" type="text" placeholder="Leg Centre (As Per SOS)"></td>
+									</tr>
+									<tr>
+										<td><label for="2-cylinderheight-existing">Cylinder Height</label></td>
+										<td><input id="2-cylinderheight-existing" name="2_cylinderheight_existing" type="text" placeholder="Cylinder Height (Existing)"></td>
+										<td><input id="2-cylinderheight-sos" name="2_cylinderheight_sos" type="text" placeholder="Cylinder Height (As Per SOS)"></td>
+									</tr>
+									<tr>
+										<td><label for="2-coredia-existing">Core Dia</label></td>
+										<td><input id="2-coredia-existing" name="2_coredia_existing" type="text" placeholder="Core Dia (Existing)"></td>
+										<td><input id="2-coredia-sos" name="2_coredia_sos" type="text" placeholder="Core Dia (As Per SOS)"></td>
+									</tr>
+									<tr>
+										<td><label for="2-corediawithcorebelts-existing">Core Dia With Core Belts</label></td>
+										<td><input id="2-corediawithcorebelts-existing" name="2_corediawithcorebelts_existing" type="text" placeholder="Core Dia With Core Belts (Existing)"></td>
+										<td><input id="2-corediawithcorebelts-sos" name="2_corediawithcorebelts_sos" type="text" placeholder="Core Dia With Core Belts (As Per SOS)"></td>
+									</tr>
+									<tr>
+										<td><label for="2-corediaovercorecylinder-existing">Core Dia Over Core Cylinder</label></td>
+										<td><input id="2-corediaovercorecylinder-existing" name="2_corediaovercorecylinder_existing" type="text" placeholder="Core Dia Over Core Cylinder (Existing)"></td>
+										<td><input id="2-corediaovercorecylinder-sos" name="2_corediaovercorecylinder_sos" type="text" placeholder="Core Dia Over Core Cylinder (As Per SOS)"></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-3" class="windows">
+							<div id="window-header-3" class="window-headers">
+								Core Details
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table id="coredata">
+									<tr>
+										<th>Core</th>
+										<th>Width</th>
+										<th>Stack Width</th>
+										<th>Net Stack</th>
+										<th>Area</th>
+									</tr>
+								</table>
+								<input type="hidden" id="what-index-1" value=0>
+								<div id="addmorecores" class="addmore row" onclick="addmore(1)">
+									<div class="addmore-rule">
+										<hr class="addmore-hr">
+									</div>
+									<div class="addmore-image">
+										<img src="resources/images/plus.png" width="100%" height="100%">
+									</div>
+								</div>
+								<div style="text-align:center">
+									<input id="3-core-input-woodenstrip" name="3_core_input_woodenstrip" class="input-core-2" type="text" placeholder="Wooden Strip">
+									<input id="3-core-input-total-area" name="3_core_input_total_area" class="input-core-2" type="text" placeholder="Total Area" readonly>
+								</div>
+								<button class="funny-buts" onclick="maketable();">Make Table</button><br><br>
+								<table>
+									<tr>
+										<td><label for="3-compactingfactor">Compacting Factor</label></td>
+										<td><input id="3-compactingfactor" name="3_compactingfactor" type="text" placeholder="Compacting Factor"></td>
+									</tr>
+									<tr>
+										<td><label for="3-netcoreareammsq">Net Core Area in mm<sup>2</sup></label></td>
+										<td><input id="3-netcoreareammsq" name="3_netcoreareammsq" type="text" placeholder="Net Core Area"></td>
+									</tr>
+									<tr>
+										<td><label for="3-netcoreareacmsq">Net Core Area in cm<sup>2</sup></label></td>
+										<td><input id="3-netcoreareacmsq" name="3_netcoreareacmsq" type="text" placeholder="Net Core Area"></td>
+									</tr>
+									<tr>
+										<td><label for="3-noofphases">No Of Phases</label></td>
+										<td><input id="3-noofphases" name="3_noofphases" type="text" placeholder="No Of Phases"></td>
+									</tr>
+									<tr>
+										<td><button class="funny-buts-2" onclick="getphasevoltage();">Phase Voltage</button></td>
+										<td><input id="3-netcoreareacmsq" name="3_netcoreareacmsq" type="text" placeholder="Phase Voltage" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="3-fluxdensity">Flux Density</label></td>
+										<td><input id="3-fluxdensity" name="3_fluxdensity" type="text" placeholder="Flux Density"></td>
+									</tr>
+									<tr>
+										<td><button class="funny-buts-2" onclick="getlvturns();">LV Turns</button></td>
+										<td><input id="3-lvturns" name="3_lvturns" type="text" placeholder="LV Turns" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="3-originallvturns">Original LV Turns</label></td>
+										<td><input id="3-originallvturns" name="3_originallvturns" type="text" placeholder="Original LV Turns"></td>
+									</tr>
+									<tr>
+										<td><button class="funny-buts-2" onclick="getfluxdensity();">Calculated Flux Density</button></td>
+										<td><input id="3-actualfluxdensity" name="3_actualfluxdensity" type="text" placeholder="Actual Flux Density" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="3-lvturnstaken">LV Turns Taken</label></td>
+										<td><input id="3-lvturnstaken" name="3_lvturnstaken" type="text" placeholder="LV Turns Taken"></td>
+									</tr>
+									<tr>
+										<td><button class="funny-buts-2" onclick="getfluxdensity2();">So Flux Density</button></td>
+										<td><input id="3-sofluxdensity" name="3_sofluxdensity" type="text" placeholder="Flux Density" readonly></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-4" class="windows">
+							<div id="window-header-1" class="window-headers">
+								LV Windings
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<td><label for="4-coremaxdia">Core Max Dia</label></td>
+										<td><input id="4-coremaxdia" name="4_coremaxdia" type="text" placeholder="Core Max Dia"></td>
+									</tr>
+									<tr>
+										<td><label for="4-coremaxdiatolerance">Tolerance</label></td>
+										<td><input id="4-coremaxdiatolerance" name="4_coremaxdiatolerance" type="text" placeholder="Tolerance"></td>
+									</tr>
+									<tr>
+										<td><label for="4-cylinderid">Cylinder ID</label></td>
+										<td><input id="4-cylinderid" name="4_cylinderid" type="text" placeholder="Cylinder ID"></td>
+									</tr>
+									<tr>
+										<td><label for="4-fordia">For Dia</label></td>
+										<td><input id="4-fordia" name="4_fordia" type="text" placeholder="For Dia"></td>
+									</tr>
+									<tr>
+										<td><label for="4-cylinder1">Cylinder 1</label></td>
+										<td><input id="4-cylinder1" name="4_cylinder1" type="text" placeholder="Cylinder 1"></td>
+									</tr>
+									<tr>
+										<td><label for="4-duct1">Duct</label></td>
+										<td><input id="4-duct1" name="4_duct1" type="text" placeholder="Duct"></td>
+									</tr>
+									<tr>
+										<td><label for="4-cylinder2">Cylinder 2</label></td>
+										<td><input id="4-cylinder2" name="4_cylinder2" type="text" placeholder="Cylinder 1"></td>
+									</tr>
+									<tr>
+										<td><label for="4-duct2">Duct</label></td>
+										<td><input id="4-duct2" name="4_duct2" type="text" placeholder="Duct"></td>
+									</tr>
+									<tr>
+										<td><label for="4-mstotal">Total</label></td>
+										<td><input id="4-mstotal" name="4_mstotal" type="text" placeholder="Total"></td>
+									</tr>
+									<tr>
+										<td><label for="4-lvid">LV ID</label></td>
+										<td><input id="4-lvid" name="4_lvid" type="text" placeholder="LV ID"></td>
+									</tr>
+									<tr>
+										<td><label for="4-lvidmeasured">LV ID Measured</label></td>
+										<td><input id="4-lvidmeasured" name="4_lvidmeasured" type="text" placeholder="LV ID Measured"></td>
+									</tr>
+									<tr>
+										<td><label for="4-condsizebare">Cond. Size Bare</label></td>
+										<td><input style="width:50px;" id="4-2p2klesscs" name="4_2p2klesscs" type="text" placeholder="">
+										X
+										<input style="width:50px;" id="4-2p2k" name="4_2p2k" type="text" placeholder="" readonly>
+										=
+										<input id="4-condsizebare" name="4_condsizebare" type="text" placeholder="Cond. Size Bare" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-papercovering">Paper Covering</label></td>
+										<td><input id="4-papercovering" name="4_papercovering" type="text" placeholder="Paper Covering"></td>
+									</tr>
+									<tr>
+										<td><label for="4-covcondsize">Cov. Cond Size</label></td>
+										<td><input style="width:50px;" id="4-2p2klessccs" name="4_2p2klessccs" type="text" placeholder="">
+										X
+										<input style="width:50px;" id="4-2p2kppc" name="4_2p2kppc" type="text" placeholder="" readonly>
+										=
+										<input id="4-covcondsize" name="4_covcondsize" type="text" placeholder="Cond. Size Bare"></td>
+									</tr>
+									<tr>
+										<td><label for="4-reductionareaduetoedge">Reduction in area due to Edge</label></td>
+										<td><input id="4-reductionareaduetoedge" name="4_reductionareaduetoedge" type="text" placeholder="Reduction in area due to Edge"></td>
+									</tr>
+									<tr>
+										<td><label for="4-actualarea">Actual area</label></td>
+										<td><input id="4-actualarea" name="4_actualarea" type="text" placeholder="Actual area"></td>
+									</tr>
+									<tr>
+										<td><label for="4-totalareaofconductors">Total Area of Conductors</label></td>
+										<td><input id="4-totalareaofconductors" name="4_totalareaofconductors" type="text" placeholder="Total Area of Conductors"></td>
+									</tr>
+									<tr>
+										<td><label for="4-forchamfer">For Chamfer</label></td>
+										<td><input id="4-forchamfer" name="4_forchamfer" type="text" placeholder="For Chamfer"></td>
+									</tr>
+									<tr>
+										<td><label for="4-cylinder1length">Cylinder 1 Length</label></td>
+										<td><input id="4-cylinder1length" name="4_cylinder1length" type="text" placeholder="Cylinder 1 Length"></td>
+									</tr>
+									<tr>
+										<td><label for="4-cylinder2length">Cylinder 2 Length</label></td>
+										<td><input id="4-cylinder2length" name="4_cylinder2length" type="text" placeholder="Cylinder 2 Length"></td>
+									</tr>
+									<tr>
+										<td><label for="4-noofcond">No. Of Cond.</label></td>
+										<td><input id="4-noofcond" name="4_noofcond" type="text" placeholder="No. Of Cond."></td>
+									</tr>
+									<tr>
+										<td><label for="4-crosssectionareabare">Cross Section Area Bare</label></td>
+										<td><input id="4-crosssectionareabare" name="4_crosssectionareabare" type="text" placeholder="Cross Section Area Bare" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-fullloadcurrentlv">Full Load Current LV</label></td>
+										<td><input id="4-fullloadcurrentlv" name="4_fullloadcurrentlv" type="text" placeholder="Full Load Current LV" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-currentdensity">Current Density</label></td>
+										<td><input id="4-currentdensity" name="4_currentdensity" type="text" placeholder="Current Density" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-totalnoofdiscs">Total No Of Discs</label></td>
+										<td><input id="4-totalnoofdiscs" name="4_totalnoofdiscs" type="text" placeholder="Total No Of Discs"></td>
+									</tr>
+									<tr>
+										<td><label for="4-discsexisting">Discs Existing</label></td>
+										<td><input id="4-discsexisting" name="4_discsexisting" type="text" placeholder="Discs Existing"></td>
+									</tr>
+									<tr>
+										<td><label for="4-turnsperdisc">Turns Per Disc</label></td>
+										<td><input id="4-turnsperdisc" name="4_turnsperdisc" type="text" placeholder="Turns Per Disc"></td>
+									</tr>
+									<tr>
+										<td><label for="4-noofradialconductors">No Of Radial Conductors</label></td>
+										<td><input id="4-noofradialconductors" name="4_noofradialconductors" type="text" placeholder="No Of Radial Conductors" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-totalturnsalldiscs">Total Turns</label></td>
+										<td><input id="4-totalturnsalldiscs" name="4_totalturnsalldiscs" type="text" placeholder="Total Turns" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-lessdrop">LESS DROP</label></td>
+										<td><input id="4-lessdrop" name="4_lessdrop" type="text" placeholder="LESS DROP"></td>
+									</tr>
+									<tr>
+										<td><label for="4-turnsinactualwinding">Turns In Actual Winding</label></td>
+										<td><input id="4-turnsinactualwinding" name="4_turnsinactualwinding" type="text" placeholder="Turns In Actual Winding"></td>
+									</tr>
+									<tr>
+										<td><label for="4-windingodradial">Winding OD Radial</label></td>
+										<td><input id="4-windingodradial" name="4_windingodradial" type="text" placeholder="Winding OD Radial" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-windingodradialroff">Winding OD Radial R.Off</label></td>
+										<td><input id="4-windingodradialroff" name="4_windingodradialroff" type="text" placeholder="Winding OD Radial R.Off"></td>
+									</tr>
+									<tr>
+										<td><label for="4-totalwindingod">Total Winding OD</label></td>
+										<td><input id="4-totalwindingod" name="4_totalwindingod" type="text" placeholder="Total Winding OD" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-lvwindingod">LV Winding OD</label></td>
+										<td><input id="4-lvwindingod" name="4_lvwindingod" type="text" placeholder="LV Winding OD"></td>
+									</tr>
+									<tr>
+										<td><label for="4-toleranceforcrossoverwinding">Tolerance for cross over winding</label></td>
+										<td><input id="4-toleranceforcrossoverwinding" name="4_toleranceforcrossoverwinding" type="text" placeholder="Tolerance for cross over winding"></td>
+									</tr>
+									<tr>
+										<td><label for="4-totallvwindingod">Total LV Winding OD</label></td>
+										<td><input id="4-totallvwindingod" name="4_totallvwindingod" type="text" placeholder="Total LV Winding OD"></td>
+									</tr>
+									<tr>
+										<td colspan="2" style="text-align:center;">Bottom Insulation of LV</td>
+									</tr>
+									<tr>
+										<td><label for="4-commonring">Commong Ring</label></td>
+										<td><input id="4-commonring" name="4_commonring" type="text" placeholder="Common Ring"></td>
+									</tr>
+									<tr>
+										<td><label for="4-commonblock">Common Block</label></td>
+										<td><input id="4-commonblock" name="4_commonblock" type="text" placeholder="Common Block"></td>
+									</tr>
+									<tr>
+										<td><label for="4-lvblock1">LV Block</label></td>
+										<td><input id="4-lvblock1" name="4_lvblock1" type="text" placeholder="LV Block"></td>
+									</tr>
+									<tr>
+										<td><label for="4-lvring">LV Ring</label></td>
+										<td><input id="4-lvring" name="4_lvring" type="text" placeholder="LV Ring"></td>
+									</tr>
+									<tr>
+										<td><label for="4-lvblock2">LV Block</label></td>
+										<td><input id="4-lvblock2" name="4_lvblock2" type="text" placeholder="LV Block"></td>
+									</tr>
+									<tr>
+										<td><label for="4-commonblock2">Common Block</label></td>
+										<td><input id="4-commonblock2" name="4_commonblock2" type="text" placeholder="Common Block"></td>
+									</tr>
+									<tr>
+										<td><label for="4-pr">PR</label></td>
+										<td><input id="4-pr" name="4_pr" type="text" placeholder="PR"></td>
+									</tr>
+									<tr>
+										<td><label for="4-totalbotins">Total</label></td>
+										<td><input id="4-totalbotins" name="4_totalbotins" type="text" placeholder="Total" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-actualtotalexisting">Actual Existing</label></td>
+										<td><input id="4-actualtotalexisting" name="4_actualtotalexisting" type="text" placeholder="Actual Existing"></td>
+									</tr>
+									<tr>
+										<td colspan="2" style="text-align:center;">Top Insulation of LV</td>
+									</tr>
+									<tr>
+										<td><label for="4-lvblock3">LV Block</label></td>
+										<td><input id="4-lvblock3" name="4_lvblock3" type="text" placeholder="LV Block"></td>
+									</tr>
+									<tr>
+										<td><label for="4-lvser">LV SER</label></td>
+										<td><input id="4-lvser" name="4_lvser" type="text" placeholder="LV SER"></td>
+									</tr>
+									<tr>
+										<td><label for="4-lvblock4">LV Block</label></td>
+										<td><input id="4-lvblock4" name="4_lvblock4" type="text" placeholder="LV Block"></td>
+									</tr>
+									<tr>
+										<td><label for="4-mar">MAR</label></td>
+										<td><input id="4-mar" name="4_mar" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="4-lvblock5">LV Block</label></td>
+										<td><input id="4-lvblock5" name="4_lvblock5" type="text" placeholder="LV Block"></td>
+									</tr>
+									<tr>
+										<td><label for="4-commonblock3">Common Block</label></td>
+										<td><input id="4-commonblock3" name="4_commonblock3" type="text" placeholder="Common Block"></td>
+									</tr>
+									<tr>
+										<td><label for="4-pr2">PR</label></td>
+										<td><input id="4-pr2" name="4_pr2" type="text" placeholder="PR"></td>
+									</tr>
+									<tr>
+										<td><label for="4-totaltopins">Total</label></td>
+										<td><input id="4-totaltopins" name="4_totaltopins" type="text" placeholder="Total" readonly></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td colspan="2" style="text-align:center;">Blocks In LV</td>
+									</tr>
+									<tr>
+										<td><label for="4-lvradial">LV Radial</label></td>
+										<td><input id="4-lvradial" name="4_lvradial" type="text" placeholder="LV Radial"></td>
+									</tr>
+									<tr>
+										<td><label for="4-lvblockheight">LV Block Height</label></td>
+										<td><input id="4-lvblockheight" name="4_lvblockheight" type="text" placeholder="LV Block Height"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th>From</th>
+										<th>To</th>
+										<th>Thickness Per Block</th>
+										<th>Thickness</th>
+									</tr>
+									<tr>
+										<td><input class="input-block" id="4-from1" name="4_from1" type="text" placeholder="From"></td>
+										<td><input class="input-block" id="4-to1" name="4_to1" type="text" placeholder="To"></td>
+										<td><input class="input-block" id="4-thicknessperblock1" name="4_thicknessperblock1" type="text" placeholder="Thickness Per Block"></td>
+										<td><input class="input-block" id="4-thickness1" name="4_thickness1" type="text" placeholder="Thickness" readonly></td>
+									</tr>
+									<tr>
+										<td><input class="input-block" id="4-from2" name="4_from2" type="text" placeholder="From"></td>
+										<td><input class="input-block" id="4-to2" name="4_to2" type="text" placeholder="To"></td>
+										<td><input class="input-block" id="4-thicknessperblock2" name="4_thicknessperblock2" type="text" placeholder="Thickness Per Block"></td>
+										<td><input class="input-block" id="4-thickness2" name="4_thickness2" type="text" placeholder="Thickness" readonly></td>
+									</tr>
+									<tr>
+										<td><input class="input-block" id="4-from3" name="4_from3" type="text" placeholder="From"></td>
+										<td><input class="input-block" id="4-to3" name="4_to3" type="text" placeholder="To"></td>
+										<td><input class="input-block" id="4-thicknessperblock3" name="4_thicknessperblock3" type="text" placeholder="Thickness Per Block"></td>
+										<td><input class="input-block" id="4-thickness3" name="4_thickness3" type="text" placeholder="Thickness" readonly></td>
+									</tr>
+									<tr>
+										<td><input class="input-block" id="4-from4" name="4_from4" type="text" placeholder="From"></td>
+										<td><input class="input-block" id="4-to4" name="4_to4" type="text" placeholder="To"></td>
+										<td><input class="input-block" id="4-thicknessperblock4" name="4_thicknessperblock4" type="text" placeholder="Thickness Per Block"></td>
+										<td><input class="input-block" id="4-thickness4" name="4_thickness4" type="text" placeholder="Thickness" readonly></td>
+									</tr>
+									<tr>
+										<td><input class="input-block" id="4-from5" name="4_from5" type="text" placeholder="From"></td>
+										<td><input class="input-block" id="4-to5" name="4_to5" type="text" placeholder="To"></td>
+										<td><input class="input-block" id="4-thicknessperblock5" name="4_thicknessperblock5" type="text" placeholder="Thickness Per Block"></td>
+										<td><input class="input-block" id="4-thickness5" name="4_thickness5" type="text" placeholder="Thickness" readonly></td>
+									</tr>
+									<tr>
+										<td><input class="input-block" id="4-from6" name="4_from6" type="text" placeholder="From"></td>
+										<td><input class="input-block" id="4-to6" name="4_to6" type="text" placeholder="To"></td>
+										<td><input class="input-block" id="4-thicknessperblock6" name="4_thicknessperblock6" type="text" placeholder="Thickness Per Block"></td>
+										<td><input class="input-block" id="4-thickness6" name="4_thickness6" type="text" placeholder="Thickness" readonly></td>
+									</tr>
+									<tr>
+										<td><input class="input-block" id="4-from7" name="4_from7" type="text" placeholder="From"></td>
+										<td><input class="input-block" id="4-to7" name="4_to7" type="text" placeholder="To"></td>
+										<td><input class="input-block" id="4-thicknessperblock7" name="4_thicknessperblock7" type="text" placeholder="Thickness Per Block"></td>
+										<td><input class="input-block" id="4-thickness7" name="4_thickness7" type="text" placeholder="Thickness" readonly></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td><label for="4-totalthickness">Total</label></td>
+										<td><input id="4-totalthickness" name="4_totalthickness" type="text" placeholder="Total" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-windingheight">Winding Height</label></td>
+										<td><input id="4-windingheight" name="4_windingheight" type="text" placeholder="Winding Height"></td>
+									</tr>
+									<tr>
+										<td colspan="2" style="text-align:center;">												
+											<select>
+											<option value=1>Layer Winding</option>
+											<option value=2>Disc Winding</option>
+										</td>
+									</tr>
+									<tr>
+										<td><label for="4-windingheighttolerance">Tolerance</label></td>
+										<td><input id="4-windingheighttolerance" name="4_windingheighttolerance" type="text" placeholder="Tolerance" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-totalwindingheight">Total Winding Height</label></td>
+										<td><input id="4-totalwindingheight" name="4_totalwindingheight" type="text" placeholder="Total Winding Height" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-whptipbi">Winding Ht.+ Top Ins.+ Bot. Ins</label></td>
+										<td><input id="4-whptipbi" name="4_whptipbi" type="text" placeholder="Winding Ht.+ Top Ins.+ Bot. Ins"></td>
+									</tr>
+									<tr>
+										<td><label for="4-lengthofmeanturn">Length Of mean turn (meter)</label></td>
+										<td><input id="4-lengthofmeanturn" name="4_lengthofmeanturn" type="text" placeholder="Length Of mean turn (meter)" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-lengthofwire">Length Of wire (meter)</label></td>
+										<td><input id="4-lengthofwire" name="4_lengthofwire" type="text" placeholder="Length Of wire (meter)" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-resistanceat75deg">Resistance @ 75 ˚C (Ohms)</label></td>
+										<td><input id="4-resistanceat75deg" name="4_resistanceat75deg" type="text" placeholder="Resistance @ 75 ˚C (Ohms)" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-bareweight">Bare Weight (Kgs)</label></td>
+										<td><input id="4-bareweight" name="4_bareweight" type="text" placeholder="Bare Weight (Kgs)" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-orderqty">Order Qty. (Kgs)</label></td>
+										<td><input id="4-orderqty" name="4_orderqty" type="text" placeholder="Order Qty. (Kgs)" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-insulatingweight">Insulating Weight %</label></td>
+										<td><input id="4-insulatingweight" name="4_insulatingweight" type="text" placeholder="Insulating Weight %" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-strayloss">Stray Loss %</label></td>
+										<td><input id="4-strayloss" name="4_strayloss" type="text" placeholder="Stray Loss %" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-loadloss">Load Loss (Watts)</label></td>
+										<td><input id="4-loadloss" name="4_loadloss" type="text" placeholder="Load Loss (Watts)" readonly></td>
+									</tr>
+									<tr>
+										<td><label for="4-strayloss">Stray Loss(Watts)</label></td>
+										<td><input id="4-strayloss" name="4_strayloss" type="text" placeholder="Stray Loss(Watts)"></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-5" class="windows">
+							<div id="window-header-1" class="window-headers">
+								Insulation Over LV
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+									<th class=""></th>
+									<th class="">Radial</th>
+									<th class="">Height</th>
+									<th class="">Length</th>
+									<th class="">MAR Size<br>(Portion<br>inserted<br>in wdg.)</th>
+									<th class="">MAR Size<br>(Portion<br>Over wdg.)</th>
+									<th class="">Thickness<br>of MAR</th>
+									<tr>
+										<td><label for="5-marductrad1">MAR Duct</label></td>
+										<td><input class="input-mars" id="5-marductrad1" name="5_marductrad1" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductht1" name="5_marductht1" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductlt1" name="5_marductlt1" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-marductms1" name="5_marductms1" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductmsp1" name="5_marductmsp1" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductthk1" name="5_marductthk1" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label class="" for="5-cylinder1">Cylinder</label></td>
+										<td><input class="input-mars" id="5-cylinderrad1" name="5_cylinderrad1" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderht1" name="5_cylinderht1" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderlt1" name="5_cylinderlt1" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderms1" name="5_cylinderms1" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-cylindermsp1" name="5_cylindermsp1" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-cylinderthk1" name="5_cylinderthk1" type="text" value="-"></td>
+									</tr>
+									<tr>
+										<td><label class="" for="5-marductrad2">MAR Duct</label></td>
+										<td><input class="input-mars" id="5-marductrad2" name="5_marductrad2" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductht2" name="5_marductht2" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductlt2" name="5_marductlt2" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-marductms2" name="5_marductms2" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductmsp2" name="5_marductmsp2" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductthk2" name="5_marductthk2" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label class="" for="5-cylinder2">Cylinder</label></td>
+										<td><input class="input-mars" id="5-cylinderrad2" name="5_cylinderrad2" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderht2" name="5_cylinderht2" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderlt2" name="5_cylinderlt2" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderms2" name="5_cylinderms2" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-cylindermsp2" name="5_cylindermsp2" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-cylinderthk2" name="5_cylinderthk2" type="text" value="-"></td>
+									</tr>
+									<tr>
+										<td><label class="" for="5-marductrad3">MAR Duct</label></td>
+										<td><input class="input-mars" id="5-marductrad3" name="5_marductrad3" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductht3" name="5_marductht3" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductlt3" name="5_marductlt3" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-marductms3" name="5_marductms3" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductmsp3" name="5_marductmsp3" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductthk3" name="5_marductthk3" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label class="" for="5-cylinder3">Cylinder</label></td>
+										<td><input class="input-mars" id="5-cylinderrad3" name="5_cylinderrad3" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderht3" name="5_cylinderht3" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderlt3" name="5_cylinderlt3" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderms3" name="5_cylinderms3" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-cylindermsp3" name="5_cylindermsp3" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-cylinderthk3" name="5_cylinderthk3" type="text" value="-"></td>
+									</tr>
+									<tr>
+										<td><label class="" for="5-marductrad4">MAR Duct</label></td>
+										<td><input class="input-mars" id="5-marductrad4" name="5_marductrad4" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductht4" name="5_marductht4" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductlt4" name="5_marductlt4" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-marductms4" name="5_marductms4" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductmsp4" name="5_marductmsp4" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductthk4" name="5_marductthk4" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label class="" for="5-cylinder4">Cylinder</label></td>
+										<td><input class="input-mars" id="5-cylinderrad4" name="5_cylinderrad4" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderht4" name="5_cylinderht4" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderlt4" name="5_cylinderlt4" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderms4" name="5_cylinderms4" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-cylindermsp4" name="5_cylindermsp4" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-cylinderthk4" name="5_cylinderthk4" type="text" value="-"></td>
+									</tr>
+									<tr>
+										<td><label class="" for="5-marductrad5">MAR Duct</label></td>
+										<td><input class="input-mars" id="5-marductrad5" name="5_marductrad5" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductht5" name="5_marductht5" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductlt5" name="5_marductlt5" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-marductms5" name="5_marductms5" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductmsp5" name="5_marductmsp5" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductthk5" name="5_marductthk5" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label class="" for="5-cylinder5">Cylinder</label></td>
+										<td><input class="input-mars" id="5-cylinderrad5" name="5_cylinderrad5" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderht5" name="5_cylinderht5" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderlt5" name="5_cylinderlt5" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderms5" name="5_cylinderms5" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-cylindermsp5" name="5_cylindermsp5" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-cylinderthk5" name="5_cylinderthk5" type="text" value="-"></td>
+									</tr>
+									<tr>
+										<td><label class="" for="5-marductrad6">MAR Duct</label></td>
+										<td><input class="input-mars" id="5-marductrad6" name="5_marductrad6" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductht6" name="5_marductht6" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductlt6" name="5_marductlt6" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-marductms6" name="5_marductms6" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductmsp6" name="5_marductmsp6" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-marductthk6" name="5_marductthk6" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label class="" for="5-cylinder6">Cylinder</label></td>
+										<td><input class="input-mars" id="5-cylinderrad6" name="5_cylinderrad6" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderht6" name="5_cylinderht6" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderlt6" name="5_cylinderlt6" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-cylinderms6" name="5_cylinderms6" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-cylindermsp6" name="5_cylindermsp6" type="text" value="-"></td>
+										<td><input class="input-mars" id="5-cylinderthk6" name="5_cylinderthk6" type="text" value="-"></td>
+									</tr>
+									<tr>
+										<td><label class="" for="5-totalrad">Total</label></td>
+										<td><input class="input-mars" id="5-totalrad" name="5_totalrad" type="text" placeholder=""></td>
+										<td><input class="input-mars" id="5-totalht" name="5_totalht" type="text" placeholder=""></td>
+										<td><label class="" for="5-tolerance">Tolerance</label></td>
+										<td><input class="input-mars" id="5-tolerance" name="5_tolerance" type="text" value=""></td>
+										<td><input class="input-mars" id="5-totalmsp" name="5_totalmsp" type="text" value=""></td>
+										<td><input class="input-mars" id="5-totalthk" name="5_totalthk" type="text" value=""></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td><label for="5-totalthickness">HV ID</label></td>
+										<td><input id="5-totalthickness" name="5_totalthickness" type="text" placeholder="HV ID" readonly></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-6" class="windows">
+							<div id="window-header-1" class="window-headers">
+								HV Windings 1
+							</div>
+							<div id="window-body" class="class-window-body">
+								<div style="width:100%; text-align:center"><b>Area</b></div>
+								<table>
+									<tr>
+										<td><label for="6-condsizebare1">Cond. Size- bare</label></td>
+										<td><input class="input-hv1" id="6-condsizebare1" name="6_condsizebare1" type="text" placeholder="">X<input class="input-hv1" id="6-condsizebare2" name="6_condsizebare2" type="text" placeholder=""></td><td>=</td><td><input class="input-hv1" id="6-condsizebare3" name="6_condsizebare2" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label for="6-papercovering">Paper Covering</label></td>
+										<td><input class="input-hv1" id="6-papercovering" name="6_papercovering" type="text" placeholder=""></td><td></td><td style="text-align:center;">QPC</td>
+									</tr>
+									<tr>
+										<td><label for="6-covcondsize1">Cov. Cond. Size</label></td>
+										<td><input class="input-hv1" id="6-covcondsize1" name="6_covcondsize1" type="text" placeholder="">X<input class="input-hv1" id="6-covcondsize2" name="6_covcondsize2" type="text" placeholder=""></td><td>=</td><td><input class="input-hv1" id="6-covcondsize3" name="6_covcondsize3" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td colspan="4" style="">For Last 4</td>
+									</tr>
+									<tr>
+										<td><label for="6-condsizebare1fl4">Cond. Size- bare</label></td>
+										<td><input class="input-hv1" id="6-condsizebare1fl4" name="6_condsizebare1fl4" type="text" placeholder="">X<input class="input-hv1" id="6-condsizebare2fl4" name="6_condsizebare2fl4" type="text" placeholder=""></td><td>=</td><td><input class="input-hv1" id="6-condsizebare3fl4" name="6_condsizebare2fl4" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label for="6-papercoveringfl4">Paper Covering</label></td>
+										<td><input class="input-hv1" id="6-papercoveringfl4" name="6_papercoveringfl4" type="text" placeholder=""></td><td></td><td style="text-align:center;">QPC</td>
+									</tr>
+									<tr>
+										<td><label for="6-covcondsize1fl4">Cov. Cond. Size</label></td>
+										<td><input class="input-hv1" id="6-covcondsize1fl4" name="6_covcondsize1fl4" type="text" placeholder="">X<input class="input-hv1" id="6-covcondsize2fl4" name="6_covcondsize2fl4" type="text" placeholder=""></td><td>=</td><td><input class="input-hv1" id="6-covcondsize3fl4" name="6_covcondsize3fl4" type="text" placeholder=""></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th></th>
+										<th>LV Turns</th>
+										<th>Ratio T/F</th>
+										<th style="text-align:center;">=</th>
+										<th>SOS</th>
+									</tr>
+									<tr>
+										<td><label for="6-hvturns">HV Turns</label></td>
+										<td><input class="input-hv1" id="6-hvturns" name="6_hvturns" type="text" placeholder="HV Turns"></td>
+										<td><input class="input-hv1" id="6-ratiotsf" name="6_ratiotsf" type="text" placeholder="Ratio T/F"></td>
+										<td><input class="input-hv1" id="6-hvintoratio" name="6_hvintoratio" type="text" placeholder="Total"></td>
+										<td><input class="input-hv1" id="6-soshvintoratio" name="6_soshvintoratio" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label class="" for="6-taprangepercent">Tap Range %</label></td>
+										<td colspan="4"><input class="input-hv1" id="6-taprangepercent" name="6_taprangepercent" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td>Tap Turns</td>
+										<td style="text-align:center;">+</td>
+										<td><input class="input-hv1" id="6-taprangemultiplier" name="6_taprangemultiplier" type="text" placeholder=""></td>
+										<td><input class="input-hv1" id="6-taprangetotal" name="6_taprangetotal" type="text" placeholder=""></td>
+										<td><input class="input-hv1" id="6-sostaprangetotal" name="6_sostaprangetotal" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label for="6-totalhvturns">Total</label></td>
+										<td>
+										<td colspan="3"><input class="input-hv1" id="6-totalhvturns" name="6_totalhvturns" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td>Tap Turns</td>
+										<td style="text-align:center;"></td>
+										<td><input class="input-hv1" id="6-taprangemultiplier2" name="6_taprangemultiplier2" type="text" placeholder=""></td>
+										<td><input class="input-hv1" id="6-taprangetotal2" name="6_taprangetotal2" type="text" placeholder=""></td>
+										<td><input class="input-hv1" id="6-sostaprangetotal2" name="6_sostaprangetotal2" type="text" placeholder=""></td>
+									</tr>
+								</table><br>
+								<table>
+									<tr>
+										<td><label for="6-normalhvturns">Normal HV Turns</label></td>
+										<td><input id="6-normalhvturns" name="6_normalhvturns" type="text" placeholder="Normal HV Turns"></td>
+									</tr>
+									<tr>
+										<td><label for="6-totalnoofdiscs">Total no of discs</label></td>
+										<td><input id="6-totalnoofdiscs" name="6_totalnoofdiscs" type="text" placeholder="Total no of discs"></td>
+									</tr>
+									<tr>
+										<td><label for="6-noofplaindiscs">No. Of Plain Discs</label></td>
+										<td><input id="6-noofplaindiscs" name="6_noofplaindiscs" type="text" placeholder="No. Of Plain Discs"></td>
+									</tr>
+									<tr>
+										<td><label for="6-turnsdivdiscs">Turns / Discs</label></td>
+										<td><input id="6-turnsdivdiscs" name="6_turnsdivdiscs" type="text" placeholder="Turns / Discs"></td>
+									</tr>
+									<tr>
+										<td><label for="6-turnsinxdiscs">Turns in X Discs</label></td>
+										<td><input id="6-turnsinxdiscs" name="6_turnsinxdiscs" type="text" placeholder="Turns in X Discs"></td>
+									</tr>
+									<tr>
+										<td><label for="6-lessdrop">LESS DROP</label></td>
+										<td><input id="6-lessdrop" name="6_lessdrop" type="text" placeholder="LESS DROP"></td>
+									</tr>
+									<tr>
+										<td><label for="6-actualturnsinxdiscs">Actual Turns in X Discs</label></td>
+										<td><input id="6-actualturnsinxdiscs" name="6_actualturnsinxdiscs" type="text" placeholder="Actual Turns in X Discs"></td>
+									</tr>
+									<tr>
+										<td><label for="6-noofinterleaveddiscs">No. Of Interleaved Discs</label></td>
+										<td><input class="input-hv1" id="6-noofinterleaveddiscs1" name="6_noofinterleaveddiscs1" type="text" placeholder="">+<input class="input-hv1" id="6-noofinterleaveddiscs2" name="6_noofinterleaveddiscs2" type="text" placeholder="">=<input class="input-hv1" id="6-noofinterleaveddiscs3" name="6_noofinterleaveddiscs3" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label for="6-turnsdivdiscs2">Turns / Discs</label></td>
+										<td><input id="6-turnsdivdiscs2" name="6_turnsdivdiscs2" type="text" placeholder="Turns / Discs"></td>
+									</tr>
+									<tr>
+										<td><label for="6-turnsdivdiscs3">Turns / Discs</label></td>
+										<td><input id="6-turnsdivdiscs3" name="6_turnsdivdiscs3" type="text" placeholder="Turns / Discs"></td>
+									</tr>
+									<tr>
+										<td><label for="6-noofinterleaveddiscs2">No. Of Interleaved Discs</label></td>
+										<td><input id="6-noofinterleaveddiscs2" name="6_noofinterleaveddiscs2" type="text" placeholder="No. Of Interleaved Discs"></td>
+									</tr>
+									<tr>
+										<td><label for="6-lessdrops">LESS DROPS</label></td>
+										<td><input id="6-lessdrops" name="6_lessdrops" type="text" placeholder="LESS DROPS"></td>
+									</tr>
+									<tr>
+										<td><label for="6-actualturnsininterleavedwdg">Actual turns in Inteleaved WDG.</label></td>
+										<td><input id="6-actualturnsininterleavedwdg" name="6_actualturnsininterleavedwdg" type="text" placeholder="Actual turns in Inteleaved WDG."></td>
+									</tr>
+									<tr>
+										<td><label for="6-turnsinactualwinding">Turns in actual winding</label></td>
+										<td><input id="6-turnsinactualwinding" name="6_turnsinactualwinding" type="text" placeholder="Turns in actual winding"></td>
+									</tr>
+									<tr>
+										<td><label for="6-noofcondperturn">No. of cond. Per turn</label></td>
+										<td><input id="6-noofcondperturn" name="6_noofcondperturn" type="text" placeholder="No. of cond. Per turn"></td>
+									</tr>
+									<tr>
+										<td><label for="6-crosssectionareabare">Cross section area bare</label></td>
+										<td><input id="6-crosssectionareabare" name="6_crosssectionareabare" type="text" placeholder="Cross section area bare"></td>
+									</tr>
+									<tr>
+										<td><label for="6-fullloadcurrenthv">Full load current HV</label></td>
+										<td><input id="6-fullloadcurrenthv" name="6_fullloadcurrenthv" type="text" placeholder="Full load current HV"></td>
+									</tr>
+									<tr>
+										<td><label for="6-currentdensity">Current Density</label></td>
+										<td><input id="6-currentdensity" name="6_currentdensity" type="text" placeholder="Current Density"></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-7" class="windows">
+							<div id="window-header-1" class="window-headers">
+								HV Windings 2
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<td colspan="2"><label for="7-">Total No of turns/disc</label></td>
+										<td><label for="7-">HV Normal</label></td>
+										<td><input id="7-" name="7_" class="" type="text" placeholder="Total No of turns/disc"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><label for="7-">Thickness of cond. With covering</label></td>
+										<td><label for="7-">HV Normal</label></td>
+										<td><input id="7-" name="7_" class="" type="text" placeholder="Thickness of cond. With covering"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><label for="7-">winding OD Radial</label></td>
+										<td colspan="2"><input id="7-" class="" name="7_" type="text" placeholder="winding OD Radial"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><label for="7-">winding OD Radial R.Off</label></td>
+										<td colspan="2"><input id="7-" class="" name="7_" type="text" placeholder="winding OD Radial R.Off"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><label for="7-">Total winding OD</label></td>
+										<td colspan="2"><input id="7-" class="" name="7_" type="text" placeholder="Total winding OD"></td>
+									</tr>
+									<tr>
+										<th colspan="4"><label for="7-">HV winding OD</label></th>
+									</tr>
+									<tr>
+										<td colspan="2"><label for="7-">Wdg ID</label></td>
+										<td colspan="2"><input id="7-" class="" name="7_" type="text" placeholder="Wdg ID"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><label for="7-">Cond. Ht</label></td>
+										<td colspan="2"><input id="7-" class="" name="7_" type="text" placeholder="Cond. Ht"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><label for="7-">HV winding OD</label></td>
+										<td colspan="2"><input id="7-" class="" name="7_" type="text" placeholder="HV winding OD"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><label for="7-">Tolerance  for cross over winding</label></td>
+										<td colspan="2"><input id="7-" class="" name="7_" type="text" placeholder="Tolerance  for cross over winding"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><label for="7-">Total HV winding OD</label></td>
+										<td colspan="2"><input id="7-" class="" name="7_" type="text" placeholder="Total HV winding OD"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th>Bottom Insulation</th>
+									</tr>
+									<tr>
+										<th>Starting From Channel To Wdg.</th>
+										<th>Tangential</th>
+									</tr>
+									<tr>
+										<td><label for="7-bicommonring">Common Ring</label></td>
+										<td><input id="7-bicommonring" name="7_bicommonring" type="text" placeholder="Common Ring"></td>
+									</tr>
+									<tr>
+										<td><label for="7-bicommonblock">Common Block</label></td>
+										<td><input id="7-bicommonblock" name="7_bicommonblock" type="text" placeholder="Common Block"></td>
+									</tr>
+									<tr>
+										<td><label for="7-bihvblock">HV Block</label></td>
+										<td><input id="7-bihvblock" name="7_bihvblock" type="text" placeholder="HV Block"></td>
+									</tr>
+									<tr>
+										<td><label for="7-bimar">MAR</label></td>
+										<td><input id="7-bimar" name="7_bimar" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="7-biser">SER</label></td>
+										<td><input id="7-biser" name="7_biser" type="text" placeholder="SER"></td>
+									</tr>
+									<tr>
+										<td><label for="7-bihvblock">HV Block</label></td>
+										<td><input id="7-bihvblock" name="7_bihvblock" type="text" placeholder="HV Block"></td>
+									</tr>
+									<tr>
+										<td><label for="7-biser2">SER</label></td>
+										<td><input id="7-biser2" name="7_biser2" type="text" placeholder="SER"></td>
+									</tr>
+									<tr>
+										<td><label for="7-bihvb">HVB</label></td>
+										<td><input id="7-bihvb" name="7_bihvb" type="text" placeholder="HVB"></td>
+									</tr>
+									<tr>
+										<td><label for="7-bitotal">Total</label></td>
+										<td><input id="7-bitotal" name="7_bitotal" type="text" placeholder="Total"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th>Top Insulation</th>
+									</tr>
+									<tr>
+										<th>Starting From wdg to Channel.</th>
+										<th>Tangential</th>
+									</tr>
+									<tr>
+										<td><label for="7-tihvblock">HV Block</label></td>
+										<td><input id="7-tihvblock" name="7_tihvblock" type="text" placeholder="HV Block"></td>
+									</tr>
+									<tr>
+										<td><label for="7-tiser">SER</label></td>
+										<td><input id="7-tiser" name="7_tiser" type="text" placeholder="SER"></td>
+									</tr>
+									<tr>
+										<td><label for="7-tihvblock2">HV Block</label></td>
+										<td><input id="7-tihvblock2" name="7_tihvblock2" type="text" placeholder="HV Block"></td>
+									</tr>
+									<tr>
+										<td><label for="7-timar">MAR</label></td>
+										<td><input id="7-timar" name="7_timar" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="7-tihvblock3">HV Block</label></td>
+										<td><input id="7-tihvblock3" name="7_tihvblock3" type="text" placeholder="HV Block"></td>
+									</tr>
+									<tr>
+										<td><label for="7-timar2">MAR</label></td>
+										<td><input id="7-timar2" name="7_timar2" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="7-timar3">MAR</label></td>
+										<td><input id="7-timar3" name="7_timar3" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="7-tihvplustapcb">HV+Tap CB</label></td>
+										<td><input id="7-tihvplustapcb" name="7_tihvplustapcb" type="text" placeholder="HV+Tap CB"></td>
+									</tr>
+									<tr>
+										<td><label for="7-timar4">MAR</label></td>
+										<td><input id="7-timar4" name="7_timar4" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="7-tihvplustapcb2">HV+Tap CB</label></td>
+										<td><input id="7-tihvplustapcb2" name="7_tihvplustapcb2" type="text" placeholder="HV+Tap CB"></td>
+									</tr>
+									<tr>
+										<td><label for="7-timar5">MAR</label></td>
+										<td><input id="7-timar5" name="7_timar5" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="7-tihvplustapcb3">HV+Tap CB</label></td>
+										<td><input id="7-tihvplustapcb3" name="7_tihvplustapcb3" type="text" placeholder="HV+Tap CB"></td>
+									</tr>
+									<tr>
+										<td><label for="7-ticommonblock">Common Block</label></td>
+										<td><input id="7-ticommonblock" name="7_ticommonblock" type="text" placeholder="Common Block"></td>
+									</tr>
+									<tr>
+										<td><label for="7-tipr">PR</label></td>
+										<td><input id="7-tipr" name="7_tipr" type="text" placeholder="PR"></td>
+									</tr>
+									<tr>
+										<td><label for="7-titotal">Total</label></td>
+										<td><input id="7-titotal" name="7_titotal" type="text" placeholder="Total"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="4">Blocks in HV</th>
+									</tr>
+									<tr>
+										<td><label for="7-bihvcommonblock">Common Block</label></td>
+										<td><input id="7-bihvcommonblock" name="7_bihvcommonblock" type="text" placeholder="Common Block="></td>
+										<td><label for="7-bihvhvblockheight">HV block height</label></td>
+										<td><input id="7-bihvhvblockheight" name="7_bihvhvblockheight" type="text" placeholder="HV block height"></td>
+									</tr>
+								</table>
+								<table id="7thblockdata">
+									<tr>
+										<th>Form</th>
+										<th>To</th>
+										<th>Thickness Per block</th>
+										<th>Thickness</th>
+									</tr>
+								</table>
+								<input type="hidden" id="what-index-2" value=0>
+								<div id="addmorecores" class="addmore row" onclick="addmore(2)">
+									<div class="addmore-rule">
+										<hr class="addmore-hr">
+									</div>
+									<div class="addmore-image">
+										<img src="resources/images/plus.png" width="100%" height="100%">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="window-8" class="windows">
+							<div id="window-header-1" class="window-headers">
+								HV Windings 3
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<td><label for="7-thicknesstotal">Total</label></td>
+										<td><input id="7-thicknesstotal" name="7_thicknesstotal" type="text" placeholder="Total"></td>
+									</tr>
+									<tr>
+										<td><label for="7-ttwindingheight">Winding Height</label></td>
+										<td><input id="7-ttwindingheight" name="7_ttwindingheight" type="text" placeholder="Winding Height"></td>
+									</tr>
+									<tr>
+										<td><label for="7-tttolerance">Tolerance</label></td>
+										<td><input id="7-tttolerance" name="7_tttolerance" type="text" placeholder="Tolerance"></td>
+									</tr>
+									<tr>
+										<td><label for="7-tttotalwindingheight">Total Winding Height</label></td>
+										<td><input id="7-tttotalwindingheight" name="7_tttotalwindingheight" type="text" placeholder="Total Winding Height"></td>
+									</tr>
+								</table>
+								<table id="8thblockdata">
+									<tr>
+										<th>Tap no</th>
+										<th>LV Turns</th>
+										<th>HV Turns</th>
+										<th>Tap turns</th>
+										<th>Total HV AND TAP</th>
+										<th>Ratio</th>
+										<th>Voltage</th>
+										<th>Standard Ratio</th>
+									</tr>
+								</table>
+								<input type="hidden" id="what-index-3" value=0>
+								<div id="addmorecores" class="addmore row" onclick="addmore(3)">
+									<div class="addmore-rule">
+										<hr class="addmore-hr">
+									</div>
+									<div class="addmore-image">
+										<img src="resources/images/plus.png" width="100%" height="100%">
+									</div>
+								</div>
+								<table>
+									<tr>
+										<th colspan="3">Overall</th>
+									</tr>
+									<tr>
+										<td><label for="8-ohvid">HV ID</label></td>
+										<td colspan="2"><input id="8-ohvid" name="8_ohvid" type="text" placeholder="HV ID"></td>
+									</tr>
+									<tr>
+										<td><label for="8-ohvod">HV OD</label></td>
+										<td colspan="2"><input id="8-ohvod" name="8_ohvod" type="text" placeholder="HV OD"></td>
+									</tr>
+									<tr>
+										<td><label for="8-ohvradial">HV Radial</label></td>
+										<td colspan="2"><input id="8-ohvradial" name="8_ohvradial" type="text" placeholder="HV Radial"></td>
+									</tr>
+									<tr>
+										<td><label for="8-ohvwindingheight">HV Winding Height</label></td>
+										<td colspan="2"><input id="8-ohvwindingheight" name="8_ohvwindingheight" type="text" placeholder="HV Winding Height"></td>
+									</tr>
+									<tr>
+										<td><label for="8-ohvturns">HV Turns</label></td>
+										<td><input id="8-ohvturns" name="8_ohvturns" type="text" placeholder="HV Turns"></td>
+										<td><input id="8-ohvturnsexisting" name="8_ohvturnsexisting" type="text" placeholder="HV Turns (Existing)"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><label for="2-ototalwindingheight">Total Winding Height</label></td>
+										<td><input id="8-ototalwindingheight" name="8_ototalwindingheight" type="text" placeholder="Total Winding Height"></td>
+									</tr>
+								</table>
+								<table>
+									<tr><th>Tole. 1% per condr is to be added while Calculating Length of wire & Bare wt.</th></tr>
+									<tr>
+										<td><label for="8-ocondsizebare">Cond. Size- bare</label></td>
+										<td><input id="8-ocondsizebare" name="8_ocondsizebare" type="text" placeholder="Cond. Size- bare"></td>
+									</tr>
+									<tr>
+										<td><label for="8-oreductioninareaduetoedge">Reduction in area due to Edge</label></td>
+										<td><input id="8-oreductioninareaduetoedge" name="8_oreductioninareaduetoedge" type="text" placeholder="Reduction in area due to Edge"></td>
+									</tr>
+									<tr>
+										<td><label for="8-oactualarea">Actual area </label></td>
+										<td><input id="8-oactualarea" name="8_oactualarea" type="text" placeholder="Actual area"></td>
+									</tr>
+									<tr>
+										<td><label for="8-onoofcond">No. of cond.</label></td>
+										<td><input id="8-onoofcond" name="8_onoofcond" type="text" placeholder="No. of cond."></td>
+									</tr>
+									<tr>
+										<td><label for="8-ototalareaofconductors">Total Area of Conductors</label></td>
+										<td><input id="8-ototalareaofconductors" name="8_ototalareaofconductors" type="text" placeholder="Total Area of Conductors"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td><label for="8-lengthofmeanturn">Length Of mean turn (meter)</label></td>
+										<td><input id="8-lengthofmeanturn" name="8_lengthofmeanturn" type="text" placeholder="Length Of mean turn (meter)"></td>
+									</tr>
+									<tr>
+										<td><label for="8-lengthofwire">Length Of wire (mm)</label></td>
+										<td><input id="8-lengthofwire" name="8_lengthofwire" type="text" placeholder="Length Of wire (mm)"></td>
+									</tr>
+									<tr>
+										<td><label for="8-resistanceat75deg">Resistance @ 75 ˚C (Ohms)</label></td>
+										<td><input id="8-resistanceat75deg" name="8_resistanceat75deg" type="text" placeholder="Resistance @ 75 ˚C (Ohms)"></td>
+									</tr>
+									<tr>
+										<td><label for="8-bareweight">Bare Weight (Kgs)</label></td>
+										<td><input id="8-bareweight" name="8_bareweight" type="text" placeholder="Bare Weight (Kgs)"></td>
+									</tr>
+									<tr>
+										<td><label for="8-orderquantity">Order Qty. (Kgs)</label></td>
+										<td><input id="8-orderquantity" name="8_orderquantity" type="text" placeholder="Order Qty. (Kgs)"></td>
+									</tr>
+									<tr>
+										<td><label for="8-insulatingweightpercent">Insulating Weight %</label></td>
+										<td><input id="8-insulatingweightpercent" name="8_insulatingweightpercent" type="text" placeholder="Insulating Weight %"></td>
+									</tr>
+									<tr>
+										<td><label for="8-straylosspercent">Stray Loss %</label></td>
+										<td><input id="8-straylosspercent" name="8_straylosspercent" type="text" placeholder="Stray Loss %"></td>
+									</tr>
+									<tr>
+										<td><label for="8-loadlosswatts">Load Loss (Watts)</label></td>
+										<td><input id="8-loadlosswatts" name="8_loadlosswatts" type="text" placeholder="Load Loss (Watts)"></td>
+									</tr>
+									<tr>
+										<td><label for="8-loadlosskilowatts">Load Loss (KW)</label></td>
+										<td><input id="8-loadlosskilowatts" name="8_loadlosskilowatts" type="text" placeholder="Load Loss (KW)"></td>
+									</tr>
+									<tr>
+										<td><label for="8-straylosswatts">Stray Loss(Watts)</label></td>
+										<td><input id="8-straylosswatts" name="8_straylosswatts" type="text" placeholder="Stray Loss(Watts)"></td>
+									</tr>
+									<tr>
+										<td><label for="8-straylosskilowatts">Stray Loss(KW)</label></td>
+										<td><input id="8-straylosskilowatts" name="8_straylosskilowatts" type="text" placeholder="Stray Loss(KW)"></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-9" class="windows">
+							<div id="window-header-1" class="window-headers">
+								Insulation Over HV
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<th></th>
+										<th>Radial</th>
+										<th>Height</th>
+										<th>Length</th>
+										<th>Tolerance</th>
+										<th>Inner Tap ID</th>
+									</tr>
+									<tr>
+										<td><label>Duct</label></td>
+										<td><input style="width:75px" id="9-duct1" name="9_duct1" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-duct2" name="9_duct2" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-duct3" name="9_duct3" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-duct4" name="9_duct4" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-duct5" name="9_duct5" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label>Cylinder</label></td>
+										<td><input style="width:75px" id="9-cylinder1" name="9_cylinder1" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder2" name="9_cylinder2" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder3" name="9_cylinder3" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder4" name="9_cylinder4" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder5" name="9_cylinder5" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label>MAR Duct</label></td>
+										<td><input style="width:75px" id="9-marduct1" name="9_marduct1" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct2" name="9_marduct2" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct3" name="9_marduct3" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct4" name="9_marduct4" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct5" name="9_marduct5" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label>Cylinder</label></td>
+										<td><input style="width:75px" id="9-cylinder21" name="9_cylinder21" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder22" name="9_cylinder22" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder23" name="9_cylinder23" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder24" name="9_cylinder24" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder25" name="9_cylinder25" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label>MAR Duct</label></td>
+										<td><input style="width:75px" width="75px" id="9-marduct21" name="9_marduct21" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct22" name="9_marduct22" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct23" name="9_marduct23" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct24" name="9_marduct24" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct25" name="9_marduct25" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label>Cylinder</label></td>
+										<td><input style="width:75px" id="9-cylinder31" name="9_cylinder31" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder32" name="9_cylinder32" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder33" name="9_cylinder33" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder34" name="9_cylinder34" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder35" name="9_cylinder35" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label>MAR Duct</label></td>
+										<td><input style="width:75px" id="9-marduct31" name="9_marduct31" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct32" name="9_marduct32" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct33" name="9_marduct33" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct34" name="9_marduct34" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct35" name="9_marduct35" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label>Cylinder</label></td>
+										<td><input style="width:75px" id="9-cylinder41" name="9_cylinder41" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder42" name="9_cylinder42" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder43" name="9_cylinder43" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder44" name="9_cylinder44" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder45" name="9_cylinder45" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label>Bottom MAR Duct</label></td>
+										<td><input style="width:75px" id="9-marduct41" name="9_marduct41" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct42" name="9_marduct42" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct43" name="9_marduct43" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-marduct44" name="9_marduct44" type="text" placeholder=""></td>
+										<td><input style="width:75px"id="9-marduct45" name="9_marduct45" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label>Cylinder</label></td>
+										<td><input style="width:75px" id="9-cylinder51" name="9_cylinder51" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder52" name="9_cylinder52" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder53" name="9_cylinder53" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder54" name="9_cylinder54" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-cylinder55" name="9_cylinder55" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label>Duct</label></td>
+										<td><input style="width:75px" id="9-duct21" name="9_duct21" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-duct22" name="9_duct22" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-duct23" name="9_duct23" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-duct24" name="9_duct24" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-duct25" name="9_duct25" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label>Total</label></td>
+										<td><input style="width:75px" id="9-total1" name="9_total1" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-total2" name="9_total2" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-total3" name="9_total3" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-total4" name="9_total4" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-total5" name="9_total5" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label>Existing</label></td>
+										<td><input style="width:75px" id="9-existing1" name="9_existing1" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-existing2" name="9_existing2" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-existing3" name="9_existing3" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-existing4" name="9_existing4" type="text" placeholder=""></td>
+										<td><input style="width:75px" id="9-existing5" name="9_existing5" type="text" placeholder=""></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-10" class="windows">
+							<div id="window-header-1" class="window-headers">
+								Inner Tap Winding 1
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<th colspan="3">Cond. Size- bare</th>
+									</tr>
+									<tr>
+										<td><input id="10-itwcondsizebareinput1" name="10_itwcondsizebareinput1" type="text" placeholder=""></td>
+										<td>X</td>
+										<td><input id="10-itwcondsizebareinput2" name="10_itwcondsizebareinput2" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><input id="10-itwcondsizebareoutput1" name="10_itwcondsizebareoutput1" type="text" placeholder=""></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td><label for="10-">Paper covering</label></td>
+										<td><input id="10-itwpapercoovering" name="10_itwpapercoovering" type="text" placeholder="Paper Covering"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="3">Cov. Cond. Size</th>
+									</tr>
+									<tr>
+										<td><input id="10-itwcovcondsizeinput1" name="10_itwcovcondsizeinput1" type="text" placeholder=""></td>
+										<td>X</td>
+										<td><input id="10-itwcovcondsizeinput2" name="10_itwcovcondsizeinput2" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><input id="10-itwcovcondsizeoutput1" name="10_itwcovcondsizeoutput1" type="text" placeholder=""></td>
+									</tr>
+								</table>
+								
+								<table>
+									<tr>
+										<td><label for="10-noofconductorsedgewise">No. of conductors edgewise taken together</label></td>
+										<td><input id="10-noofconductorsedgewise" name="10_noofconductorsedgewise" type="text" placeholder="No. of conductors edgewise taken together"></td>
+									</tr>
+									<tr>
+										<td><label for="10-nooflayers">No. of layers</label></td>
+										<td><input id="10-nooflayers" name="10_nooflayers" type="text" placeholder="No. of layers"></td>
+									</tr>
+									<tr>
+										<td><label for="10-noofturnsinsingle">No of Turns in single</label></td>
+										<td><input id="10-noofturnsinsingle" name="10_noofturnsinsingle" type="text" placeholder="No of Turns in single"></td>
+									</tr>
+									<tr>
+										<td><label for="10-turnsperlayer">Turns/Layer</label></td>
+										<td><input id="10-turnsperlayer" name="10_turnsperlayer" type="text" placeholder="Turns/Layer"></td>
+									</tr>
+									<tr>
+										<td><label for="10-totalturns">Total turns</label></td>
+										<td><input id="10-totalturns" name="10_totalturns" type="text" placeholder="Total turns"></td>
+									</tr>
+									<tr>
+										<td><label for="10-thicknessofcondwithcovering">Thickness of cond. With covering </label></td>
+										<td><input id="10-thicknessofcondwithcovering" name="10_thicknessofcondwithcovering" type="text" placeholder="Thickness of cond. With covering "></td>
+									</tr>
+									<tr>
+										<td><label for="10-windingodradial">winding OD Radial</label></td>
+										<td><input id="10-windingodradial" name="10_windingodradial" type="text" placeholder="winding OD Radial"></td>
+									</tr>
+									<tr>
+										<td><label for="10-tapwindingod">Tap winding OD</label></td>
+										<td><input id="10-tapwindingod" name="10_tapwindingod" type="text" placeholder="Tap winding OD"></td>
+									</tr>
+									<tr>
+										<td><label for="10-toleranceforcrossoverwinding">Tolerance  for cross over winding</label></td>
+										<td><input id="10-toleranceforcrossoverwinding" name="10_toleranceforcrossoverwinding" type="text" placeholder="Tolerance  for cross over winding"></td>
+									</tr>
+									<tr>
+										<td><label for="10-innertapwindingod">Inner Tap winding OD</label></td>
+										<td><input id="10-innertapwindingod" name="10_innertapwindingod" type="text" placeholder="Inner Tap winding OD"></td>
+									</tr>
+									<tr>
+										<td><label for="10-legcentre">Leg Centre</label></td>
+										<td><input id="10-legcentre" name="10_legcentre" type="text" placeholder="Leg Centre"></td>
+									</tr>
+									<tr>
+										<td><label for="10-gap">Gap</label></td>
+										<td><input id="10-gap" name="10_gap" type="text" placeholder="Gap"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="2">Bottom Insulation of Inner Tap</th>
+									</tr>
+									<tr>
+										<td>Starting From Channel to wdg.</td>
+										<td>Tangential</td>
+									</tr>
+									<tr>
+										<td><label for="10-bitring">Ring</label></td>
+										<td><input id="10-bitring" name="10_bitring" type="text" placeholder="Ring"></td>
+									</tr>
+									<tr>
+										<td><label for="10-bitcommonblock">Common Block</label></td>
+										<td><input id="10-bitcommonblock" name="10_bitcommonblock" type="text" placeholder="Common Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-bitblock">Block</label></td>
+										<td><input id="10-bitblock" name="10_bitblock" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-bitring2">Ring</label></td>
+										<td><input id="10-bitring2" name="10_bitring2" type="text" placeholder="Ring"></td>
+									</tr>
+									<tr>
+										<td><label for="10-bitblock2">Block</label></td>
+										<td><input id="10-bitblock2" name="10_bitblock2" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-bitmar">MAR</label></td>
+										<td><input id="10-bitmar" name="10_bitmar" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="10-bitblock3">Block</label></td>
+										<td><input id="10-bitblock3" name="10_bitblock3" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-bitser">SER</label></td>
+										<td><input id="10-bitser" name="10_bitser" type="text" placeholder="SER"></td>
+									</tr>
+									<tr>
+										<td><label for="10-bitblock4">Block</label></td>
+										<td><input id="10-bitblock4" name="10_bitblock4" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-bitmar2">MAR</label></td>
+										<td><input id="10-bitmar2" name="10_bitmar2" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="10-bittcblock">TC Block</label></td>
+										<td><input id="10-bittcblock" name="10_bittcblock" type="text" placeholder="TC Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-bittotal">Total</label></td>
+										<td><input id="10-bittotal" name="10_bittotal" type="text" placeholder="Total"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="2">Top Insulation of Inner Tap</th>
+									</tr>
+									<tr>
+										<td>Starting From Channel to wdg.</td>
+										<td>Tangential</td>
+									</tr>
+									<tr>
+										<td><label for="10-">Block</label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-">SER</label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="SER"></td>
+									</tr>
+									<tr>
+										<td><label for="10-">Block</label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-">Ring</label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="Ring"></td>
+									</tr>
+									<tr>
+										<td><label for="10-">Block</label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-">MAR</label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="10-">Common Block</label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="Common Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-">Block</label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-">Common Block </label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="Common Block "></td>
+									</tr>
+									<tr>
+										<td><label for="10-">Block</label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-">Common Block</label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="Common Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-">Common Block</label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="Common Block"></td>
+									</tr>
+									<tr>
+										<td><label for="10-">PR</label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="PR"></td>
+									</tr>
+									<tr>
+										<td><label for="10-">Total</label></td>
+										<td><input id="10-" name="10_" type="text" placeholder="Total"></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-11" class="windows">
+							<div id="window-header-1" class="window-headers">
+								Inner Tap Winding 2
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table id="11thblockdata">
+									<tr>
+										<th>Dummy Inserted</th>
+										<th></th>
+										<th></th>
+										<th></th>
+									</tr>
+								</table>
+								<input type="hidden" id="what-index-4" value=0>
+								<div id="addmorecores" class="addmore row" onclick="addmore(4)">
+									<div class="addmore-rule">
+										<hr class="addmore-hr">
+									</div>
+									<div class="addmore-image">
+										<img src="resources/images/plus.png" width="100%" height="100%">
+									</div>
+								</div>
+								<table>
+									<tr>
+										<td><label for="2-">Inner Wdg. Ht.</label></td>
+										<td><input id="2-" name="name" type="text" placeholder="Inner Wdg. Ht."></td>
+									</tr>
+									<tr>
+										<td><label for="2-">End Strips being edge winding</label></td>
+										<td><input id="2-" name="name" type="text" placeholder="End Strips being edge winding"></td>
+									</tr>
+									<tr>
+										<td><label for="2-">Total Inner Wdg ht.</label></td>
+										<td><input id="2-" name="name" type="text" placeholder="Total Inner Wdg ht."></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-12" class="windows">
+							<div id="window-header-1" class="window-headers">
+								Insulation Over In Tap
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<td></td>
+										<td>Height</td>
+										<td>Length</td>
+										<td>Tolerance</td>
+										<td>Outer Tap ID</td>
+									</tr>
+									<tr>
+										<td><label for="12-marduct1">MAR Duct</label></td>
+										<td><input style="width:80px" id="12-marduct1" name="12_marduct1" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-marduct2" name="12_marduct2" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-marduct3" name="12_marduct3" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-marduct4" name="12_marduct4" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label for="12-cylinder1">Cylinder</label></td>
+										<td><input style="width:80px" id="12-cylinder1" name="12_cylinder1" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-cylinder2" name="12_cylinder2" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-cylinder3" name="12_cylinder3" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-cylinder4" name="12_cylinder4" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label for="12-2marduct1">MAR Duct</label></td>
+										<td><input style="width:80px" id="12-2marduct1" name="12_2marduct1" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-2marduct2" name="12_2marduct2" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-2marduct3" name="12_2marduct3" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-2marduct4" name="12_2marduct4" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label for="12-2cylinder1">Cylinder</label></td>
+										<td><input style="width:80px" id="12-2cylinder1" name="12_2cylinder1" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-2cylinder2" name="12_2cylinder2" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-2cylinder3" name="12_2cylinder3" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-2cylinder4" name="12_2cylinder4" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label for="12-mar1">MAR</label></td>
+										<td><input style="width:80px" id="12-mar1" name="12_mar1" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-mar2" name="12_mar2" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-mar3" name="12_mar3" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-mar4" name="12_mar4" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label for="12-3cylinder1">Cylinder</label></td>
+										<td><input style="width:80px" id="12-3cylinder1" name="12_3cylinder1" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-3cylinder2" name="12_3cylinder2" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-3cylinder3" name="12_3cylinder3" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-3cylinder4" name="12_3cylinder4" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label for="12-duct1">Duct</label></td>
+										<td><input style="width:80px" id="12-duct1" name="12_duct1" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-duct2" name="12_duct2" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-duct3" name="12_duct3" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-duct4" name="12_duct4" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><label for="12-total">Total</label></td>
+										<td><input style="width:80px" id="12-total1" name="12_total1" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-total2" name="12_total2" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-total3" name="12_total3" type="text" placeholder=""></td>
+										<td><input style="width:80px" id="12-total4" name="12_total4" type="text" placeholder=""></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-13" class="windows">
+							<div id="window-header-1" class="window-headers">
+								Outer Tap Winding
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<th colspan="3">Cond. Size- bare</th>
+									</tr>
+									<tr>
+										<td><input id="13-itwcondsizebareinput1" name="13_itwcondsizebareinput1" type="text" placeholder=""></td>
+										<td>X</td>
+										<td><input id="13-itwcondsizebareinput2" name="13_itwcondsizebareinput2" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><input id="13-itwcondsizebareoutput1" name="13_itwcondsizebareoutput1" type="text" placeholder=""></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td><label for="13-">Paper covering</label></td>
+										<td><input id="13-itwpapercoovering" name="13_itwpapercoovering" type="text" placeholder="Paper Covering"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="3">Cov. Cond. Size</th>
+									</tr>
+									<tr>
+										<td><input id="13-itwcovcondsizeinput1" name="13_itwcovcondsizeinput1" type="text" placeholder=""></td>
+										<td>X</td>
+										<td><input id="13-itwcovcondsizeinput2" name="13_itwcovcondsizeinput2" type="text" placeholder=""></td>
+									</tr>
+									<tr>
+										<td><input id="13-itwcovcondsizeoutput1" name="13_itwcovcondsizeoutput1" type="text" placeholder=""></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										
+									</tr>
+									<tr>
+										<td><label for="13-noofconductorsedgewise">No. of conductors edgewise taken together</label></td>
+										<td><input id="13-noofconductorsedgewise" name="13_noofconductorsedgewise" type="text" placeholder="No. of conductors edgewise taken together"></td>
+									</tr>
+									<tr>
+										<td><label for="13-noofsectionsinbodttomwdg">No. Of Sections in Bottom wdg.</label></td>
+										<td><input id="13-noofsectionsinbodttomwdg" name="13_noofsectionsinbodttomwdg" type="text" placeholder="No. Of Sections in Bottom wdg."></td>
+									</tr>
+									<tr>
+										<td><label for="13-noofturnspersection1">No. Of turns/Section (R-L)</label></td>
+										<td><input id="13-noofsectionsperturn" name="13_noofsectionsperturn" type="text" placeholder="No. Of turns/Section"></td>
+									</tr>
+									<tr>
+										<td><label for="13-noofsectionsintopwdg">No. Of Sections in Top wdg.</label></td>
+										<td><input id="13-noofsectionsintopwdg" name="13_noofsectionsintopwdg" type="text" placeholder="No. Of Sections in Top wdg."></td>
+									</tr>
+									<tr>
+										<td><label for="13-noofturnspersection2">No. Of turns/Section (L-R)</label></td>
+										<td><input id="13-noofturnspersection2" name="13_noofturnspersection2" type="text" placeholder="No. Of turns/Section"></td>
+									</tr>
+									<tr>
+										<td><label for="13-totalturns">Total turns</label></td>
+										<td><input id="13-totalturns" name="13_totalturns" type="text" placeholder="Total turns"></td>
+									</tr>
+									<tr>
+										<td><label for="13-thicknessofcondwithcovering">Thickness of cond. With covering </label></td>
+										<td><input id="13-thicknessofcondwithcovering" name="13_thicknessofcondwithcovering" type="text" placeholder="Thickness of cond. With covering "></td>
+									</tr>
+									<tr>
+										<td><label for="13-outertapwindingradial">Outer Tap winding Radial</label></td>
+										<td><input id="13-outertapwindingradial" name="13_outertapwindingradial" type="text" placeholder="Outer Tap winding Radial"></td>
+									</tr>
+									<tr>
+										<td><label for="13-tapwindingod">Tap winding OD</label></td>
+										<td><input id="13-tapwindingod" name="13_tapwindingod" type="text" placeholder="Tap winding OD"></td>
+									</tr>
+									<tr>
+										<td><label for="13-toleranceforcrossoverwinding">Tolerance  for cross over winding</label></td>
+										<td><input id="13-toleranceforcrossoverwinding" name="13_toleranceforcrossoverwinding" type="text" placeholder="Tolerance  for cross over winding"></td>
+									</tr>
+									<tr>
+										<td><label for="13-outertapwindingod">Outer Tap winding OD</label></td>
+										<td><input id="13-outertapwindingod" name="13_outertapwindingod" type="text" placeholder="Outer Tap winding OD"></td>
+									</tr>
+									<tr>
+										<td><label for="13-legcentre">leg centre</label></td>
+										<td><input id="13-legcentre" name="13_legcentre" type="text" placeholder="leg centre"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th>Bottom Insulation of Outer Tap</th>
+									</tr>
+									<tr>
+										<td>Starting From Channel to Wdg.</td>
+										<td>Tangential</td>
+									</tr>
+									<tr>
+										<td><label for="13-bitring">Ring</label></td>
+										<td><input id="13-bitring" name="13_bitring" type="text" placeholder="Ring"></td>
+									</tr>
+									<tr>
+										<td><label for="13-bitmar">MAR</label></td>
+										<td><input id="13-bitmar" name="13_bitmar" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="13-bittapblock">Tap Block</label></td>
+										<td><input id="13-bittapblock" name="13_bittapblock" type="text" placeholder="Tap Block"></td>
+									</tr>
+									<tr>
+										<td><label for="13-bitmar2">MAR</label></td>
+										<td><input id="13-bitmar2" name="13_bitmar2" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="13-bittapblock2">Tap Block</label></td>
+										<td><input id="13-bittapblock2" name="13_bittapblock2" type="text" placeholder="Tap Block"></td>
+									</tr>
+									<tr>
+										<td><label for="13-bittotal">Total</label></td>
+										<td><input id="13-bittotal" name="13_bittotal" type="text" placeholder="Total"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th>Top Insulation of Outer Tap</th>
+									</tr>
+									<tr>
+										<td><label for="13-titblock">Block</label></td>
+										<td><input id="13-titblock" name="13_titblock" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="13-titmar">MAR</label></td>
+										<td><input id="13-titmar" name="13_titmar" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="13-titblock2">Block</label></td>
+										<td><input id="13-titblock2" name="13_titblock2" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="13-titmar2">MAR</label></td>
+										<td><input id="13-titmar2" name="13_titmar2" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="13-titblock3">Block</label></td>
+										<td><input id="13-titblock3" name="13_titblock3" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="13-titser">SER</label></td>
+										<td><input id="13-titser" name="13_titser" type="text" placeholder="SER"></td>
+									</tr>
+									<tr>
+										<td><label for="13-titblock4">Block</label></td>
+										<td><input id="13-titblock4" name="13_titblock4" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="13-titring">Ring</label></td>
+										<td><input id="13-titring" name="13_titring" type="text" placeholder="Ring"></td>
+									</tr>
+									<tr>
+										<td><label for="13-titblock5">Block</label></td>
+										<td><input id="13-titblock5" name="13_titblock5" type="text" placeholder="Block"></td>
+									</tr>
+									<tr>
+										<td><label for="13-titmar4">MAR</label></td>
+										<td><input id="13-titmar4" name="13_titmar4" type="text" placeholder="MAR"></td>
+									</tr>
+									<tr>
+										<td><label for="13-titcommonblock">Common Block</label></td>
+										<td><input id="13-titcommonblock" name="13_titcommonblock" type="text" placeholder="Common Block"></td>
+									</tr>
+									<tr>
+										<td><label for="13-titpr">PR</label></td>
+										<td><input id="13-titpr" name="13_titpr" type="text" placeholder="PR"></td>
+									</tr>
+									<tr>
+										<td><label for="13-tittotal">Total</label></td>
+										<td><input id="13-tittotal" name="13_tittotal" type="text" placeholder="Total"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td><label for="13-fnoofsectionsinwinding">No of Sections in Winding</label></td>
+										<td><input id="13-fnoofsectionsinwinding" name="13_fnoofsectionsinwinding" type="text" placeholder="No of Sections in Winding"></td>
+									</tr>
+									<tr>
+										<td><label for="13-fcondwidthinparallel">Cond. Width in parallel</label></td>
+										<td><input id="13-fcondwidthinparallel" name="13_fcondwidthinparallel" type="text" placeholder="Cond. Width in parallel"></td>
+									</tr>
+									<tr>
+										<td><label for="13-fblocksin1section">Blocks in 1 Section </label></td>
+										<td><input id="13-fblocksin1section" name="13_fblocksin1section" type="text" placeholder="Blocks in 1 Section 	"></td>
+									</tr>
+									<tr>
+										<td><label for="13-fcenterblockbetweenrllrwinding">Center block between RL-LR Winding</label></td>
+										<td><input id="13-fcenterblockbetweenrllrwinding" name="13_fcenterblockbetweenrllrwinding" type="text" placeholder="Center block between RL-LR Winding"></td>
+									</tr>
+									<tr>
+										<td><label for="13-fparallelcondcovering">Parallel Cond. Covering of 15 Mills</label></td>
+										<td><input id="13-fparallelcondcovering" name="13_fparallelcondcovering" type="text" placeholder="Parallel Cond. Covering of 15 Mills"></td>
+									</tr>
+									<tr>
+										<td><label for="13-ftotalinsulationinoutertapwinding">Total Insulation Oin Outer Tap winding</label></td>
+										<td><input id="13-ftotalinsulationinoutertapwinding" name="13_ftotalinsulationinoutertapwinding" type="text" placeholder="Total Insulation Oin Outer Tap winding"></td>
+									</tr>
+									<tr>
+										<td><label for="13-fcondheight">Cond. Height</label></td>
+										<td><input id="13-fcondheight" name="13_fcondheight" type="text" placeholder="Cond. Height"></td>
+									</tr>
+									<tr>
+										<td><label for="13-finsulation">Insulation</label></td>
+										<td><input id="13-finsulation" name="13_finsulation" type="text" placeholder="Insulation"></td>
+									</tr>
+									<tr>
+										<td><label for="13-fwindingheight">Winding Height</label></td>
+										<td><input id="13-fwindingheight" name="13_fwindingheight" type="text" placeholder="Winding Height"></td>
+									</tr>
+									<tr>
+										<td><label for="13-ftotalwindingheight">Total winding Height</label></td>
+										<td><input id="13-ftotalwindingheight" name="13_ftotalwindingheight" type="text" placeholder="Total winding Height"></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-14" class="windows">
+							<div id="window-header-1" class="window-headers">
+								Calculate Impedance
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<td><label for="14-multiplyingfactor">Multiplying factor</label></td>
+										<td><input id="14-multiplyingfactor" name="14_multiplyingfactor" type="text" placeholder="Multiplying factor"></td>
+									</tr>
+									<tr>
+										<td><label for="14-lvradial">LV Radial</label></td>
+										<td><input id="14-lvradial" name="14_lvradial" type="text" placeholder="LV Radial"></td>
+									</tr>
+									<tr>
+										<td><label for="14-hvradial">HV Radial</label></td>
+										<td><input id="14-hvradial" name="14_hvradial" type="text" placeholder="HV Radial"></td>
+									</tr>
+									<tr>
+										<td><label for="14-lvradialplushvradialdiv3">(LV rad.+HV rad.)/3</label></td>
+										<td><input id="14-lvradialplushvradialdiv3" name="14_lvradialplushvradialdiv3" type="text" placeholder="(LV rad.+HV rad.)/3"></td>
+									</tr>
+									<tr>
+										<td><label for="14-insulationbetweenlvandhv">Insulation Between LV and HV</label></td>
+										<td><input id="14-insulationbetweenlvandhv" name="14_insulationbetweenlvandhv" type="text" placeholder="Insulation Between LV and HV"></td>
+									</tr>
+									<tr>
+										<td><label for="14-insulationbetweenlvandhvdiv2">(Insulation Between LV and HV)/2</label></td>
+										<td><input id="14-insulationbetweenlvandhvdiv2" name="14_insulationbetweenlvandhvdiv2" type="text" placeholder="(Insulation Between LV and HV)/2"></td>
+									</tr>
+									<tr>
+										<td><label for="14-sum">Sum</label></td>
+										<td><input id="14-sum" name="14_sum" type="text" placeholder="Sum"></td>
+									</tr>
+									<tr>
+										<td><label for="14-multiplyingfactor2">Multiplying factor </label></td>
+										<td><input id="14-multiplyingfactor2" name="14_multiplyingfactor2" type="text" placeholder="Multiplying factor "></td>
+									</tr>
+									<tr>
+										<td><label for="14-meandiaofhvandlv">Mean Dia of HV&LV</label></td>
+										<td><input id="14-meandiaofhvandlv" name="14_meandiaofhvandlv" type="text" placeholder="Mean Dia of HV&LV"></td>
+									</tr>
+									<tr>
+										<td><label for="14-lvturns">LV Turns </label></td>
+										<td><input id="14-lvturns" name="14_lvturns" type="text" placeholder="LV Turns "></td>
+									</tr>
+									<tr>
+										<td><label for="14-lvcurrent">LV Current </label></td>
+										<td><input id="14-lvcurrent" name="14_lvcurrent" type="text" placeholder="LV Current "></td>
+									</tr>
+									<tr>
+										<td><label for="14-lvwindingheight">LV Winding Height</label></td>
+										<td><input id="14-lvwindingheight" name="14_lvwindingheight" type="text" placeholder="LV Winding Height"></td>
+									</tr>
+									<tr>
+										<td><label for="14-lvphasevoltage">LV Phase voltage</label></td>
+										<td><input id="14-lvphasevoltage" name="14_lvphasevoltage" type="text" placeholder="LV Phase voltage"></td>
+									</tr>
+									<tr>
+										<td><label for="14-voltsperturn">Volts per turn</label></td>
+										<td><input id="14-voltsperturn" name="14_voltsperturn" type="text" placeholder="Volts per turn"></td>
+									</tr>
+									<tr>
+										<td><label for="14-percentageimpedance">PERCENTAGE IMPENDANCE </label></td>
+										<td><input id="14-percentageimpedance" name="14_percentageimpedance" type="text" placeholder="PERCENTAGE IMPENDANCE "></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-15" class="windows">
+							<div id="window-header-1" class="window-headers">
+								Covered Cu. Weight Calculation
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<th colspan="2">LV Winding</th>
+									</tr>
+									<tr>
+										<td><label for="15-lvcondsizebaremm">Cond. Size- bare(in mm)</label></td>
+										<td><input id="15-lvcondsizebaremm" name="15_lvcondsizebaremm" type="text" placeholder="Cond. Size- bare(in mm)"></td>
+									</tr>
+									<tr>
+										<td><label for="15-lvpapercoveringmm">Paper covering(in mm)</label></td>
+										<td><input id="15-lvpapercoveringmm" name="15_lvpapercoveringmm" type="text" placeholder="Paper covering(in mm)"></td>
+									</tr>
+									<tr>
+										<td><label for="15-lvcovcondsizemm">Cov. Cond. Size(in mm)</label></td>
+										<td><input id="15-lvcovcondsizemm" name="15_lvcovcondsizemm" type="text" placeholder="Cov. Cond. Size(in mm)"></td>
+									</tr>
+									<tr>
+										<td><label for="15-lvdifferenceinarea">Difference in area</label></td>
+										<td><input id="15-lvdifferenceinarea" name="15_lvdifferenceinarea" type="text" placeholder="Difference in area"></td>
+									</tr>
+									<tr>
+										<td><label for="15-lvpaperdensity">Paper Density</label></td>
+										<td><input id="15-lvpaperdensity" name="15_lvpaperdensity" type="text" placeholder="Paper Density"></td>
+									</tr>
+									<tr>
+										<td><label for="15-lvcopperdensity">Copper Density</label></td>
+										<td><input id="15-lvcopperdensity" name="15_lvcopperdensity" type="text" placeholder="Copper Density"></td>
+									</tr>
+									<tr>
+										<td><label for="15-lvweightofpaperperkgofcu">Weight of Paper/Kg of Cu</label></td>
+										<td><input id="15-lvweightofpaperperkgofcu" name="15_lvweightofpaperperkgofcu" type="text" placeholder="Weight of Paper/Kg of Cu"></td>
+									</tr>
+									<tr>
+										<td><label for="15-lvweightofpaperfor100kg">Weight of Paper for 100 Kg</label></td>
+										<td><input id="15-lvweightofpaperfor100kg" name="15_lvweightofpaperfor100kg" type="text" placeholder="">Weight of Paper for 100 Kg</td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="2">HV Winding</th>
+									</tr>
+									<tr>
+										<td><label for="15-hvcondsizebaremm">Cond. Size- bare(in mm)</label></td>
+										<td><input id="15-hvcondsizebaremm" name="15_hvcondsizebaremm" type="text" placeholder="Cond. Size- bare(in mm)"></td>
+									</tr>
+									<tr>
+										<td><label for="15-hvpapercoveringmm">Paper covering(in mm)</label></td>
+										<td><input id="15-hvpapercoveringmm" name="15_hvpapercoveringmm" type="text" placeholder="Paper covering(in mm)"></td>
+									</tr>
+									<tr>
+										<td><label for="15-hvcovcondsizemm">Cov. Cond. Size(in mm)</label></td>
+										<td><input id="15-hvcovcondsizemm" name="15_hvcovcondsizemm" type="text" placeholder="Cov. Cond. Size(in mm)"></td>
+									</tr>
+									<tr>
+										<td><label for="15-hvdifferenceinarea">Difference in area</label></td>
+										<td><input id="15-hvdifferenceinarea" name="15_hvdifferenceinarea" type="text" placeholder="Difference in area"></td>
+									</tr>
+									<tr>
+										<td><label for="15-hvpaperdensity">Paper Density</label></td>
+										<td><input id="15-hvpaperdensity" name="15_hvpaperdensity" type="text" placeholder="Paper Density"></td>
+									</tr>
+									<tr>
+										<td><label for="15-hvcopperdensity">Copper Density</label></td>
+										<td><input id="15-hvcopperdensity" name="15_hvcopperdensity" type="text" placeholder="Copper Density"></td>
+									</tr>
+									<tr>
+										<td><label for="15-hvweightofpaperperkgofcu">Weight of Paper/Kg of Cu</label></td>
+										<td><input id="15-hvweightofpaperperkgofcu" name="15_hvweightofpaperperkgofcu" type="text" placeholder="Weight of Paper/Kg of Cu"></td>
+									</tr>
+									<tr>
+										<td><label for="15-hvweightofpaperfor100kg">Weight of Paper for 100 Kg</label></td>
+										<td><input id="15-hvweightofpaperfor100kg" name="15_hvweightofpaperfor100kg" type="text" placeholder="">Weight of Paper for 100 Kg</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-16" class="windows">
+							<div id="window-header-1" class="window-headers">
+								Calculate Weight
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<th colspan="2">LV Winding</th>
+									</tr>
+									<tr>
+										<td><label for="16-lvcondsizebaremm">Cond. Size- bare(in mm)</label></td>
+										<td><input id="16-lvcondsizebaremm" name="16_lvcondsizebaremm" type="text" placeholder="Cond. Size- bare(in mm)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-lvmeandiametercm">Mean Diameter(in cm)</label></td>
+										<td><input id="16-lvmeandiametercm" name="16_lvmeandiametercm" type="text" placeholder="Mean Diameter(in cm)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-lvlengthofconductorcm">Length of Conductor(in cm)</label></td>
+										<td><input id="16-lvlengthofconductorcm" name="16_lvlengthofconductorcm" type="text" placeholder="Length of Conductor(in cm)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-lvlengthofconductormt">Length of Conductor(in mt.)</label></td>
+										<td><input id="16-lvlengthofconductormt" name="16_lvlengthofconductormt" type="text" placeholder="Length of Conductor(in mt)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-lvcopperdensity">Copper Density</label></td>
+										<td><input id="16-lvcopperdensity" name="16_lvcopperdensity" type="text" placeholder="Copper Density"></td>
+									</tr>
+									<tr>
+										<td><label for="16-lvareaperdisc">Area per disc</label></td>
+										<td><input id="16-lvareaperdisc" name="16_lvareaperdisc" type="text" placeholder="Area per disc"></td>
+									</tr>
+									<tr>
+										<td><label for="16-lvweightofcopperkg">Weight of Copper(Kg)</label></td>
+										<td><input id="16-lvweightofcopperkg" name="16_lvweightofcopperkg" type="text" placeholder="Weight of Copper(Kg)"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="2">HV Winding</th>
+									</tr>
+									<tr>
+										<td><label for="16-hvcondsizebaremm">Cond. Size- bare(in mm)</label></td>
+										<td><input id="16-hvcondsizebaremm" name="16_hvcondsizebaremm" type="text" placeholder="Cond. Size- bare(in mm)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-hvmeandiametercm">Mean Diameter(in cm)</label></td>
+										<td><input id="16-hvmeandiametercm" name="16_hvmeandiametercm" type="text" placeholder="Mean Diameter(in cm)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-hvlengthofconductorcm">Length of Conductor(in cm)</label></td>
+										<td><input id="16-hvlengthofconductorcm" name="16_hvlengthofconductorcm" type="text" placeholder="Length of Conductor(in cm)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-hvlengthofconductormt">Length of Conductor(in mt.)</label></td>
+										<td><input id="16-hvlengthofconductormt" name="16_hvlengthofconductormt" type="text" placeholder="Length of Conductor(in mt)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-hvcopperdensity">Copper Density</label></td>
+										<td><input id="16-hvcopperdensity" name="16_hvcopperdensity" type="text" placeholder="Copper Density"></td>
+									</tr>
+									<tr>
+										<td><label for="16-hvareaperdisc">Area per disc</label></td>
+										<td><input id="16-hvareaperdisc" name="16_hvareaperdisc" type="text" placeholder="Area per disc"></td>
+									</tr>
+									<tr>
+										<td><label for="16-hvweightofcopperkg">Weight of Copper(Kg)</label></td>
+										<td><input id="16-hvweightofcopperkg" name="16_hvweightofcopperkg" type="text" placeholder="Weight of Copper(Kg)"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="2">Inner Tap Winding</th>
+									</tr>
+									<tr>
+										<td><label for="16-itcondsizebaremm">Cond. Size- bare(in mm)</label></td>
+										<td><input id="16-itcondsizebaremm" name="16_itcondsizebaremm" type="text" placeholder="Cond. Size- bare(in mm)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-itmeandiametercm">Mean Diameter(in cm)</label></td>
+										<td><input id="16-itmeandiametercm" name="16_itmeandiametercm" type="text" placeholder="Mean Diameter(in cm)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-itlengthofconductorcm">Length of Conductor(in cm)</label></td>
+										<td><input id="16-itlengthofconductorcm" name="16_itlengthofconductorcm" type="text" placeholder="Length of Conductor(in cm)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-itlengthofconductormt">Length of Conductor(in mt.)</label></td>
+										<td><input id="16-itlengthofconductormt" name="16_itlengthofconductormt" type="text" placeholder="Length of Conductor(in mt)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-itcopperdensity">Copper Density</label></td>
+										<td><input id="16-itcopperdensity" name="16_itcopperdensity" type="text" placeholder="Copper Density"></td>
+									</tr>
+									<tr>
+										<td><label for="16-itareaperdisc">Area per disc</label></td>
+										<td><input id="16-itareaperdisc" name="16_itareaperdisc" type="text" placeholder="Area per disc"></td>
+									</tr>
+									<tr>
+										<td><label for="16-itweightofcopperkg">Weight of Copper(Kg)</label></td>
+										<td><input id="16-itweightofcopperkg" name="16_itweightofcopperkg" type="text" placeholder="Weight of Copper(Kg)"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="2">Over Tap Winding</th>
+									</tr>
+									<tr>
+										<td><label for="16-otcondsizebaremm">Cond. Size- bare(in mm)</label></td>
+										<td><input id="16-otcondsizebaremm" name="16_otcondsizebaremm" type="text" placeholder="Cond. Size- bare(in mm)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-otmeandiametercm">Mean Diameter(in cm)</label></td>
+										<td><input id="16-otmeandiametercm" name="16_otmeandiametercm" type="text" placeholder="Mean Diameter(in cm)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-otlengthofconductorcm">Length of Conductor(in cm)</label></td>
+										<td><input id="16-otlengthofconductorcm" name="16_otlengthofconductorcm" type="text" placeholder="Length of Conductor(in cm)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-otlengthofconductormt">Length of Conductor(in mt.)</label></td>
+										<td><input id="16-otlengthofconductormt" name="16_otlengthofconductormt" type="text" placeholder="Length of Conductor(in mt)"></td>
+									</tr>
+									<tr>
+										<td><label for="16-otcopperdensity">Copper Density</label></td>
+										<td><input id="16-otcopperdensity" name="16_otcopperdensity" type="text" placeholder="Copper Density"></td>
+									</tr>
+									<tr>
+										<td><label for="16-otareaperdisc">Area per disc</label></td>
+										<td><input id="16-otareaperdisc" name="16_otareaperdisc" type="text" placeholder="Area per disc"></td>
+									</tr>
+									<tr>
+										<td><label for="16-otweightofcopperkg">Weight of Copper(Kg)</label></td>
+										<td><input id="16-otweightofcopperkg" name="16_otweightofcopperkg" type="text" placeholder="Weight of Copper(Kg)"></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-17" class="windows">
+							<div id="window-header-1" class="window-headers">
+								OLTC Details
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<td><label for="17-intankboxtype">Intank / Box Type</label></td>
+										<td><input id="17-intankboxtype" name="17_intankboxtype" type="text" placeholder="Intank / Box Type"></td>
+									</tr>
+									<tr>
+										<td><label for="17-make">Make</label></td>
+										<td><input id="17-make" name="17_make" type="text" placeholder="Make"></td>
+									</tr>
+									<tr>
+										<td><label for="17-serialnumber">Serial Number</label></td>
+										<td><input id="17-serialnumber" name="17_serialnumber" type="text" placeholder="Serial Number"></td>
+									</tr>
+									<tr>
+										<td><label for="17-yearofmfg">Year Of Mfg.</label></td>
+										<td><input id="17-yearofmfg" name="17_yearofmfg" type="text" placeholder="Year Of Mfg."></td>
+									</tr>
+									<tr>
+										<td><label for="17-oilquantity">Oil Quantity</label></td>
+										<td><input id="17-oilquantity" name="17_oilquantity" type="text" placeholder="Oil Quantity"></td>
+									</tr>
+									<tr>
+										<td><label for="17-osr">OSR</label></td>
+										<td><input id="17-osr" name="17_osr" type="text" placeholder="OSR"></td>
+									</tr>
+									<tr>
+										<td><label for="17-conservatortank">Conservator Tank</label></td>
+										<td><input id="17-conservatortank" name="17_conservatortank" type="text" placeholder="Conservator Tank"></td>
+									</tr>
+									<tr>
+										<td><label for="17-prv">PRV (0.42 Kg/Cm²)</label></td>
+										<td><input id="17-prv" name="17_prv" type="text" placeholder="PRV (0.42 Kg/Cm²)"></td>
+									</tr>
+									<tr>
+										<td><label for="17-breather">Breather</label></td>
+										<td><input id="17-breather" name="17_breather" type="text" placeholder="Breather"></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-18" class="windows">
+							<div id="window-header-1" class="window-headers">
+								Accessories
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<th colspan="4">HV Bushings</th>
+									<tr>
+										<td>Phase</td>
+										<td>R</td>
+										<td>G</td>
+										<td>B</td>
+									</tr>
+									<tr>
+										<td>Make</td>
+										<td><input id="18-rmake" class="input-hv1" name="18_rmake" type="text" placeholder="R Make"></td>
+										<td><input id="18-gmake" class="input-hv1" name="18_gmake" type="text" placeholder="G Make"></td>
+										<td><input id="18-bmake" class="input-hv1" name="18_bmake" type="text" placeholder="B Make"></td>
+									</tr>
+									<tr>
+										<td>Serial Number</td>
+										<td><input id="18-rserialnumber" class="input-hv1" name="18_rserialnumber" type="text" placeholder="R Serial Number"></td>
+										<td><input id="18-gserialnumber" class="input-hv1" name="18_gserialnumber" type="text" placeholder="G Serial Number"></td>
+										<td><input id="18-bserialnumber" class="input-hv1" name="18_bserialnumber" type="text" placeholder="B Serial Number"></td>
+									</tr>
+									<tr>
+										<td>Year Of Mfg.</td>
+										<td><input id="18-ryearofmfg" class="input-hv1" name="18_ryearofmfg" type="text" placeholder="R Year Of Mfg."></td>
+										<td><input id="18-gyearofmfg" class="input-hv1" name="18_gyearofmfg" type="text" placeholder="G Year Of Mfg."></td>
+										<td><input id="18-byearofmfg" class="input-hv1" name="18_byearofmfg" type="text" placeholder="B Year Of Mfg."></td>
+									</tr>
+									<tr>
+										<td>Top Height</td>
+										<td><input id="18-rtopheight" class="input-hv1" name="18_rtopheight" type="text" placeholder="R Top Height"></td>
+										<td><input id="18-gtopheight" class="input-hv1" name="18_gtopheight" type="text" placeholder="G Top Height"></td>
+										<td><input id="18-btopheight" class="input-hv1" name="18_btopheight" type="text" placeholder="B Top Height"></td>
+									</tr>
+									<tr>
+										<td>Bottom Height</td>
+										<td><input id="18-rbottomheight" class="input-hv1" name="18_rbottomheight" type="text" placeholder="R Bottom Height"></td>
+										<td><input id="18-gbottomheight" class="input-hv1" name="18_gbottomheight" type="text" placeholder="G Bottom Height"></td>
+										<td><input id="18-bbottomheight" class="input-hv1" name="18_bbottomheight" type="text" placeholder="B Bottom Height"></td>
+									</tr>
+									<tr>
+										<td>BCT</td>
+										<td><input id="18-rbct" class="input-hv1" name="18_rbct" type="text" placeholder="R BCT"></td>
+										<td><input id="18-gbct" class="input-hv1" name="18_gbct" type="text" placeholder="G BCT"></td>
+										<td><input id="18-bbct" class="input-hv1" name="18_bbct" type="text" placeholder="B BCT"></td>
+									</tr>
+									<tr>
+										<td>PCD</td>
+										<td><input id="18-rpcd" class="input-hv1" name="18_rpcd" type="text" placeholder="R PCD"></td>
+										<td><input id="18-gpcd" class="input-hv1" name="18_gpcd" type="text" placeholder="G PCD"></td>
+										<td><input id="18-bpcd" class="input-hv1" name="18_bpcd" type="text" placeholder="B PCD"></td>
+									</tr>
+									<tr>
+										<td>Top hole Diameter</td>
+										<td><input id="18-rtopholediameter" class="input-hv1" name="18_rtopholediameter" type="text" placeholder="R Top hole Diameter"></td>
+										<td><input id="18-gtopholediameter" class="input-hv1" name="18_gtopholediameter" type="text" placeholder="G Top hole Diameter"></td>
+										<td><input id="18-btopholediameter" class="input-hv1" name="18_btopholediameter" type="text" placeholder="B Top hole Diameter"></td>
+									</tr>
+									<tr>
+										<td>Bottom hole Diameter</td>
+										<td><input id="18-rbottomholediameter" class="input-hv1" name="18_rbottomholediameter" type="text" placeholder="R Bottom hole Diameter"></td>
+										<td><input id="18-gbottomholediameter" class="input-hv1" name="18_gbottomholediameter" type="text" placeholder="G Bottom hole Diameter"></td>
+										<td><input id="18-bbottomholediameter" class="input-hv1" name="18_bbottomholediameter" type="text" placeholder="B Bottom hole Diameter"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="2">LV Bushings</th>
+									</tr>
+									<tr>
+										<td>Class (33 / 66KV)</td>
+										<td><input id="18-class" name="18_class" type="text" placeholder="Class"></td>
+									</tr>
+									<tr>
+										<td>Peticoats</td>
+										<td><input id="18-peticoats" name="18_peticoats" type="text" placeholder="Peticoats"></td>
+									</tr>
+									<tr>
+										<td>Type (Polluted / Plain)</td>
+										<td><input id="18-type" name="18_type" type="text" placeholder="Type"></td>
+									</tr>
+									<tr>
+										<td>Height</td>
+										<td><input id="18-height" name="18_height" type="text" placeholder="Height"></td>
+									</tr>
+									<tr>
+										<td>Rod Diameter</td>
+										<td><input id="18-roddiameter" name="18_roddiameter" type="text" placeholder="Rod Diameter"></td>
+									</tr>
+									<tr>
+										<td>Rod Length</td>
+										<td><input id="18-rodlength" name="18_rodlength" type="text" placeholder="Rod Length"></td>
+									</tr>
+									<tr>
+										<td>Coupling (Cup / Flat / Leads)</td>
+										<td><input id="18-coupling" name="18_coupling" type="text" placeholder="Coupling"></td>
+									</tr>
+									<tr>
+										<td>LV WTI CT Ratio</td>
+										<td><input id="18-lvwtictratio" name="18_lvwtictratio" type="text" placeholder="LV WTI CT Ratio"></td>
+									</tr>
+									<tr>
+										<td>HV WTI CT Ratio</td>
+										<td><input id="18-hvwtictratio" name="18_hvwtictratio" type="text" placeholder="HV WTI CT Ratio"></td>
+									</tr>
+									<tr>
+										<td>HV Neutral CT Ratio</td>
+										<td><input id="18-hvneutralctratio" name="18_hvneutralctratio" type="text" placeholder="HV Neutral CT Ratio"></td>
+									</tr>
+									<tr>
+										<td>Turret CT Ratio</td>
+										<td><input id="18-turretctratio" name="18_turretctratio" type="text" placeholder="Turret CT Ratio"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="2">Brass Palm Connectors</th>
+									</tr>
+									<tr>
+										<td>LV (20 / 30 / 42 mm)</td>
+										<td><input id="18-lv20304042mm" name="18_lv20304042mm" type="text" placeholder="LV (20 / 30 / 42 mm)"></td>
+									</tr>
+									<tr>
+										<td>HVN (20 / 30 / 42 mm)</td>
+										<td><input id="18-hvn20304042mm" name="18_hvn20304042mm" type="text" placeholder="HVN (20 / 30 / 42 mm)"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="2">Main Tank PRV</th>
+									</tr>
+									<tr>
+										<td>Quantity</td>
+										<td><input id="18-quantity" name="18_quantity" type="text" placeholder="Quantity"></td>
+									</tr>
+									<tr>
+										<td>Pressure (0.49 \ 0.56 Kg/Cm²)</td>
+										<td><input id="18-pressure" name="18_pressure" type="text" placeholder="Pressure (0.49 \ 0.56 Kg/Cm²)"></td>
+									</tr>
+									<tr>
+										<td>Explosion Vent Diaphram</td>
+										<td><input id="18-explosionventdiaphram" name="18_explosionventdiaphram" type="text" placeholder="Explosion Vent Diaphram"></td>
+									</tr>
+									<tr>
+										<td>Buchhloz Relay (GOR - 1 / 2 / 3)</td>
+										<td><input id="18-buchhlozrelay" name="18_buchhlozrelay" type="text" placeholder="Buchhloz Relay (GOR - 1 / 2 / 3)"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="2">Silica Gel Breather (Main Tank)</th>
+									</tr>
+									<tr>
+										<td>Capacity</td>
+										<td><input id="18-silicagelbreathercapacity" name="18_silicagelbreathercapacity" type="text" placeholder="Capacity"></td>
+									</tr>
+									<tr>
+										<td>Quantity</td>
+										<td><input id="18-silicagelbreatherquantity" name="18_silicagelbreatherquantity" type="text" placeholder="Quantity"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th>Magnetic Oil Guage</th>
+										<td><input id="18-magneticoilguage" name="18_magneticoilguage" type="text" placeholder="Magnetic Oil Guage"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="3">Cooling Fans</th>
+									</tr>
+									<tr>
+										<td>Size</td>
+										<td><input id="18-coolingfanssize" name="18_coolingfanssize" type="text" placeholder="Size"></td>
+										<td><input id="18-coolingfanssize2" name="18_coolingfanssize2" type="text" placeholder="Size"></td>
+									</tr>
+									<tr>
+										<td>Quantity</td>
+										<td><input id="18-coolingfansquantity" name="18_coolingfansquantity" type="text" placeholder="Quantity"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="4">Fan Control Panel</th>
+									</tr>
+									<tr>
+										<td>Number of Fans</td>
+										<td colspan="3"><input id="18-numberoffans" name="18_numberoffans" type="text" placeholder="Number Of Fans"></td>
+									</tr>
+									<tr>
+										<td rowspan="2">WTI Meter</td>
+										<td>Quantity</td>
+										<td>Make</td>
+										<td>CT Current</td>
+									</tr>
+									<tr>
+										<td><input id="18-wtimeterquantity" class="input-hv1" name="18_wtimeterquantity" type="text" placeholder="Quantity"></td>
+										<td><input id="18-wtimetermake" class="input-hv1" name="18_wtimetermake" type="text" placeholder="Make"></td>
+										<td><input id="18-wtimeterctcurrent" class="input-hv1" name="18_wtimeterctcurrent" type="text" placeholder="CT Current"></td>
+									</tr>
+									<tr>
+										<td rowspan="2">OTI Meter</td>
+										<td colspan="2">Make</td>
+										<td>Serial Number</td>
+									</tr>
+									<tr>
+										<td colspan="2"><input id="18-otimetermake" name="18_otimetermake" type="text" placeholder="Make"></td>
+										<td><input id="18-otimeterserialnumber" class="input-hv1" name="18_otimeterserialnumber" type="text" placeholder="Serial Number"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="2">Radiators</th>
+									</tr>
+									<tr>
+										<td><label for="18-radiatorsquantity">Breather</label></td>
+										<td><input id="18-radiators" name="18_radiators" type="text" placeholder="Breather"></td>
+									</tr>
+									<tr>
+										<td><label for="18-radiatorsquantity">Quantity</label></td>
+										<td><input id="18-radiatorsquantity" name="18_radiatorsquantity" type="text" placeholder="Quantity"></td>
+									</tr>
+									<tr>
+										<td><label for="18-radiatorslength">Length</label></td>
+										<td><input id="18-radiatorslength" name="18_radiatorslength" type="text" placeholder="Length"></td>
+									</tr>
+									<tr>
+										<td><label for="18-radiatorswidth">Width</label></td>
+										<td><input id="18-radiatorswidth" name="18_radiatorswidth" type="text" placeholder="Width"></td>
+									</tr>
+									<tr>
+										<td><label for="18-radiatorspipediameter">Pipe Diameter</label></td>
+										<td><input id="18-radiatorspipediameter" name="18_radiatorspipediameter" type="text" placeholder="Pipe Diameter"></td>
+									</tr>
+									<tr>
+										<td><label for="18-radiatorsnumberoffins">Number of Fins</label></td>
+										<td><input id="18-radiatorsnumberoffins" name="18_radiatorsnumberoffins" type="text" placeholder="Number of Fins"></td>
+									</tr>
+									<tr>
+										<td><label for="18-radiatorsblankingplates">Blanking Plates</label></td>
+										<td><input id="18-radiatorsblankingplates" name="18_radiatorsblankingplates" type="text" placeholder="Blanking Plates"></td>
+									</tr>
+									<tr>
+										<td><label for="18-radiatorsheaders">Headers</label></td>
+										<td><input id="18-radiatorsheaders" name="18_radiatorsheaders" type="text" placeholder="Headers"></td>
+									</tr>
+									<tr>
+										<td><label for="18-conservatoroilquantity">Radiator and 50% Conservator Oil Quantity</label></td>
+										<td><input id="18-conservatoroilquantity" name="18_conservatoroilquantity" type="text" placeholder="Quantity"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="2">Tank Size</th>
+									</tr>
+									<tr>
+										<td><label for="18-tanklength">Length</label></td>
+										<td><input id="18-tanklength" name="18_tanklength" type="text" placeholder="Length"></td>
+									</tr>
+									<tr>
+										<td><label for="18-tankwidth">Width</label></td>
+										<td><input id="18-tankwidth" name="18_tankwidth" type="text" placeholder="Width"></td>
+									</tr>
+									<tr>
+										<td><label for="18-tankheight">Height</label></td>
+										<td><input id="18-tankheight" name="18_tankheight" type="text" placeholder="Height"></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div id="window-19" class="windows">
+							<div id="window-header-1" class="window-headers">
+								Impedance Calculated
+							</div>
+							<div id="window-body" class="class-window-body">
+								<table>
+									<tr>
+										<th colspan="2">Testing Details</th>
+									</tr>
+									<tr>
+										<td><label for="19-noloadlosses">No Load Losses (KW)</label></td>
+										<td><input id="19-noloadlosses" name="19_noloadlosses" type="text" placeholder="No Load Losses (KW)"></td>
+									</tr>
+									<tr>
+										<td><label for="19-loadlosses">Load Losses (KW)</label></td>
+										<td><input id="19-loadlosses" name="19_loadlosses" type="text" placeholder="Load Losses (KW)"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th colspan="2">LV winding Resistance (in mΩ)</th>
+									</tr>
+									<tr>
+										<td><label for="19-lvrphase">R - Phase</label></td>
+										<td><input id="19-lvrphase" name="19_lvrphase" type="text" placeholder="R Phase"></td>
+									</tr>
+									<tr>
+										<td><label for="19-lvgphase">G - Phase</label></td>
+										<td><input id="19-lvrghase" name="19_lvgphase" type="text" placeholder="G Phase"></td>
+									</tr>
+									<tr>
+										<td><label for="19-lvbphase">B - Phase</label></td>
+										<td><input id="19-lvbphase" name="19_lvbphase" type="text" placeholder="B Phase"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th>Full Tap</th>
+										<th>Normal Tap</th>
+										<th>Lowest Tap</th>
+									</tr>
+									<tr>
+										<td><label for="19-hvrphase1">R - Phase</label></td>
+										<td><input id="19-hvrphase1" class="input-hv1" name="19_hvrphase1" type="text" placeholder="R Phase"></td>
+										<td><input id="19-hvrphase2" class="input-hv1" name="19_hvrphase2" type="text" placeholder="R Phase"></td>
+										<td><input id="19-hvrphase3" class="input-hv1" name="19_hvrphase3" type="text" placeholder="R Phase"></td>
+									</tr>
+									<tr>
+										<td><label for="19-hvgphase1">G - Phase</label></td>
+										<td><input id="19-hvgphase1" class="input-hv1" name="19_hvgphase1" type="text" placeholder="G Phase"></td>
+										<td><input id="19-hvgphase2" class="input-hv1" name="19_hvgphase2" type="text" placeholder="G Phase"></td>
+										<td><input id="19-hvgphase3" class="input-hv1" name="19_hvgphase3" type="text" placeholder="G Phase"></td>
+									</tr>
+									<tr>
+										<td><label for="19-hvbphase1">B - Phase</label></td>
+										<td><input id="19-hvbphase1" class="input-hv1" name="19_hvbphase1" type="text" placeholder="B Phase"></td>
+										<td><input id="19-hvbphase2" class="input-hv1" name="19_hvbphase2" type="text" placeholder="B Phase"></td>
+										<td><input id="19-hvbphase3" class="input-hv1" name="19_hvbphase3" type="text" placeholder="B Phase"></td>
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<th><label for="19-percentimpedance">% Impedance - Calculated</label></th>
+										<td><input id="19-percentimpedance" name="19_percentimpedance" type="text" placeholder="% Impedance - Calculated"></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer>
+			&copy; Set On Site Electricals
+		</footer>
+	</body>
+</html>
