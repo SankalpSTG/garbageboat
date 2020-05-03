@@ -10,7 +10,7 @@ require("../database/dbh.inc.php");
 			$message["error_message"] = "Require all parameters";	
 			die(json_encode($message));
 		}else{
-			$stmt = $conn->prepare("SELECT pet_name, registration_number, type, credential_id, simulator_device_id,verified FROM boats WHERE serial_id = ? limit 10");
+			$stmt = $conn->prepare("SELECT pet_name, registration_number, type, serial_id, simulator_device_id, verified FROM boats WHERE credential_id = ?");
 			$stmt->bind_param("i", $serial_id);
 			$stmt->execute();
 			$result = $stmt->get_result();
@@ -18,14 +18,14 @@ require("../database/dbh.inc.php");
 			if(mysqli_num_rows($result) > 0){
 				$data = [];
 				while ($row = mysqli_fetch_assoc($result)){
-				$responce = [];
-				$responce["pet_name"] = (string)$row["pet_name"];
-				$responce["registration_number"] = (string)$row["registration_number"];
-				$responce["type"] = (string)$row["type"];
-				$responce["credential_id"] = (int)$row["credential_id"];
-				$responce["simulator_device_id"] = (string)$row["simulator_device_id"];
-				$responce["verified"] = (int)$row["verified"];
-				array_push($data, $responce);
+					$responce = [];
+					$responce["pet_name"] = (string)$row["pet_name"];
+					$responce["registration_number"] = (string)$row["registration_number"];
+					$responce["type"] = (string)$row["type"];
+					$responce["serial_id"] = (int)$row["serial_id"];
+					$responce["simulator_device_id"] = (string)$row["simulator_device_id"];
+					$responce["verified"] = (int)$row["verified"];
+					array_push($data, $responce);
 				}
 				$message["data"] = $data;
 				$message["error"] = false;

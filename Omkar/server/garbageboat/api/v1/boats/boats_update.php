@@ -25,7 +25,7 @@ require("../database/dbh.inc.php");
 				$verified = (int)$row["verified"];
 				if($verified == -1){
 					$stmt = $conn->prepare("UPDATE boats SET pet_name = ?, credential_id  = ?, verified = 0 WHERE registration_number = ?");
-					$stmt->bind_param("sisi", $pet_name, $credential_id, $registration_number);
+					$stmt->bind_param("sis", $pet_name, $credential_id, $registration_number);
 					$stmt->execute();
 					$stmt->close();
 					$message["error"] = false;
