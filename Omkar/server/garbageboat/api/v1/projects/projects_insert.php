@@ -15,13 +15,12 @@ require("../database/dbh.inc.php");
 			$message["error_message"] = "Require all parameters ";	
 			die(json_encode($message));
 		}else{
-			$stmt = $conn->prepare("SELECT project_name FROM projects WHERE credential_id = ?");
-			$stmt->bind_param("i", $serial_id);
+			$stmt = $conn->prepare("SELECT project_name FROM projects WHERE credential_id = ? and project_name = ?");
+			$stmt->bind_param("is", $serial_id, $project_name);
 			$stmt->execute();
 			$result = $stmt->get_result();
 			$stmt->close();
-			$row = mysqli_fetch_assoc($result);
-			if((string)$row["project_name"] != $project_name){
+			if(mysqli_num_rows($result) != 1 ){
 				$stmt = $conn->prepare("INSERT INTO projects (credential_id, project_name, project_description, is_anonymous) VALUES (?, ?, ?, ?)");
 				$stmt->bind_param("issi", $serial_id, $project_name, $project_description, $is_anonymous);
 				$stmt->execute();
@@ -38,11 +37,9 @@ require("../database/dbh.inc.php");
 				die(json_encode($message));
 			}else{
 				$message["error"] = true;
-				$message["error_message"] = "Project name is already exist";	
+				$message["error_message"] = "Project name ". $project_name. " is already exist";	
 				die(json_encode($message));
 			}
-			
-			
 		}
 		
 	}die(json_encode($message));
