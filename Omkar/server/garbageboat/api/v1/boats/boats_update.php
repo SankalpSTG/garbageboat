@@ -4,14 +4,13 @@ require("../database/dbh.inc.php");
 
 	$message["error"] = true;
 	$message["error_message"] = "Require all parameters";	
-	if(isset($_POST["registration_number"]) && isset($_POST["type"]) && isset($_POST["credential_id"]) && isset($_POST["pet_name"]) && isset($_POST["simulator_device_id"])){
+	if(isset($_POST["registration_number"]) && isset($_POST["type"]) && isset($_POST["credential_id"]) && isset($_POST["pet_name"])){
 		$registration_number = (int)$_POST["registration_number"];
 		$credential_id = (int)$_POST["credential_id"];
 		$type = mysqli_real_escape_string($conn, $_POST["type"]);
 		$pet_name = mysqli_real_escape_string($conn, $_POST["pet_name"]);
-		$simulator_device_id = mysqli_real_escape_string($conn, $_POST["simulator_device_id"]);
 
-		if(empty($registration_number) || empty($type) || empty($credential_id) || empty($pet_name) || empty($simulator_device_id)){
+		if(empty($registration_number) || empty($type) || empty($credential_id) || empty($pet_name)){
 			$message["error"] = true;
 			$message["error_message"] = "Require all parameters";	
 			die(json_encode($message));
@@ -25,8 +24,8 @@ require("../database/dbh.inc.php");
 				$row = mysqli_fetch_assoc($result);
 				$verified = (int)$row["verified"];
 				if($verified == -1){
-					$stmt = $conn->prepare("UPDATE boats SET pet_name = ?, credential_id  = ?,  simulator_device_id = ?, verified = 0 WHERE registration_number = ?");
-					$stmt->bind_param("sisi", $pet_name, $credential_id, $simulator_device_id, $registration_number);
+					$stmt = $conn->prepare("UPDATE boats SET pet_name = ?, credential_id  = ?, verified = 0 WHERE registration_number = ?");
+					$stmt->bind_param("sisi", $pet_name, $credential_id, $registration_number);
 					$stmt->execute();
 					$stmt->close();
 					$message["error"] = false;
@@ -39,7 +38,7 @@ require("../database/dbh.inc.php");
 				}
 			}else{
 				$message["error"] = true;
-				$message["error_message"] = "Invalid parameters";	
+				$message["error_message"] = "No ". $type. " boat with provided registration number ". $registration_number;	
 				die(json_encode($message));
 			}
 		}
