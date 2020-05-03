@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2020 at 09:17 AM
+-- Generation Time: May 03, 2020 at 03:56 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -63,9 +63,9 @@ CREATE TABLE `boats` (
 --
 
 INSERT INTO `boats` (`serial_id`, `pet_name`, `registration_number`, `type`, `credential_id`, `simulator_device_id`, `verified`) VALUES
-(1, 'qwertyuiop', 5215, 'master', 1, '1234', 0),
-(2, 'qwertyuiop', 1234, 'master', 1, '1234', 0),
-(3, NULL, 123456789, 'master', NULL, NULL, -1),
+(1, NULL, 5215, 'master', NULL, NULL, -1),
+(2, 'qwertyuiop', 1234, 'slave', 35, '1234', 0),
+(3, 'helloworld', 123456789, 'master', 35, NULL, 0),
 (4, 'hubby', 789456, 'slave', 2, '582546', 0);
 
 -- --------------------------------------------------------
@@ -301,11 +301,31 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`serial_id`, `credential_id`, `project_name`, `project_description`, `location_lat`, `location_lng`, `is_anonymous`) VALUES
-(1, 1, 'river cleaning', 'ganga cleaning', '19.254521589', '20.256314789', 0),
-(2, 1, 'river cleaning', 'ganga cleaning', '19.254521589', '20.256314789', 0),
+(1, 0, '', '', '', '', 0),
+(2, 0, '', '', '', '', 0),
 (3, 1, 'river cleaning', 'ganga cleaning', '19.254521589', '20.256314789', 0),
 (4, 2, 'cleaning', 'cleaning', '59.25452158', '58.256314789', 1),
 (5, 2, 'cleaning', 'cleaning', '59.25452158', '58.256314789', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project_boat_mapping`
+--
+
+CREATE TABLE `project_boat_mapping` (
+  `serial_id` bigint(20) NOT NULL,
+  `project_id` bigint(20) NOT NULL,
+  `boat_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `project_boat_mapping`
+--
+
+INSERT INTO `project_boat_mapping` (`serial_id`, `project_id`, `boat_id`) VALUES
+(3, 3, 3),
+(4, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -563,6 +583,13 @@ ALTER TABLE `projects`
   ADD PRIMARY KEY (`serial_id`);
 
 --
+-- Indexes for table `project_boat_mapping`
+--
+ALTER TABLE `project_boat_mapping`
+  ADD PRIMARY KEY (`serial_id`),
+  ADD UNIQUE KEY `boat_id` (`boat_id`);
+
+--
 -- Indexes for table `running_numbers`
 --
 ALTER TABLE `running_numbers`
@@ -639,6 +666,12 @@ ALTER TABLE `problem_solutions`
 --
 ALTER TABLE `projects`
   MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `project_boat_mapping`
+--
+ALTER TABLE `project_boat_mapping`
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `running_numbers`
