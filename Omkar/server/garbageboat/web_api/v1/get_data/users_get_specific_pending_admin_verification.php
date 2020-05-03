@@ -5,7 +5,6 @@ require("../database/dbh.inc.php");
 	$message["error_message"] = "Require all parameters";
 	if(isset($_POST["verification_level"]) ){
 		$verification_level = (int)$_POST["verification_level"];
-		echo $verification_level;
 		if(!is_numeric($verification_level)){
 			$message["error"] = true;
 			$message["error_message"] = "Require all parameters";	
