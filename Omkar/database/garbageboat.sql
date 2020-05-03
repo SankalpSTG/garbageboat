@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2020 at 12:05 PM
+-- Generation Time: May 03, 2020 at 09:17 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -50,12 +50,23 @@ INSERT INTO `admin_credentials` (`serial_id`, `email_address`, `password`, `admi
 
 CREATE TABLE `boats` (
   `serial_id` bigint(20) NOT NULL,
-  `pet_name` varchar(20) NOT NULL,
+  `pet_name` varchar(20) DEFAULT NULL,
   `registration_number` bigint(20) NOT NULL,
   `type` varchar(10) NOT NULL,
   `credential_id` bigint(20) DEFAULT NULL,
-  `simulator_device_id` text DEFAULT NULL
+  `simulator_device_id` text DEFAULT NULL,
+  `verified` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `boats`
+--
+
+INSERT INTO `boats` (`serial_id`, `pet_name`, `registration_number`, `type`, `credential_id`, `simulator_device_id`, `verified`) VALUES
+(1, 'qwertyuiop', 5215, 'master', 1, '1234', 0),
+(2, 'qwertyuiop', 1234, 'master', 1, '1234', 0),
+(3, NULL, 123456789, 'master', NULL, NULL, -1),
+(4, 'hubby', 789456, 'slave', 2, '582546', 0);
 
 -- --------------------------------------------------------
 
@@ -79,7 +90,7 @@ CREATE TABLE `credentials` (
 --
 
 INSERT INTO `credentials` (`serial_id`, `email_id`, `mobile_no`, `account_level`, `verification_level`, `token`, `token_key`, `token_iv`) VALUES
-(34, 'sankikul@gmail.com', 2147483647, 0, 0, NULL, NULL, NULL),
+(34, 'sankikul@gmail.com', 2147483647, 1, 0, NULL, NULL, NULL),
 (35, 'polskii@gmail.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (36, 'Q4dC1wAzxd@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (37, 'ddjIzihVtM@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
@@ -109,7 +120,7 @@ INSERT INTO `credentials` (`serial_id`, `email_id`, `mobile_no`, `account_level`
 (61, 'pN1yeBCgn5@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (62, 'p4zc3hP2Gl@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (63, 'mjv86g8S9d@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
-(64, 'BAdzO5emM3@email.com', 2147483647, 1, 0, NULL, NULL, NULL),
+(64, 'BAdzO5emM3@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (65, '8oN3FyZ9C1@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (66, 'yJ2Yv6t14s@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
 (67, 'MZVxvO3CTC@email.com', 2147483647, 0, 0, NULL, NULL, NULL),
@@ -236,21 +247,8 @@ CREATE TABLE `problems_submitted` (
 
 INSERT INTO `problems_submitted` (`serial_id`, `credential_id`, `category`, `problem`, `description`) VALUES
 (1, 1, 'suggestion', 'php', 'Don\\\'t ask silly doubts'),
-(2, 35, 'suggestion', 'php', 'Don\\\'t ask silly doubts'),
-(3, 35, 'suggestion', 'php', 'Don\\\'t ask silly doubts'),
-(4, 35, 'suggestion', 'php', 'Don\\\'t ask silly doubts'),
-(5, 35, 'suggestion', 'php', 'Don\\\'t ask silly doubts'),
-(6, 35, 'enfwcijwci', 'php', 'Don\\\'t ask silly doubts'),
-(7, 35, 'enfwcijwci', 'fewfwefEWF', 'Don\\\' JDFIJQIFJijt ask silly doubts'),
-(8, 35, 'enfwcijwci', 'fewfwefEWF', 'Don\\\' JDFIJQIFJijt ask silly doubts'),
-(9, 35, 'enfwcijwci', 'MNCDCIC', 'Don\\\' JDFIJQIFJijt ask silly doubts'),
-(10, 35, 'KADJFIejfijwEFI', 'MNCDCIC', 'Don\\\' JDFIJQIFJijt ask silly doubts'),
-(11, 35, 'KADJFIejfijwEFI', 'MNCDCIC', 'sjfiejfehfheFI\\n'),
-(12, 35, 'KADJFIejfijwEFI', 'SAKCEJFIJFE\\n', 'sjfiejfehfheFI\\n'),
-(13, 35, 'KADJFEFIJWeifjwifjIejfijwEFI', 'SAKCEJFIJFE\\n', 'sjfiejfehfheFI\\n'),
-(14, 35, 'KADJFEFIJWeifjwifjIejfijwEFI', 'SAKCESMDiQEFIOJQegioJFIJFE\\n', 'sjfiejfehfheFI\\n'),
-(15, 35, 'KADJFEFIJWeifjwifjIejfijwEFI', 'SAKCESMDiQEFIOJQegioJFIJFE\\n', 'sjfiejfehfheFI\\n'),
-(16, 35, 'x jx jscnJsnJnx\\nw', 's dcmsdcdkc', 'fdkc mdkc mkdc');
+(2, 35, 'Performance', 'performance', 'this is awesome'),
+(3, 35, 'Performance', 'sbshs', 'jshsjs');
 
 -- --------------------------------------------------------
 
@@ -279,27 +277,8 @@ INSERT INTO `problem_solutions` (`serial_id`, `problem_id`, `solution_header`, `
 (7, 35, 'ehdfuehwchscanjsncjn,SCnacncnwec', 'mcsaca\\nw'),
 (8, 35, 'CNJNSCJSANCJVC\\n', 'mcsaca\\nw'),
 (9, 35, 'CNJNSCJx jNADC JNJC NSJCNSANCJVC\\n', 'x jx jscnJsnJnx\\nw'),
-(10, 35, 'CNJNSCJx jNADC JNJC NSJCNSANCJVC\\n', 'x jx jscnJsnJnx\\nw'),
-(11, 35, 'CNJNSCJx jNADC JNJC NSJCNSANCJVC\\n', 'x jx jscnJsnJnx\\nw'),
-(12, 35, 'CNJNSCJx jNADC JNJC NSJCNSANCJVC\\n', 'x jx jscnJsnJnx\\nw'),
-(13, 35, 'CNJNSCJx jNADC JNJC NSJCNSANCJVC\\n', 'x jx jscnJsnJnx\\nw'),
-(14, 35, 'CNJNSCJx jNADC JNJC NSJCNSANCJVC\\n', 'x jx jscnJsnJnx\\nw'),
-(15, 2, 'x jx jscnJsnJnx\\nw', 's dcmsdcdkc'),
-(16, 2, 'x jx jsnfvefenfcnJsnJnx\\nw', 's dcmsdcdkc'),
-(17, 2, 'x jx jsnfvefenfnvnvnrvncnJsnJnx\\nw', 's dcmsdcdkc'),
-(18, 2, 'x jx jsnfvefenfnvnvnrvncnJsnJnx\\nw', 's dcmqjvijijqeviofsdcdkc'),
-(19, 2, 'x jx jsnfvefenfnvnvnrvncnJsnJnx\\nw', 's dcmqjvijijqeviofnfjnqejfnsdcdkc'),
-(20, 2, 'x jx jsnfvefenfnvnvnrvncnJsnJnx\\nw', 'w;c[e;fc[e[dcmqjvijijqeviofnfjnqejfnsdcdkc'),
-(21, 3, 'x jx jsnfvefenfnvnvnrvncnJsnJnx\\nw', 'w;c[e;fc[e[dcmqjvijijqeviofnfjnqejfnsdcdkc'),
-(22, 3, 'oekfokeoefoeofkofw', 'wrigngnrjn'),
-(23, 3, 'jfijrwfij', 'wrigngnrjn'),
-(24, 3, 'jfijrwqekmfmqefij', 'jerfiefjiejf'),
-(25, 3, 'jefiejfif', 'jerfiefjiejf'),
-(26, 3, 'jefiejfif', 'nfnefnefn'),
-(27, 3, 'jefiejfif', 'nfnefnefnvnwe fne fqe f'),
-(28, 3, 'miifev', 'nfnefnefnvnwe fne fqe f'),
-(29, 3, 'miifev', 'nfnefnefnvnwe fne fqe f'),
-(30, 3, 'miifev', 'nfnefnefnvnwe fne fqe f');
+(10, 3, 'This is first solution', 'This is first solution description'),
+(11, 3, 'This is second solution', 'This is second solution description');
 
 -- --------------------------------------------------------
 
@@ -316,6 +295,17 @@ CREATE TABLE `projects` (
   `location_lng` text NOT NULL,
   `is_anonymous` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`serial_id`, `credential_id`, `project_name`, `project_description`, `location_lat`, `location_lng`, `is_anonymous`) VALUES
+(1, 1, 'river cleaning', 'ganga cleaning', '19.254521589', '20.256314789', 0),
+(2, 1, 'river cleaning', 'ganga cleaning', '19.254521589', '20.256314789', 0),
+(3, 1, 'river cleaning', 'ganga cleaning', '19.254521589', '20.256314789', 0),
+(4, 2, 'cleaning', 'cleaning', '59.25452158', '58.256314789', 1),
+(5, 2, 'cleaning', 'cleaning', '59.25452158', '58.256314789', 1);
 
 -- --------------------------------------------------------
 
@@ -509,7 +499,13 @@ CREATE TABLE `user_feedback` (
 INSERT INTO `user_feedback` (`serial_id`, `credential_id`, `header`, `description`, `rating`, `category`) VALUES
 (11, 35, 'dsdasd', 'adsasdsa', 2, 'App User Interfacing'),
 (12, 35, 'hello', 'asdasd', 3.5, 'App User Interfacing'),
-(13, 2, 'can be done', 'Don\\\'t ask silly doubts', 100, 'suggestion');
+(13, 1, 'php', 'Don\\\'t ask silly doubts', 10, 'suggestion'),
+(14, 1, 'php', 'Don\\\'t ask silly doubts', 10, 'suggestion'),
+(15, 1, 'php', 'Don\\\'t ask silly doubts', 10, 'suggestion'),
+(16, 1, 'php', 'Don\\\'t ask silly doubts', 10, 'suggestion'),
+(17, 1, 'php', 'Don\\\'t ask silly doubts', 10, 'suggestion'),
+(18, 1, 'php', 'Don\\\'t ask silly doubts', 10, 'suggestion'),
+(19, 35, 'php', 'Don\\\'t ask silly doubts', 10, 'suggestion');
 
 --
 -- Indexes for dumped tables
@@ -603,6 +599,12 @@ ALTER TABLE `admin_credentials`
   MODIFY `serial_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `boats`
+--
+ALTER TABLE `boats`
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `credentials`
 --
 ALTER TABLE `credentials`
@@ -624,19 +626,19 @@ ALTER TABLE `maintenance_schedules`
 -- AUTO_INCREMENT for table `problems_submitted`
 --
 ALTER TABLE `problems_submitted`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `problem_solutions`
 --
 ALTER TABLE `problem_solutions`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `running_numbers`
@@ -660,7 +662,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_feedback`
 --
 ALTER TABLE `user_feedback`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -16,19 +16,27 @@ require("../database/dbh.inc.php");
 			$message["error_message"] = "Require all parameters";	
 			die(json_encode($message));
 		}else{
-			$stmt = $conn->prepare("SELECT registration_number, type FROM boats WHERE registration_number = ? and type = ? ");
+			$stmt = $conn->prepare("SELECT registration_number, type, verified FROM boats WHERE registration_number = ? and type = ? ");
 			$stmt->bind_param("is", $registration_number, $type);
 			$stmt->execute();
 			$result = $stmt->get_result();
 			$stmt->close();
 			if(mysqli_num_rows($result) == 1){
-				$stmt = $conn->prepare("UPDATE boats SET pet_name = ?, credential_id  = ?,  simulator_device_id = ?, verified = 0 WHERE registration_number = ?");
-				$stmt->bind_param("sisi", $pet_name, $credential_id, $simulator_device_id, $registration_number);
-				$stmt->execute();
-				$stmt->close();
-				$message["error"] = false;
-				$message["error_message"] = "Success";	
-				die(json_encode($message));
+				$row = mysqli_fetch_assoc($result);
+				$verified = (int)$row["verified"];
+				if($verified == -1){
+					$stmt = $conn->prepare("UPDATE boats SET pet_name = ?, credential_id  = ?,  simulator_device_id = ?, verified = 0 WHERE registration_number = ?");
+					$stmt->bind_param("sisi", $pet_name, $credential_id, $simulator_device_id, $registration_number);
+					$stmt->execute();
+					$stmt->close();
+					$message["error"] = false;
+					$message["error_message"] = "Success";	
+					die(json_encode($message));
+				}else{
+					$message["error"] = true;
+					$message["error_message"] = "Boat is already added";	
+					die(json_encode($message));
+				}
 			}else{
 				$message["error"] = true;
 				$message["error_message"] = "Invalid parameters";	
