@@ -15,20 +15,33 @@ require("../database/dbh.inc.php");
 			$message["error_message"] = "Require all parameters ";	
 			die(json_encode($message));
 		}else{
-			$stmt = $conn->prepare("INSERT INTO projects (credential_id, project_name, project_description, is_anonymous) VALUES (?, ?, ?, ?)");
-			$stmt->bind_param("issi", $serial_id, $project_name, $project_description, $is_anonymous);
-			$stmt->execute();
-			$stmt->close();
-			$stmt = $conn->prepare("SELECT serial_id FROM projects WHERE credential_id = ?");
+			$stmt = $conn->prepare("SELECT project_name FROM projects WHERE credential_id = ?");
 			$stmt->bind_param("i", $serial_id);
 			$stmt->execute();
 			$result = $stmt->get_result();
 			$stmt->close();
 			$row = mysqli_fetch_assoc($result);
-			$message["project_id"] = (string)$row["serial_id"] ;
-			$message["error"] = false;
-			$message["error_message"] = "Success";	
-			die(json_encode($message));
+			if((string)$row["project_name"] != $project_name){
+				$stmt = $conn->prepare("INSERT INTO projects (credential_id, project_name, project_description, is_anonymous) VALUES (?, ?, ?, ?)");
+				$stmt->bind_param("issi", $serial_id, $project_name, $project_description, $is_anonymous);
+				$stmt->execute();
+				$stmt->close();
+				$stmt = $conn->prepare("SELECT serial_id FROM projects WHERE credential_id = ? and project_name = ?");
+				$stmt->bind_param("is", $serial_id, $project_name);
+				$stmt->execute();
+				$result = $stmt->get_result();
+				$stmt->close();
+				$row = mysqli_fetch_assoc($result);
+				$message["project_id"] = (string)$row["serial_id"] ;
+				$message["error"] = false;
+				$message["error_message"] = "Success";	
+				die(json_encode($message));
+			}else{
+				$message["error"] = true;
+				$message["error_message"] = "Project name is already exist";	
+				die(json_encode($message));
+			}
+			
 			
 		}
 		
