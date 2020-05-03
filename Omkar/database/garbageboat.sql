@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2020 at 03:56 PM
+-- Generation Time: May 03, 2020 at 05:00 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -302,10 +302,19 @@ CREATE TABLE `projects` (
 
 INSERT INTO `projects` (`serial_id`, `credential_id`, `project_name`, `project_description`, `location_lat`, `location_lng`, `is_anonymous`) VALUES
 (1, 0, '', '', '', '', 0),
-(2, 0, '', '', '', '', 0),
+(2, 0, '', '', '56.5445526', '58.258456595', 0),
 (3, 1, 'river cleaning', 'ganga cleaning', '19.254521589', '20.256314789', 0),
 (4, 2, 'cleaning', 'cleaning', '59.25452158', '58.256314789', 1),
-(5, 2, 'cleaning', 'cleaning', '59.25452158', '58.256314789', 1);
+(5, 2, 'cleaning', 'cleaning', '56.5445526', '58.258456595', 1),
+(6, 2, 'cleaning', 'cleaning', '56.5445526', '58.258456595', 1),
+(7, 2, 'cleaning', 'cleaning', '', '', 1),
+(8, 1, 'cleaning', 'cleaning', '34.58265', '36.25972', 1),
+(9, 1, 'cleaning', 'cleaning', '', '', 1),
+(10, 10, 'cleaning', 'cleaning', '56', '58.258456595', 1),
+(11, 11, 'cleaning', 'cleaning', '', '', 1),
+(12, 5, 'cleaning', 'cleaning', '', '', 1),
+(13, 5, 'cleaning', 'cleaning', '', '', 1),
+(14, 5, 'cleaning', 'cleaning', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -665,7 +674,7 @@ ALTER TABLE `problem_solutions`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `project_boat_mapping`
