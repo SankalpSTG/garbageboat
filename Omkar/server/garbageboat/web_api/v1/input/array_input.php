@@ -29,13 +29,13 @@ require("dbh.inc.php");
 						$message["error_message"] = "Success";
 					}else{
 						$message["error"] = true;
-						$message["error_message"] = "User is already approved";
-						die(json_encode($message));
+						$message["error_message"] = "User is already approved ". (int)$serial_id;
+						echo json_encode($message);
 					}
 				}else{
 					$message["error"] = true;
-					$message["error_message"] = "Failes to update";
-					die(json_encode($message));
+					$message["error_message"] = "Failes to update ". (int)$serial_id;
+					echo json_encode($message);
 				}
 			}
 		}
