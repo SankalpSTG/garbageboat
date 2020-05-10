@@ -70,9 +70,11 @@ public class LoginActivity extends AppCompatActivity {
                         boolean error = message.getBoolean("error");
                         String error_message = message.getString("error_message");
                         if(!error){
-                            BigInteger data = BigInteger.valueOf(message.getInt("data"));
+                            JSONObject data = message.getJSONObject("data");
                             Toast.makeText(LoginActivity.this, ErrorMessages.login_successful, Toast.LENGTH_SHORT).show();
-                            shr.addpreference(data.toString(), SharedItHelper.credential_id);
+                            shr.addpreference(data.getString("serial_id"), SharedItHelper.credential_id);
+                            shr.addpreference(data.getString("verification_level"), SharedItHelper.verification_level);
+                            shr.addpreference(data.getString("account_level"), SharedItHelper.account_level);
                             Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(i);
                             finish();

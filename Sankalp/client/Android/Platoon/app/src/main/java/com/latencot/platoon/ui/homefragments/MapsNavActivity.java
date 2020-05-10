@@ -1,22 +1,15 @@
-package com.latencot.platoon.ui.authentication;
+package com.latencot.platoon.ui.homefragments;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -31,102 +24,52 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.latencot.platoon.R;
-import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
-import com.latencot.platoon.retrofit.RetrofitClient;
-import com.latencot.platoon.ui.HomeActivity;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.math.BigInteger;
 
-public class MapPointCenterLocation extends FragmentActivity implements OnMapReadyCallback {
-    private static final String TAG = "MapPointLocation";
-    private GoogleMap mMap;
-    private Button bt_update_location;
-    private FusedLocationProviderClient mFusedLocationProviderClient;
+public class MapsNavActivity extends FragmentActivity implements OnMapReadyCallback {
+    private static final String TAG = "MapsNavActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private boolean mLocationPermissionGranted = false;
     private static final float DEFAULT_ZOOM = 15f;
+    private boolean mLocationPermissionGranted = false;
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private GoogleMap mMap;
     private Marker marker;
     private static double bigLatitude, bigLongitude;
-    private BigInteger serial_id;
-    private SharedIt shr;
+    BigInteger serial_id;
+    SharedIt shr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_point_center_location);
-        bt_update_location = findViewById(R.id.mpcl_bt_submit_location);
-        bt_update_location.setOnClickListener(update_button_clicked);
+        setContentView(R.layout.activity_maps_nav);
         getLocationPermission();
-
         shr = new SharedIt(this);
         serial_id = new BigInteger(shr.extractpreference("serial_id"));
 
         initMap();
     }
-    View.OnClickListener update_button_clicked = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            uploadLocation();
-        }
-    };
-    private void uploadLocation(){
-        Call<ResponseBody> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .updateLocation(serial_id, bigLatitude, bigLongitude);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.body() != null) {
-                    try {
-                        JSONObject message = new JSONObject(response.body().string());
-                        boolean error = message.getBoolean("error");
-                        String error_message = message.getString("error_message");
-                        Toast.makeText(getApplicationContext(), error_message, Toast.LENGTH_SHORT).show();
-                        if(!error){
-                            Intent i = new Intent(MapPointCenterLocation.this, UploadFile.class);
-                            startActivity(i);
-                            finish();
-                        }else{
-                            Toast.makeText(getApplicationContext(), ErrorMessages.error_occured, Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (IOException | JSONException e) {
-                        Toast.makeText(getApplicationContext(), ErrorMessages.exception_occured, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), ErrorMessages.default_failure, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.setOnCameraIdleListener(onCameraIdleListener);
-
-        // Add a marker in Sydney and move the camera
-
-        getDeviceLocation();
-        //LatLng sydney = new LatLng(-34, 151);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-    }
     public void initMap(){
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        mMap.setOnCameraIdleListener(onCameraIdleListener);
+
+        // Add a marker in Sydney and move the camera
+
+        getDeviceLocation();
+    }
+
     private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation : Getting Device Current Location");
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -156,7 +99,6 @@ public class MapPointCenterLocation extends FragmentActivity implements OnMapRea
             Log.e(TAG, "getDeviceLocation : SecurityException " + e.getMessage());
         }
     }
-
     private void getLocationPermission() {
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
@@ -193,6 +135,7 @@ public class MapPointCenterLocation extends FragmentActivity implements OnMapRea
             }
         }
     }
+
     private void moveCamera(LatLng latLng, float zoom, String title) {
         Log.d(TAG, "moveCamera : Moving the Camera to Lat : " + latLng.latitude + " lng : " + latLng.longitude);
 
@@ -212,7 +155,11 @@ public class MapPointCenterLocation extends FragmentActivity implements OnMapRea
             LatLng center = mMap.getCameraPosition().target;
             bigLatitude = center.latitude;
             bigLongitude = center.longitude;
-            //addressview.setText("");
+
+            getBoatsUnderRadar();
         }
     };
+    public void getBoatsUnderRadar(){
+        return;
+    }
 }

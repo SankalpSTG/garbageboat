@@ -1,4 +1,4 @@
-package com.latencot.platoon.ui.authentication;
+package com.latencot.platoon.ui.profile.manageprojects;
 
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.ResponseBody;
@@ -8,64 +8,72 @@ import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.JsonParser;
 import com.latencot.platoon.R;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
 import com.latencot.platoon.retrofit.RetrofitClient;
+import com.latencot.platoon.ui.HomeActivity;
+import com.latencot.platoon.ui.profile.manageboats.AddBoat;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.math.BigInteger;
 
-public class RegisterCredentials extends AppCompatActivity {
-    //EditText
-    EditText et_email_id, et_mobile_no;
-    //Buttons
+public class AddProject extends AppCompatActivity {
+    EditText et_projectname, et_projectdescription;
     Button bt_submit;
-    //String Data
-    String email_id, mobile_no;
-    //SharedPreference
+    CheckBox cb_anonymous;
     SharedIt shr;
-
+    BigInteger serial_id;
+    String projectname, projectdescription;
+    int isanonymous = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_credentials);
-        et_email_id = findViewById(R.id.arc_emailid);
-        et_mobile_no = findViewById(R.id.arc_mobile_no);
-        bt_submit = findViewById(R.id.arc_submit);
+        setContentView(R.layout.activity_add_project);
+
         shr = new SharedIt(this);
-        bt_submit.setOnClickListener(register_button_listener);
-    }
+        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
 
-    View.OnClickListener register_button_listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if(!TextUtils.isEmpty(et_email_id.getText().toString().trim()) && !TextUtils.isEmpty(et_mobile_no.getText().toString().trim())){
-                mobile_no = et_mobile_no.getText().toString().trim();
-                email_id = et_email_id.getText().toString().trim();
-                uploadCredentials();
-            }else{
-                Toast.makeText(getApplicationContext(), ErrorMessages.multiple_empty_fields_error, Toast.LENGTH_SHORT).show();
+        et_projectname = findViewById(R.id.aap_projectname);
+        et_projectdescription = findViewById(R.id.aap_projectdescription);
+        bt_submit = findViewById(R.id.aab_submit);
+        cb_anonymous = findViewById(R.id.aap_anonymouscheckbox);
+
+        cb_anonymous.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    isanonymous = 1;
+                }else{
+                    isanonymous = 0;
+                }
             }
-        }
-    };
-    public void uploadCredentials(){
-
+        });
+        bt_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                projectname = et_projectname.getText().toString().trim();
+                projectdescription = et_projectdescription.getText().toString().trim();
+                addProject();
+            }
+        });
+    }
+    public void addProject(){
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .uploadCredentials(email_id, mobile_no);
+                .addProject(serial_id, projectname, projectdescription, isanonymous);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -76,11 +84,9 @@ public class RegisterCredentials extends AppCompatActivity {
                         String error_message = message.getString("error_message");
                         Toast.makeText(getApplicationContext(), error_message, Toast.LENGTH_SHORT).show();
                         if(!error){
-                            JSONObject data = message.getJSONObject("data");
-                            shr.addpreference(data.getString("serial_id"), SharedItHelper.credential_id);
-                            shr.addpreference(data.getString("verification_level"), SharedItHelper.verification_level);
-                            shr.addpreference(data.getString("account_level"), SharedItHelper.account_level);
-                            Intent i = new Intent(RegisterCredentials.this, RegisterUser.class);
+                            String project_id = message.getString("data");
+                            Intent i = new Intent(AddProject.this, UpdateProjectLocation.class);
+                            i.putExtra(SharedItHelper.project_id, project_id);
                             startActivity(i);
                             finish();
                         }else{
@@ -89,6 +95,8 @@ public class RegisterCredentials extends AppCompatActivity {
                     } catch (IOException | JSONException e) {
                         Toast.makeText(getApplicationContext(), ErrorMessages.exception_occured, Toast.LENGTH_SHORT).show();
                     }
+                }else{
+                    Toast.makeText(AddProject.this, ErrorMessages.no_response_received, Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

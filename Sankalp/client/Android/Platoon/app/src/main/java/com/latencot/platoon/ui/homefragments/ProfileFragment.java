@@ -23,6 +23,8 @@ import com.latencot.platoon.ui.MainActivity;
 import com.latencot.platoon.ui.authentication.LoginActivity;
 import com.latencot.platoon.ui.authentication.RegisterCredentials;
 import com.latencot.platoon.ui.authentication.RegisterUser;
+import com.latencot.platoon.ui.profile.manageboats.CompanyBoatsList;
+import com.latencot.platoon.ui.profile.manageprojects.ProjectList;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -45,13 +47,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     ImageView btetname, btetnamecancel, btetemail, btetemailcancel, btetpassword, btetpasswordcancel;
     EditText etname, etemail, etpassword, etpasswordconfirm;
     Button loginbutton, registerbutton;*/
-
+    TextView pf_tvmanageboats, pf_tvmanageprojects;
     TextView tvname, tvemail, tvpassword, tvaddress, tvnoofprojects, tvheadername, tvheaderemail;
     //SharedPreference Class Variable
     SharedIt shr;
     RelativeLayout rl_headeractions, rl_headerdata;
     //SharedPreference Data
     BigInteger serial_id;
+    int verification_level;
     //Login and Register Buttons
     Button bt_login, bt_register, bt_logout;
     //ImageView
@@ -64,11 +67,36 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         if(shr.extractpreference(SharedItHelper.credential_id) != null){
             serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
-            fetchUserDetails();
+            verification_level = Integer.parseInt(shr.extractpreference(SharedItHelper.verification_level));
+            if(verification_level != 0) {
+                fetchUserDetails();
+            }else{
+                LinearLayout company_data_layout = view.findViewById(R.id.pf_userdata);
+                company_data_layout.setVisibility(View.GONE);
+            }
         }else{
             LinearLayout company_data_layout = view.findViewById(R.id.pf_userdata);
             company_data_layout.setVisibility(View.GONE);
         }
+
+        pf_tvmanageboats = view.findViewById(R.id.pf_tvmanageboats);
+        pf_tvmanageprojects = view.findViewById(R.id.pf_tvmanageprojects);
+        pf_tvmanageboats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), CompanyBoatsList.class);
+                startActivity(i);
+            }
+        });
+        pf_tvmanageprojects.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), ProjectList.class);
+                startActivity(i);
+            }
+        });
+
+
         tvname = view.findViewById(R.id.pf_tvname);
         tvemail = view.findViewById(R.id.pf_tvemail);
         tvpassword = view.findViewById(R.id.pf_tvpassword);
@@ -110,7 +138,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         return view;
     }
     public void fetchUserDetails(){
-        Toast.makeText(getActivity(), "Now I am gonna fetch data. so hold tight", Toast.LENGTH_SHORT).show();
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
@@ -148,6 +175,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     } catch (IOException | JSONException e) {
                         Toast.makeText(getActivity(), ErrorMessages.exception_occured, Toast.LENGTH_SHORT).show();
                     }
+                }else{
+                    Toast.makeText(getActivity(), ErrorMessages.no_response_received, Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

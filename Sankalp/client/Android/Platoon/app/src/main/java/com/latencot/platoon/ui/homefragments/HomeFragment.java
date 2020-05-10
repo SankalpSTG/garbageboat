@@ -5,12 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.SharedIt;
+import com.latencot.platoon.model.SharedItHelper;
 import com.latencot.platoon.ui.homefragments.Adapters.GridItems;
 import com.latencot.platoon.ui.homefragments.Adapters.HFRecyclerAdapter;
 import com.latencot.platoon.ui.homefragments.Adapters.HFRecyclerAdapter2;
+
+import java.math.BigInteger;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +31,10 @@ public class HomeFragment extends Fragment {
     private ListAdapter mListadapter;
     private TextView mTextViewEmpty;
     private ImageView mImageViewEmpty;
-
+    private SharedIt shr;
+    BigInteger serial_id;
+    int verification_level;
+    int account_level;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,7 +44,17 @@ public class HomeFragment extends Fragment {
         int numberOfColumns = 2;
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
         controlsrecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
-
+        shr = new SharedIt(getActivity());
+        if(shr.extractpreference(SharedItHelper.credential_id) != null){
+            serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
+            verification_level = Integer.parseInt(shr.extractpreference(SharedItHelper.verification_level));
+            account_level = Integer.parseInt(shr.extractpreference(SharedItHelper.account_level));
+            if(verification_level == 0){
+                controlsrecyclerview.setVisibility(View.GONE);
+            }
+        }else{
+            controlsrecyclerview.setVisibility(View.GONE);
+        }
         GridItems gridItems[] = {
             new GridItems("Boats", ResourcesCompat.getDrawable(getResources(), R.drawable.boat192x192, null)),
             new GridItems("Working", ResourcesCompat.getDrawable(getResources(), R.drawable.working192x192_2, null)),

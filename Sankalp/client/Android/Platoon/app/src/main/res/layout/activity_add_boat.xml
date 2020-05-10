@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText
+        android:id="@+id/aab_petname"
+        android:layout_width="270dp"
+        android:hint="Enter a name for the boat"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="6dp" />
+    <Spinner
+        android:id="@+id/aab_boattype"
+        android:layout_width="270dp"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="6dp"
+        android:layout_below="@id/aab_petname"/>
+    <ImageView
+        android:id="@+id/aab_boatsampleimage"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="6dp"
+        android:layout_below="@id/aab_boattype"/>
+    <EditText
+        android:id="@+id/aab_registrationno"
+        android:layout_width="270dp"
+        android:hint="Registration Number"
+        android:inputType="number"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="6dp"
+        android:layout_below="@id/aab_boatsampleimage"/>
+    <Button
+        android:id="@+id/aab_submit"
+        android:layout_below="@id/aab_registrationno"
+        android:layout_width="270dp"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="6dp"
+        android:text="Submit"
+        android:textColor="@color/white"
+        android:background="@drawable/cutom_round_button_primary"/>
+</RelativeLayout>

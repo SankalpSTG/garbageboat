@@ -1,4 +1,4 @@
-package com.latencot.platoon.ui.authentication;
+package com.latencot.platoon.ui.profile.manageprojects;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -33,8 +33,11 @@ import com.google.android.gms.tasks.Task;
 import com.latencot.platoon.R;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
+import com.latencot.platoon.model.SharedItHelper;
 import com.latencot.platoon.retrofit.RetrofitClient;
 import com.latencot.platoon.ui.HomeActivity;
+import com.latencot.platoon.ui.authentication.MapPointCenterLocation;
+import com.latencot.platoon.ui.authentication.UploadFile;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +45,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.math.BigInteger;
 
-public class MapPointCenterLocation extends FragmentActivity implements OnMapReadyCallback {
+public class UpdateProjectLocation extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "MapPointLocation";
     private GoogleMap mMap;
     private Button bt_update_location;
@@ -55,32 +58,40 @@ public class MapPointCenterLocation extends FragmentActivity implements OnMapRea
     private static final float DEFAULT_ZOOM = 15f;
     private Marker marker;
     private static double bigLatitude, bigLongitude;
-    private BigInteger serial_id;
+    private BigInteger serial_id, project_id;
     private SharedIt shr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_point_center_location);
-        bt_update_location = findViewById(R.id.mpcl_bt_submit_location);
+        setContentView(R.layout.activity_update_project_location);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        bt_update_location = findViewById(R.id.aupl_submit);
         bt_update_location.setOnClickListener(update_button_clicked);
         getLocationPermission();
 
         shr = new SharedIt(this);
         serial_id = new BigInteger(shr.extractpreference("serial_id"));
 
+        Intent i = getIntent();
+        Bundle extras = i.getExtras();
+        project_id = new BigInteger(extras.getString(SharedItHelper.project_id));
+        Toast.makeText(this, project_id.toString(), Toast.LENGTH_SHORT).show();
+
         initMap();
     }
     View.OnClickListener update_button_clicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            uploadLocation();
+            updateProjectLocation();
         }
     };
-    private void uploadLocation(){
+
+    public void updateProjectLocation(){
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .updateLocation(serial_id, bigLatitude, bigLongitude);
+                .updateProjectLocation(project_id, bigLatitude, bigLongitude);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -91,7 +102,7 @@ public class MapPointCenterLocation extends FragmentActivity implements OnMapRea
                         String error_message = message.getString("error_message");
                         Toast.makeText(getApplicationContext(), error_message, Toast.LENGTH_SHORT).show();
                         if(!error){
-                            Intent i = new Intent(MapPointCenterLocation.this, UploadFile.class);
+                            Intent i = new Intent(UpdateProjectLocation.this, HomeActivity.class);
                             startActivity(i);
                             finish();
                         }else{
@@ -109,6 +120,18 @@ public class MapPointCenterLocation extends FragmentActivity implements OnMapRea
             }
         });
     }
+
+
+
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;

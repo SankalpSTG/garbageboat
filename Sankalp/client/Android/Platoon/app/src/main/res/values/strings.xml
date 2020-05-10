@@ -1,4 +1,27 @@
 <resources>
     <string name="app_name">Platoon</string>
     <string name="title_activity_map_point_center_location">Map</string>
+    <string name="title_activity_maps_nav">Map</string>
+    <string name="title_activity_update_project_location">Map</string>
+    <string-array name="feedback_categories">
+        <item name="selectcategory">Select Category</item>
+        <item name="boats">Boats</item>
+        <item name="support">Support</item>
+        <item name="app">App User Interfacing</item>
+        <item name="quality">Quality</item>
+        <item name="suggestions">Suggestions</item>
+    </string-array>
+    <string-array name="boat_types">
+        <item name="master">master</item>
+        <item name="slave">slave</item>
+    </string-array>
+    <string-array name="problem_categories">
+        <item name="appinterface">App Interface</item>
+        <item name="boats">Boats</item>
+        <item name="support">Support</item>
+        <item name="performance">Performance</item>
+        <item name="garbagedetection">Garbage Detection</item>
+        <item name="simulation">Simulation</item>
+        <item name="manualcontrol">Controller</item>
+    </string-array>
 </resources>

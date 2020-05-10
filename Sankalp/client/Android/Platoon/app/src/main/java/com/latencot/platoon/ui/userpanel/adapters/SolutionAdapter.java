@@ -1,72 +1,63 @@
-package com.latencot.platoon.ui.homefragments.Adapters;
+package com.latencot.platoon.ui.userpanel.adapters;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.latencot.platoon.R;
-import com.latencot.platoon.model.SharedIt;
-import com.latencot.platoon.model.SharedItHelper;
-import com.latencot.platoon.ui.authentication.LoginWithoutPassword;
 import com.latencot.platoon.ui.basicpanel.FeedbackActivity;
-import com.latencot.platoon.ui.userpanel.SubmitProblem;
-
-import java.math.BigInteger;
+import com.latencot.platoon.ui.homefragments.Adapters.HFRecyclerAdapter2;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class HFRecyclerAdapter2 extends RecyclerView.Adapter<HFRecyclerAdapter2.ViewHolder> {
-
-    private GridItems gridItems[];
+public class SolutionAdapter extends RecyclerView.Adapter<SolutionAdapter.ViewHolder>{
+    private SolutionItems solutionItems[];
     private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    private SolutionAdapter.ItemClickListener mClickListener;
     Context context;
-    SharedIt shr;
 
     // data is passed into the constructor
-    public HFRecyclerAdapter2(Context context, GridItems gridItems[]) {
+    public SolutionAdapter(Context context, SolutionItems solutionItems[]) {
         this.mInflater = LayoutInflater.from(context);
-        this.gridItems = gridItems;
+        this.solutionItems = solutionItems;
         this.context = context;
-        shr = new SharedIt(context);
     }
 
     // inflates the cell layout from xml when needed
     @Override
     @NonNull
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.gridcard2, parent, false);
+    public SolutionAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.solution_item, parent, false);
         return new ViewHolder(view);
     }
 
     // binds the data to the TextView in each cell
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.myTextView.setText(gridItems[position].getTitle());
-        holder.uselessimage.setImageDrawable(gridItems[position].getImagedrawable());
+    public void onBindViewHolder(@NonNull SolutionAdapter.ViewHolder holder, int position) {
+        holder.tv_solutionindex.setText(solutionItems[position].getSerialId().toString());
+        holder.tv_solutionheader.setText(solutionItems[position].getHeader());
+        holder.tv_solutiondescription.setText(solutionItems[position].getDescription());
     }
 
     // total number of cells
     @Override
     public int getItemCount() {
-        return gridItems.length;
+        return solutionItems.length;
     }
 
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView;
-        ImageView uselessimage;
+        TextView tv_solutionindex, tv_solutionheader, tv_solutiondescription;
         ViewHolder(View itemView) {
             super(itemView);
-            myTextView = itemView.findViewById(R.id.info_text);
-            uselessimage = itemView.findViewById(R.id.uselessimage);
+            tv_solutionindex = itemView.findViewById(R.id.si_solution_id);
+            tv_solutionheader = itemView.findViewById(R.id.si_solution_header);
+            tv_solutiondescription = itemView.findViewById(R.id.si_solution_description);
             itemView.setOnClickListener(this);
         }
 
@@ -74,18 +65,9 @@ public class HFRecyclerAdapter2 extends RecyclerView.Adapter<HFRecyclerAdapter2.
         public void onClick(View view) {
             TextView tv_infotext = view.findViewById(R.id.info_text);
             String info = tv_infotext.getText().toString();
-            Intent i;
-            if(shr.extractpreference(SharedItHelper.credential_id) == null) {
-                i = new Intent(context, LoginWithoutPassword.class);
-                context.startActivity(i);
-            }
             switch (info){
                 case "Suggestions / Feedback":
-                    i = new Intent(context, FeedbackActivity.class);
-                    context.startActivity(i);
-                    break;
-                case "Submit A Problem":
-                    i = new Intent(context, SubmitProblem.class);
+                    Intent i = new Intent(context, FeedbackActivity.class);
                     context.startActivity(i);
                     break;
             }
@@ -94,12 +76,12 @@ public class HFRecyclerAdapter2 extends RecyclerView.Adapter<HFRecyclerAdapter2.
     }
 
     // convenience method for getting data at click position
-    GridItems getItem(int id) {
-        return gridItems[id];
+    SolutionItems getItem(int id) {
+        return solutionItems[id];
     }
 
     // allows clicks events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
+    void setClickListener(SolutionAdapter.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 

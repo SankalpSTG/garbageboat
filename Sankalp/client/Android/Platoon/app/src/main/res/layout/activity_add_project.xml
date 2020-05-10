@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText
+        android:id="@+id/aap_projectname"
+        android:layout_width="270dp"
+        android:hint="Project Name"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="6dp" />
+    <EditText
+        android:id="@+id/aap_projectdescription"
+        android:layout_width="270dp"
+        android:layout_height="45dp"
+        android:hint="Project Description"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="6dp"
+        android:layout_below="@id/aap_projectname"/>
+    <CheckBox
+        android:id="@+id/aap_anonymouscheckbox"
+        android:layout_width="270dp"
+        android:layout_margin="6dp"
+        android:layout_height="wrap_content"
+        android:text="Keep Project Anonymous(Project will not be displayed to other anonymous on map)"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/aap_projectdescription"/>
+    <Button
+        android:id="@+id/aab_submit"
+        android:layout_below="@id/aap_anonymouscheckbox"
+        android:layout_width="270dp"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="6dp"
+        android:text="Submit"
+        android:textColor="@color/white"
+        android:background="@drawable/cutom_round_button_primary"/>
+</RelativeLayout>
