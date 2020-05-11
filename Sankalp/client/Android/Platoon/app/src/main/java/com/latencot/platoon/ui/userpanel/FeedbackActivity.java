@@ -1,4 +1,4 @@
-package com.latencot.platoon.ui.basicpanel;
+package com.latencot.platoon.ui.userpanel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.ResponseBody;
@@ -23,8 +23,6 @@ import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.retrofit.RetrofitClient;
 import com.latencot.platoon.ui.HomeActivity;
-import com.latencot.platoon.ui.authentication.RegisterCredentials;
-import com.latencot.platoon.ui.authentication.RegisterUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;

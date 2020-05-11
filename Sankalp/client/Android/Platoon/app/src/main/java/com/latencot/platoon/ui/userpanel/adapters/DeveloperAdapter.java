@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.latencot.platoon.R;
@@ -14,69 +15,65 @@ import com.latencot.platoon.ui.userpanel.ProblemSolutions;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ProblemAdapter extends RecyclerView.Adapter<ProblemAdapter.ViewHolder>{
-    private ProblemItems problemItems[];
+public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.ViewHolder>{
+    private DeveloperItems developerItems[];
     private LayoutInflater mInflater;
-    private ProblemAdapter.ItemClickListener mClickListener;
+    private DeveloperAdapter.ItemClickListener mClickListener;
     Context context;
 
     // data is passed into the constructor
-    public ProblemAdapter(Context context, ProblemItems problemItems[]) {
+    public DeveloperAdapter(Context context, DeveloperItems developerItems[]) {
         this.mInflater = LayoutInflater.from(context);
-        this.problemItems = problemItems;
+        this.developerItems = developerItems;
         this.context = context;
     }
 
     // inflates the cell layout from xml when needed
     @Override
     @NonNull
-    public ProblemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.problem_item, parent, false);
+    public DeveloperAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.developer_item, parent, false);
         return new ViewHolder(view);
     }
 
     // binds the data to the TextView in each cell
     @Override
-    public void onBindViewHolder(@NonNull ProblemAdapter.ViewHolder holder, int position) {
-        holder.tv_problemindex.setText(problemItems[position].getProblem_id().toString());
-        holder.tv_problemheader.setText(problemItems[position].getProblem_header());
+    public void onBindViewHolder(@NonNull DeveloperAdapter.ViewHolder holder, int position) {
+        holder.tv_developername.setText(developerItems[position].getName().toString());
+        holder.iv_developerimage.setImageDrawable(developerItems[position].getImage());
     }
 
     // total number of cells
     @Override
     public int getItemCount() {
-        return problemItems.length;
+        return developerItems.length;
     }
 
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tv_problemindex, tv_problemheader;
+        TextView tv_developername;
+        ImageView iv_developerimage;
         ViewHolder(View itemView) {
             super(itemView);
-            tv_problemindex = itemView.findViewById(R.id.pi_problemindex);
-            tv_problemheader = itemView.findViewById(R.id.pi_problemheader);
+            tv_developername = itemView.findViewById(R.id.di_developername);
+            iv_developerimage = itemView.findViewById(R.id.di_developerimage);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            TextView tv_index = view.findViewById(R.id.pi_problemindex);
-            String problem_id = tv_index.getText().toString();
-            Intent i = new Intent(context, ProblemSolutions.class);
-            i.putExtra(SharedItHelper.problem_id, problem_id);
-            context.startActivity(i);
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
     }
 
     // convenience method for getting data at click position
-    ProblemItems getItem(int id) {
-        return problemItems[id];
+    DeveloperItems getItem(int id) {
+        return developerItems[id];
     }
 
     // allows clicks events to be caught
-    void setClickListener(ProblemAdapter.ItemClickListener itemClickListener) {
+    void setClickListener(DeveloperAdapter.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 

@@ -29,4 +29,7 @@ public class ApiHelper {
     public static final String delete_project = "projects/projects_delete.php";
     public static final String update_project_location = "projects/projects_update_location.php";
     public static final String get_associated_boats = "boats/boats_get_associated.php";
+    public static final String get_boats_unmapped = "boats/boats_get_unmapped.php";
+    public static final String add_boat_to_project = "projects/add_boat_to_project.php";
+    public static final String delete_boat_from_project = "projects/delete_boat_from_project.php";
 }

@@ -2,11 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.latencot.platoon">
 
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
-    -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".ui.userpanel.AboutLatencot"></activity>
+        <activity android:name=".ui.adminpanel.simulator.SimulatorSelectProject" />
+        <activity android:name=".ui.profile.manageprojects.AddBoatToProject" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -26,12 +23,11 @@
         -->
         <activity
             android:name=".ui.profile.manageprojects.UpdateProjectLocation"
-            android:label="@string/title_activity_update_project_location"></activity>
-
+            android:label="@string/title_activity_update_project_location" />
         <activity android:name=".ui.profile.manageprojects.ProjectDetails" />
         <activity android:name=".ui.profile.manageprojects.AddProject" />
         <activity android:name=".ui.profile.manageboats.BoatDetails" />
-        <activity android:name=".ui.basicpanel.About" />
+        <activity android:name=".ui.userpanel.About" />
         <activity android:name=".ui.profile.manageboats.AddBoat" />
         <activity android:name=".ui.profile.manageboats.CompanyBoatsList" />
         <activity
@@ -48,7 +44,7 @@
         <activity android:name=".ui.authentication.LoginWithoutPassword" />
         <activity android:name=".ui.userpanel.ProblemSolutions" />
         <activity android:name=".ui.userpanel.SubmitProblem" />
-        <activity android:name=".ui.basicpanel.FeedbackActivity" />
+        <activity android:name=".ui.userpanel.FeedbackActivity" />
         <activity android:name=".ui.profile.manageprojects.ProjectList" />
         <activity
             android:name=".ui.authentication.UploadFile"
@@ -79,16 +75,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+    <ImageView
+        android:id="@+id/di_developerimage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/boat_logo"
+        />
+    <TextView
+        android:id="@+id/di_developername"
+        android:layout_width="100dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="Platoon"
+        />
+</LinearLayout>
+</androidx.cardview.widget.CardView>

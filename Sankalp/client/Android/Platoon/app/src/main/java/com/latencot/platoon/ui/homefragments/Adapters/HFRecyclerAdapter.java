@@ -7,17 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.latencot.platoon.R;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
 import com.latencot.platoon.ui.authentication.LoginWithoutPassword;
-import com.latencot.platoon.ui.basicpanel.FeedbackActivity;
+import com.latencot.platoon.ui.userpanel.About;
+import com.latencot.platoon.ui.userpanel.AboutLatencot;
+import com.latencot.platoon.ui.userpanel.FeedbackActivity;
 import com.latencot.platoon.ui.userpanel.SubmitProblem;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class HFRecyclerAdapter extends RecyclerView.Adapter<HFRecyclerAdapter.ViewHolder> {
@@ -90,6 +90,14 @@ public class HFRecyclerAdapter extends RecyclerView.Adapter<HFRecyclerAdapter.Vi
                         i = new Intent(context, SubmitProblem.class);
                         context.startActivity(i);
                     }
+                    break;
+                case "About Us":
+                    i = new Intent(context, About.class);
+                    context.startActivity(i);
+                    break;
+                case "Latencot":
+                    i = new Intent(context, AboutLatencot.class);
+                    context.startActivity(i);
                     break;
             }
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());

@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.latencot.platoon.R;
-import com.latencot.platoon.ui.basicpanel.FeedbackActivity;
-import com.latencot.platoon.ui.homefragments.Adapters.HFRecyclerAdapter2;
+import com.latencot.platoon.ui.userpanel.FeedbackActivity;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

@@ -58,7 +58,7 @@ public class ProjectDetails extends AppCompatActivity implements OnMapReadyCallb
     SharedIt shr;
     TextView tv_name, tv_description, tv_anonymous, tv_id;
     BigInteger serial_id, project_id;
-    Button bt_delete;
+    Button bt_delete, bt_addboats;
     String name, description;
     int isanonymous;
     BoatItems boatItems[];
@@ -72,6 +72,7 @@ public class ProjectDetails extends AppCompatActivity implements OnMapReadyCallb
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 8f;
     private boolean mLocationPermissionGranted = false;
+    private static final int ADD_REQUEST_CODE = 1050, RESULT_OK = 200;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private GoogleMap mMap;
     private Marker marker;
@@ -87,7 +88,7 @@ public class ProjectDetails extends AppCompatActivity implements OnMapReadyCallb
         rv_addedboatlist = findViewById(R.id.apd_boatrecycler);
         rv_addedboatlist.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         rv_addedboatlist.setItemAnimator(new DefaultItemAnimator());
-
+        bt_addboats = findViewById(R.id.apd_addboats);
         tv_name = findViewById(R.id.apd_projectname);
         tv_description = findViewById(R.id.apd_projectdescription);
         tv_anonymous = findViewById(R.id.apd_projectisanonymous);
@@ -100,8 +101,23 @@ public class ProjectDetails extends AppCompatActivity implements OnMapReadyCallb
                 deleteProject();
             }
         });
-
+        bt_addboats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProjectDetails.this, AddBoatToProject.class);
+                i.putExtra(SharedItHelper.project_id, project_id);
+                startActivityForResult(i, ADD_REQUEST_CODE);
+            }
+        });
         initMap();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(this, "Hello World", Toast.LENGTH_SHORT).show();
+        if (requestCode == ADD_REQUEST_CODE && resultCode == RESULT_OK) {
+            getAssociatedBoats();
+        }
     }
     public void getProjectDetails(){
 
@@ -189,6 +205,7 @@ public class ProjectDetails extends AppCompatActivity implements OnMapReadyCallb
                             showBoatList();
                         }else{
                             Toast.makeText(getApplicationContext(), error_message, Toast.LENGTH_SHORT).show();
+                            rv_addedboatlist.setVisibility(View.GONE);
                         }
                     } catch (IOException | JSONException e) {
                         Toast.makeText(getApplicationContext(), ErrorMessages.exception_occured, Toast.LENGTH_SHORT).show();
@@ -204,6 +221,7 @@ public class ProjectDetails extends AppCompatActivity implements OnMapReadyCallb
         });
     }
     public void showBoatList(){
+        rv_addedboatlist.setVisibility(View.VISIBLE);
         BoatAdapter boatAdapter = new BoatAdapter(this, boatItems);
         rv_addedboatlist.setAdapter(boatAdapter);
     }
@@ -231,6 +249,38 @@ public class ProjectDetails extends AppCompatActivity implements OnMapReadyCallb
                     } catch (IOException | JSONException e) {
                         Toast.makeText(getApplicationContext(), ErrorMessages.exception_occured, Toast.LENGTH_SHORT).show();
                     }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), ErrorMessages.default_failure, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void deleteBoatFromProject(BigInteger boatid){
+        Call<ResponseBody> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .deleteBoatFromProject(boatid, project_id);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.body() != null) {
+                    try {
+                        JSONObject message = new JSONObject(response.body().string());
+                        boolean error = message.getBoolean("error");
+                        String error_message = message.getString("error_message");
+                        Toast.makeText(getApplicationContext(), error_message, Toast.LENGTH_SHORT).show();
+                        if(!error){
+                            getAssociatedBoats();
+                        }else{
+                            Toast.makeText(getApplicationContext(), error_message, Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (IOException | JSONException e) {
+                        Toast.makeText(getApplicationContext(), ErrorMessages.exception_occured, Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(), ErrorMessages.no_response_received, Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -334,7 +384,6 @@ public class ProjectDetails extends AppCompatActivity implements OnMapReadyCallb
             getProjectDetails();
             getAssociatedBoats();
         }
-
     }
     public GoogleMap.OnCameraIdleListener onCameraIdleListener = new GoogleMap.OnCameraIdleListener() {
         @Override

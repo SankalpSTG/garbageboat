@@ -7,16 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.latencot.platoon.R;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
+import com.latencot.platoon.ui.adminpanel.simulator.SimulatorSelectProject;
 import com.latencot.platoon.ui.authentication.LoginWithoutPassword;
-import com.latencot.platoon.ui.basicpanel.FeedbackActivity;
 import com.latencot.platoon.ui.userpanel.SubmitProblem;
-
-import java.math.BigInteger;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -80,8 +77,8 @@ public class HFRecyclerAdapter2 extends RecyclerView.Adapter<HFRecyclerAdapter2.
                 context.startActivity(i);
             }
             switch (info){
-                case "Suggestions / Feedback":
-                    i = new Intent(context, FeedbackActivity.class);
+                case "Simulator":
+                    i = new Intent(context, SimulatorSelectProject.class);
                     context.startActivity(i);
                     break;
                 case "Submit A Problem":

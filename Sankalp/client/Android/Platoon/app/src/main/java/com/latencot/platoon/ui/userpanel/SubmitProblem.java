@@ -2,7 +2,6 @@ package com.latencot.platoon.ui.userpanel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import okhttp3.ResponseBody;
@@ -19,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -28,7 +26,6 @@ import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.retrofit.RetrofitClient;
 import com.latencot.platoon.ui.HomeActivity;
-import com.latencot.platoon.ui.basicpanel.FeedbackActivity;
 import com.latencot.platoon.ui.userpanel.adapters.ProblemAdapter;
 import com.latencot.platoon.ui.userpanel.adapters.ProblemItems;
 

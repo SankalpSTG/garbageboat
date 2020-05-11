@@ -40,6 +40,7 @@ public class AddBoat extends AppCompatActivity {
     String petname, boattype = "master";
     BigInteger serial_id, registration_no;
     SharedIt shr;
+    int RESULT_INT = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

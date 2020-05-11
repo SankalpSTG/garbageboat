@@ -165,4 +165,21 @@ public interface Api {
     @POST(ApiHelper.get_associated_boats)
     Call<ResponseBody> getAssociatedBoats(
             @Field("serial_id") BigInteger project_id);
+
+    @FormUrlEncoded
+    @POST(ApiHelper.get_boats_unmapped)
+    Call<ResponseBody> getUnmappedBoats(
+            @Field("serial_id") BigInteger serial_id);
+
+    @FormUrlEncoded
+    @POST(ApiHelper.add_boat_to_project)
+    Call<ResponseBody> addBoatToProject(
+            @Field("serial_id") BigInteger registration_no,
+            @Field("project_id") BigInteger project_id);
+
+    @FormUrlEncoded
+    @POST(ApiHelper.delete_boat_from_project)
+    Call<ResponseBody> deleteBoatFromProject(
+            @Field("serial_id") BigInteger registration_no,
+            @Field("project_id") BigInteger project_id);
 }
