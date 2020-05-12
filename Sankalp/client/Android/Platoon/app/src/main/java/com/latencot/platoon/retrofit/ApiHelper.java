@@ -32,4 +32,5 @@ public class ApiHelper {
     public static final String get_boats_unmapped = "boats/boats_get_unmapped.php";
     public static final String add_boat_to_project = "projects/add_boat_to_project.php";
     public static final String delete_boat_from_project = "projects/delete_boat_from_project.php";
+    public static final String get_project_specific_boats = "projects/project_get_boats.php";
 }

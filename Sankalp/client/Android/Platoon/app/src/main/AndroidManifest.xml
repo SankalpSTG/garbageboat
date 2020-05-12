@@ -10,17 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.userpanel.AboutLatencot"></activity>
+        <activity android:name=".ui.adminpanel.simulator.SimulatorSelectBoat"></activity>
+        <activity android:name=".ui.userpanel.AboutLatencot" />
         <activity android:name=".ui.adminpanel.simulator.SimulatorSelectProject" />
         <activity android:name=".ui.profile.manageprojects.AddBoatToProject" />
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
         <activity
             android:name=".ui.profile.manageprojects.UpdateProjectLocation"
             android:label="@string/title_activity_update_project_location" />
@@ -33,14 +26,6 @@
         <activity
             android:name=".ui.homefragments.MapsNavActivity"
             android:label="@string/title_activity_maps_nav" />
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
         <activity android:name=".ui.authentication.LoginWithoutPassword" />
         <activity android:name=".ui.userpanel.ProblemSolutions" />
         <activity android:name=".ui.userpanel.SubmitProblem" />
@@ -53,14 +38,6 @@
             android:name=".ui.authentication.MapPointCenterLocation"
             android:label="@string/title_activity_map_point_center_location" />
         <activity android:name=".ui.authentication.RegisterUser" />
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
         <activity android:name=".ui.authentication.RegisterCredentials" />
         <activity android:name=".ui.authentication.LoginActivity" />
         <activity
@@ -80,12 +57,17 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

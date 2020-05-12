@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.latencot.platoon.R;
 import com.latencot.platoon.model.SharedItHelper;
+import com.latencot.platoon.ui.adminpanel.simulator.SimulatorSelectProject;
 import com.latencot.platoon.ui.profile.manageprojects.ProjectDetails;
 import com.latencot.platoon.ui.profile.manageprojects.adapters.ProjectItems;
 
@@ -71,7 +72,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
         @Override
         public void onClick(View view) {
-            TextView tv_projectid = view.findViewById(R.id.pi_projectid);
+            ((SimulatorSelectProject)context).manageViewClickEvent(view);
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2020 at 02:58 PM
+-- Generation Time: May 12, 2020 at 08:42 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -305,7 +305,17 @@ INSERT INTO `projects` (`serial_id`, `credential_id`, `project_name`, `project_d
 (2, 1, 'river cleaning', 'ganga cleaning', '19.254521589', '20.256314789', 0),
 (3, 1, 'river cleaning', 'ganga cleaning', '19.254521589', '20.256314789', 0),
 (4, 2, 'cleaning', 'cleaning', '59.25452158', '58.256314789', 1),
-(5, 2, 'cleaning', 'cleaning', '59.25452158', '58.256314789', 1);
+(5, 2, 'cleaning', 'cleaning', '59.25452158', '58.256314789', 1),
+(6, 0, '', '', '', '', 0),
+(7, 0, '', '', '', '', 0),
+(8, 35, 'myproject', 'my project description', '21.243597101459635', '21.243597101459635', 1),
+(9, 0, '', '', '21.243597101459635', '', 0),
+(10, 35, 'myproject', 'my project description', '21.243597101459635', '21.243597101459635', 1),
+(11, 35, 'hello', 'world', '21.243597101459635', '21.243597101459635', 0),
+(12, 35, 'hello', 'world', '21.243597101459635', '21.243597101459635', 0),
+(13, 35, 'project', 'description', '21.243597101459635', '21.243597101459635', 0),
+(14, 35, 'hello', 'olleh', '21.243597101459635', '21.243597101459635', 0),
+(15, 35, 'ganya', 'manya', '21.243597101459635', '73.6683900654316', 1);
 
 -- --------------------------------------------------------
 
@@ -318,6 +328,13 @@ CREATE TABLE `project_boat_mapping` (
   `project_id` bigint(20) NOT NULL,
   `boat_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `project_boat_mapping`
+--
+
+INSERT INTO `project_boat_mapping` (`serial_id`, `project_id`, `boat_id`) VALUES
+(11, 15, 2);
 
 -- --------------------------------------------------------
 
@@ -339,6 +356,20 @@ INSERT INTO `running_numbers` (`serial_id`, `keyname`, `running_number`) VALUES
 (3, 'random_images', 1000),
 (4, 'profile_images', 1021),
 (5, 'other_images', 1000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `simulations`
+--
+
+CREATE TABLE `simulations` (
+  `serial_id` bigint(20) UNSIGNED NOT NULL,
+  `project_id` bigint(20) UNSIGNED NOT NULL,
+  `start_time` text NOT NULL,
+  `last_update_time` text NOT NULL,
+  `has_ended` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -589,6 +620,12 @@ ALTER TABLE `running_numbers`
   ADD UNIQUE KEY `keyname` (`keyname`);
 
 --
+-- Indexes for table `simulations`
+--
+ALTER TABLE `simulations`
+  ADD PRIMARY KEY (`serial_id`);
+
+--
 -- Indexes for table `testtable`
 --
 ALTER TABLE `testtable`
@@ -657,19 +694,25 @@ ALTER TABLE `problem_solutions`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `project_boat_mapping`
 --
 ALTER TABLE `project_boat_mapping`
-  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `running_numbers`
 --
 ALTER TABLE `running_numbers`
   MODIFY `serial_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `simulations`
+--
+ALTER TABLE `simulations`
+  MODIFY `serial_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `testtable`

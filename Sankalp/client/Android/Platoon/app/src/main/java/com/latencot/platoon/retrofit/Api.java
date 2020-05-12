@@ -182,4 +182,10 @@ public interface Api {
     Call<ResponseBody> deleteBoatFromProject(
             @Field("serial_id") BigInteger registration_no,
             @Field("project_id") BigInteger project_id);
+
+    @FormUrlEncoded
+    @POST(ApiHelper.get_project_specific_boats)
+    Call<ResponseBody> boatsGetProjectSpecific(
+            @Field("serial_id") BigInteger registration_no,
+            @Field("project_id") BigInteger project_id);
 }

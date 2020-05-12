@@ -1,5 +1,6 @@
 package com.latencot.platoon.ui.adminpanel.simulator;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,10 +10,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -102,9 +105,27 @@ public class SimulatorSelectProject extends AppCompatActivity {
         });
     }
     public void showProjectList(){
-
         ProjectAdapter projectAdapter = new ProjectAdapter(this, projectItems);
         rv_project_list.setAdapter(projectAdapter);
         rv_project_list.setItemAnimator(new DefaultItemAnimator());
     }
+    public void manageViewClickEvent(View view){
+        TextView tv_projectname = view.findViewById(R.id.pi_projectname);
+        String projectname = tv_projectname.getText().toString().trim();
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(which == DialogInterface.BUTTON_POSITIVE){
+
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog
+                .Builder(this);
+        builder.setMessage("Simulate Project " + projectname)
+                .setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener)
+                .show();
+    }
+
 }
