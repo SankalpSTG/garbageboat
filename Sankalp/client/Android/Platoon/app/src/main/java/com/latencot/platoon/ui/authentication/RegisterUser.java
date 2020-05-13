@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.retrofit.RetrofitClient;
@@ -34,7 +35,8 @@ public class RegisterUser extends AppCompatActivity {
     //Edittexts
     EditText et_password, et_company_name, et_address, et_postal_code;
     //Data
-    BigInteger serial_id;
+//    BigInteger serial_id;
+    CompanyLoginData loginData;
     boolean user_to_be_created = false;
     String company_name, address, password;
     long pin_code;
@@ -45,8 +47,8 @@ public class RegisterUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
         SharedIt shr = new SharedIt(getApplicationContext());
-        serial_id = new BigInteger(shr.extractpreference("serial_id"));
-
+//        serial_id = new BigInteger(shr.extractpreference("serial_id"));
+        loginData = shr.getCompanyLoginData();
         et_password = findViewById(R.id.aru_password);
         et_address = findViewById(R.id.aru_address);
         et_company_name = findViewById(R.id.aru_company_name);
@@ -87,7 +89,7 @@ public class RegisterUser extends AppCompatActivity {
         call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .uploadUserData(serial_id, company_name, address, pin_code, password);
+                .uploadUserData(loginData.getSerial_id(), company_name, address, pin_code, password);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -122,7 +124,7 @@ public class RegisterUser extends AppCompatActivity {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getUserData(serial_id);
+                .getUserData(loginData.getSerial_id());
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override

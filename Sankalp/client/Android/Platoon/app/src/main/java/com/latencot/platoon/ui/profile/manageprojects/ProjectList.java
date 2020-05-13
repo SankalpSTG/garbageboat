@@ -17,10 +17,12 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
 import com.latencot.platoon.retrofit.RetrofitClient;
+import com.latencot.platoon.ui.authentication.LoginActivity;
 import com.latencot.platoon.ui.profile.manageboats.AddBoat;
 import com.latencot.platoon.ui.profile.manageboats.CompanyBoatsList;
 import com.latencot.platoon.ui.profile.manageboats.adapters.BoatAdapter;
@@ -40,7 +42,8 @@ public class ProjectList extends AppCompatActivity {
     private static final String TAG = "ProjectList";
     FloatingActionButton bt_add;
     ProjectItems projectItems[];
-    BigInteger serial_id;
+//    BigInteger serial_id;
+    CompanyLoginData loginData;
     SharedIt shr;
     RecyclerView rv_project_list;
 
@@ -49,7 +52,13 @@ public class ProjectList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_list);
         shr = new SharedIt(this);
-        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
+        if(shr.getCompanyLoginData() != null){
+            loginData = shr.getCompanyLoginData();
+        }else{
+            Intent i = new Intent(ProjectList.this, LoginActivity.class);
+            startActivity(i);
+        }
+//        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
         rv_project_list = findViewById(R.id.apl_projectrecycler);
         rv_project_list.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
 
@@ -67,7 +76,7 @@ public class ProjectList extends AppCompatActivity {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getAllProjects(serial_id);
+                .getAllProjects(loginData.getSerial_id());
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override

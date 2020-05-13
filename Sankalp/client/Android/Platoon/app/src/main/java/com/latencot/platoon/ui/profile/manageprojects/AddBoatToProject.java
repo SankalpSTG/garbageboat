@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
@@ -36,7 +37,9 @@ import java.util.ArrayList;
 public class AddBoatToProject extends AppCompatActivity {
     RecyclerView rv_boats;
     BoatItems boatItems[];
-    BigInteger serial_id, project_id;
+//    BigInteger serial_id;
+    CompanyLoginData loginData;
+    BigInteger project_id;
     SharedIt shr;
     int RESULT_OK = 200;
     @Override
@@ -45,7 +48,8 @@ public class AddBoatToProject extends AppCompatActivity {
         setContentView(R.layout.activity_add_boat_to_project);
         rv_boats = findViewById(R.id.aabtp_boatsrecycler);
         shr = new SharedIt(this);
-        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
+//        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
+        loginData = shr.getCompanyLoginData();
         Intent i = getIntent();
         Bundle extras = i.getExtras();
         project_id = (BigInteger) extras.get(SharedItHelper.project_id);
@@ -61,7 +65,7 @@ public class AddBoatToProject extends AppCompatActivity {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getUnmappedBoats(serial_id);
+                .getUnmappedBoats(loginData.getSerial_id());
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override

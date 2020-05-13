@@ -9,6 +9,7 @@ import retrofit2.Response;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
@@ -38,7 +40,9 @@ public class AddBoat extends AppCompatActivity {
     ImageView iv_boatsampleimage;
     Button bt_submit;
     String petname, boattype = "master";
-    BigInteger serial_id, registration_no;
+//    BigInteger serial_id;
+    CompanyLoginData loginData;
+    BigInteger registration_no;
     SharedIt shr;
     int RESULT_INT = 200;
 
@@ -48,9 +52,7 @@ public class AddBoat extends AppCompatActivity {
         setContentView(R.layout.activity_add_boat);
 
         shr = new SharedIt(this);
-        if(shr.extractpreference(SharedItHelper.credential_id) != null){
-            serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
-        }
+        loginData = shr.getCompanyLoginData();
 
         et_petname = findViewById(R.id.aab_petname);
         et_registrationno = findViewById(R.id.aab_registrationno);
@@ -94,7 +96,7 @@ public class AddBoat extends AppCompatActivity {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .addBoat(serial_id, registration_no, boattype, petname);
+                .addBoat(loginData.getSerial_id(), registration_no, boattype, petname);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

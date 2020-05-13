@@ -27,8 +27,8 @@ require("../database/dbh.inc.php");
 					$password = (string) $row["password"];
 					if(password_verify($user_password, $password)==true){
 						$data["serial_id"] = $serial_id;
-						$data["account_level"] = $row["account_level"];
-						$data["verification_level"] = $row["verification_level"];
+						$data["account_level"] = (int)$row["account_level"];
+						$data["verification_level"] = (int)$row["verification_level"];
 						$message["data"] = $data;
 						$message["error"] = false;
 						$message["error_message"] = "Success";

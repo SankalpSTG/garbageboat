@@ -5,5 +5,5 @@
 	$db = "garbageboat";
 	$conn = mysqli_connect($server, $user, $pass, $db);
 	
-	$serveradd = "http://192.168.43.88/";
+	$serveradd = "http://192.168.0.102/";
 ?>

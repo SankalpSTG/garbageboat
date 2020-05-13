@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
@@ -53,8 +54,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     SharedIt shr;
     RelativeLayout rl_headeractions, rl_headerdata;
     //SharedPreference Data
-    BigInteger serial_id;
-    int verification_level;
+//    BigInteger serial_id;
+//    int verification_level;
+    CompanyLoginData loginData;
     //Login and Register Buttons
     Button bt_login, bt_register, bt_logout;
     //ImageView
@@ -64,8 +66,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.profile_fragment, container, false);
         shr = new SharedIt(getActivity());
-
-        if(shr.extractpreference(SharedItHelper.credential_id) != null){
+        if(shr.getCompanyLoginData() != null){
+            loginData = shr.getCompanyLoginData();
+            if(loginData.getVerification_level() != 0){
+                fetchUserDetails();
+            }else{
+                LinearLayout company_data_layout = view.findViewById(R.id.pf_userdata);
+                company_data_layout.setVisibility(View.GONE);
+            }
+        }else{
+            LinearLayout company_data_layout = view.findViewById(R.id.pf_userdata);
+            company_data_layout.setVisibility(View.GONE);
+        }
+        /*if(shr.extractpreference(SharedItHelper.credential_id) != null){
             serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
             verification_level = Integer.parseInt(shr.extractpreference(SharedItHelper.verification_level));
             if(verification_level != 0) {
@@ -77,8 +90,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }else{
             LinearLayout company_data_layout = view.findViewById(R.id.pf_userdata);
             company_data_layout.setVisibility(View.GONE);
-        }
-
+        }*/
         pf_tvmanageboats = view.findViewById(R.id.pf_tvmanageboats);
         pf_tvmanageprojects = view.findViewById(R.id.pf_tvmanageprojects);
         pf_tvmanageboats.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +153,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getUserAllData(serial_id);
+                .getUserAllData(loginData.getSerial_id());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -165,7 +177,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                             tvnoofprojects.setText("No Of Projects: " + noofprojects);
                             tvheadername.setText(name);
                             tvheaderemail.setText(email);
-                            Picasso.get().load(logo_url).into(iv_logo);
+                            Picasso.get().load(SharedItHelper.ServerBaseURL + logo_url).into(iv_logo);
                             rl_headeractions.setVisibility(View.GONE);
                             rl_headerdata.setVisibility(View.VISIBLE);
                             Toast.makeText(getActivity(), "Error was not false", Toast.LENGTH_SHORT).show();

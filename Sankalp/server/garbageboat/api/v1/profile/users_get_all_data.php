@@ -27,7 +27,7 @@ require("../database/dbh.inc.php");
 					$data["mobile_no"] =  (int)$row["mobile_no"];
 					$data["verification_level"] = (int) $row["verification_level"];
 					$data["company_name"] = (string) $row["company_name"];
-					$data["logo_url"] = (string)($serveradd.$base_image_path.$row["logo_url"]);
+					$data["logo_url"] = (string)($base_image_path.$row["logo_url"]);
 					$data["pincode"] = (int) $row["pincode"];
 					$data["address"] = (string) $row["address"];
 					$data["location_lat"] = (string) $row["location_lat"];

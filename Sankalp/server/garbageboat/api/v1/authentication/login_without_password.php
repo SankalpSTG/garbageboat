@@ -25,8 +25,8 @@ require ("../database/dbh.inc.php");
 					$row = mysqli_fetch_assoc($result);
 					if($row["verification_level"] == 0 && $row["account_level"] == 0){
 						$data["serial_id"] = $row["serial_id"];
-						$data["account_level"] = $row["account_level"];
-						$data["verification_level"] = $row["verification_level"];
+						$data["account_level"] = (int)$row["account_level"];
+						$data["verification_level"] = (int)$row["verification_level"];
 						$message["error"] = false;
 						$message["error_message"] = "Success";
 						$message["data"] = $data;

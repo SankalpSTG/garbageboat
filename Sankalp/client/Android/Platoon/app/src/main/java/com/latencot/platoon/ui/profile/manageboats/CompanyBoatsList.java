@@ -17,10 +17,13 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
 import com.latencot.platoon.retrofit.RetrofitClient;
+import com.latencot.platoon.ui.MainActivity;
+import com.latencot.platoon.ui.authentication.LoginActivity;
 import com.latencot.platoon.ui.profile.manageboats.adapters.BoatAdapter;
 import com.latencot.platoon.ui.profile.manageboats.adapters.BoatItems;
 import com.latencot.platoon.ui.userpanel.SubmitProblem;
@@ -39,7 +42,8 @@ public class CompanyBoatsList extends AppCompatActivity {
     private static final String TAG = "CompanyBoatsList";
     FloatingActionButton bt_add;
     BoatItems boatItems[];
-    BigInteger serial_id;
+//    BigInteger serial_id;
+    CompanyLoginData loginData;
     SharedIt shr;
     RecyclerView rv_boat_list;
     @Override
@@ -48,7 +52,13 @@ public class CompanyBoatsList extends AppCompatActivity {
         setContentView(R.layout.activity_company_boats_list);
 
         shr = new SharedIt(this);
-        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
+//        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
+        if(shr.getCompanyLoginData() != null){
+            loginData = shr.getCompanyLoginData();
+        }else{
+            Intent i = new Intent(CompanyBoatsList.this, LoginActivity.class);
+            startActivity(i);
+        }
         rv_boat_list = findViewById(R.id.acbl_boatrecycler);
         rv_boat_list.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
 
@@ -68,7 +78,7 @@ public class CompanyBoatsList extends AppCompatActivity {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getAllBoats(serial_id);
+                .getAllBoats(loginData.getSerial_id());
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -90,7 +100,7 @@ public class CompanyBoatsList extends AppCompatActivity {
                                 String type = boatsjsonobject.getString("type");
                                 int verified = boatsjsonobject.getInt("verified");
                                 Log.d(TAG, "onResponse: " + boat_id + " : " + registration_no);
-                                BoatItems boatItems = new BoatItems(verified, petname, type, registration_no, serial_id);
+                                BoatItems boatItems = new BoatItems(verified, petname, type, registration_no, boat_id);
                                 boatsarraylist.add(boatItems);
                             }
                             BoatItems[] items = boatsarraylist.toArray(new BoatItems[boatsarraylist.size()]);

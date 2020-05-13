@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -24,7 +25,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
+import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
+import com.latencot.platoon.ui.authentication.LoginWithoutPassword;
 
 import java.math.BigInteger;
 
@@ -40,7 +44,8 @@ public class MapsNavActivity extends FragmentActivity implements OnMapReadyCallb
     private GoogleMap mMap;
     private Marker marker;
     private static double bigLatitude, bigLongitude;
-    BigInteger serial_id;
+//    BigInteger serial_id;
+    CompanyLoginData loginData;
     SharedIt shr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +53,16 @@ public class MapsNavActivity extends FragmentActivity implements OnMapReadyCallb
         setContentView(R.layout.activity_maps_nav);
         getLocationPermission();
         shr = new SharedIt(this);
-        serial_id = new BigInteger(shr.extractpreference("serial_id"));
-
+        if(shr.getCompanyLoginData() != null){
+            loginData = shr.getCompanyLoginData();
+        }else if(shr.getTemporaryLoginData() != null){
+            loginData = shr.getTemporaryLoginData();
+        }else{
+            Toast.makeText(this, ErrorMessages.please_login, Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(MapsNavActivity.this, LoginWithoutPassword.class);
+            startActivity(i);
+        }
+//        serial_id = new BigInteger(shr.extractpreference("serial_id"));
         initMap();
     }
 

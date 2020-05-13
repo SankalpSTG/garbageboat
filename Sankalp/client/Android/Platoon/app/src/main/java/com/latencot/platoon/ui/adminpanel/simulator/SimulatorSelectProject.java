@@ -20,10 +20,12 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
 import com.latencot.platoon.retrofit.RetrofitClient;
+import com.latencot.platoon.ui.MainActivity;
 import com.latencot.platoon.ui.adminpanel.simulator.adapters.ProjectAdapter;
 import com.latencot.platoon.ui.profile.manageprojects.AddProject;
 import com.latencot.platoon.ui.profile.manageprojects.ProjectList;
@@ -41,8 +43,10 @@ import java.util.ArrayList;
 public class SimulatorSelectProject extends AppCompatActivity {
     private static final String TAG = "SimulatorSelectProject";
     FloatingActionButton bt_add;
-    ProjectItems projectItems[];
-    BigInteger serial_id;
+    ProjectItems[] projectItems;
+//    BigInteger serial_id;
+    CompanyLoginData loginData;
+    BigInteger projectid;
     SharedIt shr;
     RecyclerView rv_project_list;
 
@@ -51,7 +55,8 @@ public class SimulatorSelectProject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simulator_select_project);
         shr = new SharedIt(this);
-        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
+//        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
+        loginData = shr.getCompanyLoginData();
         rv_project_list = findViewById(R.id.assp_projectrecycler);
         rv_project_list.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
 
@@ -61,7 +66,7 @@ public class SimulatorSelectProject extends AppCompatActivity {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getAllProjects(serial_id);
+                .getAllProjects(loginData.getSerial_id());
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -110,13 +115,15 @@ public class SimulatorSelectProject extends AppCompatActivity {
         rv_project_list.setItemAnimator(new DefaultItemAnimator());
     }
     public void manageViewClickEvent(View view){
+        TextView tv_projectid = view.findViewById(R.id.pi_projectid);
         TextView tv_projectname = view.findViewById(R.id.pi_projectname);
+        projectid = new BigInteger(tv_projectid.getText().toString().trim());
         String projectname = tv_projectname.getText().toString().trim();
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(which == DialogInterface.BUTTON_POSITIVE){
-
+                    startSimulation();
                 }
             }
         };
@@ -127,5 +134,9 @@ public class SimulatorSelectProject extends AppCompatActivity {
                 .setNegativeButton("No", dialogClickListener)
                 .show();
     }
-
+    public void startSimulation(){
+        Intent i = new Intent(SimulatorSelectProject.this, SimulatorSelectBoat.class);
+        i.putExtra(SharedItHelper.project_id, projectid.toString());
+        startActivity(i);
+    }
 }

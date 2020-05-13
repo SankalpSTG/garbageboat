@@ -13,4 +13,5 @@ public interface ErrorMessages {
     String require_all_fields = "Required All Fields";
     String no_response_received = "No response received from our servers";
     String error_parsing_location = "Location data is incorrect";
+    String please_login = "Please Login";
 }

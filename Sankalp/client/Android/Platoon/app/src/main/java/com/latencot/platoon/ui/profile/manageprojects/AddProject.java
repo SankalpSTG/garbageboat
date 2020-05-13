@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
@@ -34,7 +35,8 @@ public class AddProject extends AppCompatActivity {
     Button bt_submit;
     CheckBox cb_anonymous;
     SharedIt shr;
-    BigInteger serial_id;
+//    BigInteger serial_id;
+    CompanyLoginData loginData;
     String projectname, projectdescription;
     int isanonymous = 0;
     @Override
@@ -43,8 +45,8 @@ public class AddProject extends AppCompatActivity {
         setContentView(R.layout.activity_add_project);
 
         shr = new SharedIt(this);
-        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
-
+//        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
+        loginData = shr.getCompanyLoginData();
         et_projectname = findViewById(R.id.aap_projectname);
         et_projectdescription = findViewById(R.id.aap_projectdescription);
         bt_submit = findViewById(R.id.aab_submit);
@@ -73,7 +75,7 @@ public class AddProject extends AppCompatActivity {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .addProject(serial_id, projectname, projectdescription, isanonymous);
+                .addProject(loginData.getSerial_id(), projectname, projectdescription, isanonymous);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
@@ -33,7 +34,7 @@ public class BoatDetails extends AppCompatActivity {
     SharedIt shr;
     TextView tv_registrationno, tv_petname, tv_type, tv_verified;
     ImageView iv_boatimage;
-    BigInteger serial_id, registration_no;
+    BigInteger registration_no;
     String petname, type;
     int verified;
     Button bt_delete;
@@ -49,8 +50,6 @@ public class BoatDetails extends AppCompatActivity {
         iv_boatimage = findViewById(R.id.abd_boatimage);
         bt_delete = findViewById(R.id.abd_deletebutton);
         shr = new SharedIt(this);
-
-        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
 
         Intent i = getIntent();
         Bundle intentdata = i.getExtras();

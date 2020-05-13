@@ -16,14 +16,15 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
 import com.latencot.platoon.retrofit.RetrofitClient;
+import com.latencot.platoon.ui.adminpanel.simulator.adapters.BoatAdapter;
+import com.latencot.platoon.ui.adminpanel.simulator.adapters.BoatItems;
 import com.latencot.platoon.ui.profile.manageboats.AddBoat;
 import com.latencot.platoon.ui.profile.manageboats.CompanyBoatsList;
-import com.latencot.platoon.ui.profile.manageboats.adapters.BoatAdapter;
-import com.latencot.platoon.ui.profile.manageboats.adapters.BoatItems;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +37,8 @@ import java.util.ArrayList;
 public class SimulatorSelectBoat extends AppCompatActivity {
     private static final String TAG = "SimulatorSelectBoat";
     BoatItems boatItems[];
-    BigInteger serial_id, project_id;
+//    BigInteger serial_id;
+    BigInteger project_id;
     SharedIt shr;
     RecyclerView rv_boat_list;
     @Override
@@ -44,12 +46,12 @@ public class SimulatorSelectBoat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simulator_select_boat);
         shr = new SharedIt(this);
-        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
+//        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
         rv_boat_list = findViewById(R.id.assb_boatrecycler);
         rv_boat_list.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
         Intent i = getIntent();
         Bundle extras = i.getExtras();
-        project_id = (BigInteger) (extras.get(SharedItHelper.project_id));
+        project_id = new BigInteger(extras.getString(SharedItHelper.project_id));
         getBoats();
     }
     public void getBoats(){
@@ -73,12 +75,9 @@ public class SimulatorSelectBoat extends AppCompatActivity {
                             for(int i = 0; i < boatsjsonarray.length(); i++){
                                 JSONObject boatsjsonobject = boatsjsonarray.getJSONObject(i);
                                 BigInteger boat_id = BigInteger.valueOf(boatsjsonobject.getLong("serial_id"));
-                                BigInteger registration_no = BigInteger.valueOf(boatsjsonobject.getLong("registration_number"));
                                 String petname = boatsjsonobject.getString("pet_name");
                                 String type = boatsjsonobject.getString("type");
-                                int verified = boatsjsonobject.getInt("verified");
-                                Log.d(TAG, "onResponse: " + boat_id + " : " + registration_no);
-                                BoatItems boatItems = new BoatItems(verified, petname, type, registration_no, serial_id);
+                                BoatItems boatItems = new BoatItems(boat_id, petname, type);
                                 boatsarraylist.add(boatItems);
                             }
                             BoatItems[] items = boatsarraylist.toArray(new BoatItems[boatsarraylist.size()]);

@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
@@ -26,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.math.BigInteger;
 
 public class LoginWithoutPassword extends AppCompatActivity {
     TextInputLayout til_mobileno;
@@ -75,9 +77,14 @@ public class LoginWithoutPassword extends AppCompatActivity {
                         if(!error){
                             JSONObject data = message.getJSONObject("data");
                             Toast.makeText(LoginWithoutPassword.this, ErrorMessages.login_successful, Toast.LENGTH_SHORT).show();
-                            shr.addpreference(data.getString("serial_id"), SharedItHelper.credential_id);
-                            shr.addpreference(data.getString("verification_level"), SharedItHelper.verification_level);
-                            shr.addpreference(data.getString("account_level"), SharedItHelper.account_level);
+                            BigInteger id = new BigInteger(data.getString("serial_id"));
+                            int verification_level = data.getInt("verification_level");
+                            int account_level = data.getInt("account_level");
+                            CompanyLoginData logindata = new CompanyLoginData(id, verification_level, account_level);
+                            shr.saveTemporaryLoginData(logindata);
+//                            shr.addpreference(data.getString("serial_id"), SharedItHelper.credential_id);
+//                            shr.addpreference(data.getString("verification_level"), SharedItHelper.verification_level);
+//                            shr.addpreference(data.getString("account_level"), SharedItHelper.account_level);
                             Intent i = new Intent(LoginWithoutPassword.this, HomeActivity.class);
                             startActivity(i);
                             finishAffinity();

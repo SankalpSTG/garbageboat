@@ -58,7 +58,8 @@ public class UpdateProjectLocation extends FragmentActivity implements OnMapRead
     private static final float DEFAULT_ZOOM = 15f;
     private Marker marker;
     private static double bigLatitude, bigLongitude;
-    private BigInteger serial_id, project_id;
+//    private BigInteger serial_id;
+    private BigInteger project_id;
     private SharedIt shr;
 
     @Override
@@ -71,7 +72,7 @@ public class UpdateProjectLocation extends FragmentActivity implements OnMapRead
         getLocationPermission();
 
         shr = new SharedIt(this);
-        serial_id = new BigInteger(shr.extractpreference("serial_id"));
+//        serial_id = new BigInteger(shr.extractpreference("serial_id"));
 
         Intent i = getIntent();
         Bundle extras = i.getExtras();

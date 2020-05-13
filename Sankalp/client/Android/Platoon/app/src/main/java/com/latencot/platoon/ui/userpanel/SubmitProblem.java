@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.retrofit.RetrofitClient;
@@ -44,7 +45,8 @@ public class SubmitProblem extends AppCompatActivity {
     Spinner sp_category;
     Button bt_submit;
     String header, description, category;
-    BigInteger serial_id;
+//    BigInteger serial_id;
+    CompanyLoginData loginData;
     SharedIt shr;
     ProblemItems problemItems[];
     RecyclerView rv_problems;
@@ -54,8 +56,8 @@ public class SubmitProblem extends AppCompatActivity {
         setContentView(R.layout.activity_submit_problem);
 
         shr = new SharedIt(this);
-        serial_id = new BigInteger(shr.extractpreference("serial_id"));
-
+//        serial_id = new BigInteger(shr.extractpreference("serial_id"));
+        loginData = shr.getCompanyLoginData();
         et_problemheader = findViewById(R.id.asp_problemheader);
         et_problemdescription = findViewById(R.id.asp_problemdescription);
         bt_submit = findViewById(R.id.asp_problemsubmit);
@@ -100,7 +102,7 @@ public class SubmitProblem extends AppCompatActivity {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .uploadProblem(serial_id, header, description, category);
+                .uploadProblem(loginData.getSerial_id(), header, description, category);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -135,7 +137,7 @@ public class SubmitProblem extends AppCompatActivity {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getSpecificProblems(serial_id);
+                .getSpecificProblems(loginData.getSerial_id());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

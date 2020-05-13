@@ -57,7 +57,8 @@ import java.util.ArrayList;
 public class ProjectDetails extends AppCompatActivity implements OnMapReadyCallback {
     SharedIt shr;
     TextView tv_name, tv_description, tv_anonymous, tv_id;
-    BigInteger serial_id, project_id;
+//    BigInteger serial_id;
+    BigInteger project_id;
     Button bt_delete, bt_addboats;
     String name, description;
     int isanonymous;
@@ -84,7 +85,7 @@ public class ProjectDetails extends AppCompatActivity implements OnMapReadyCallb
         setContentView(R.layout.activity_project_details);
 
         shr = new SharedIt(this);
-        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
+//        serial_id = new BigInteger(shr.extractpreference(SharedItHelper.credential_id));
         rv_addedboatlist = findViewById(R.id.apd_boatrecycler);
         rv_addedboatlist.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         rv_addedboatlist.setItemAnimator(new DefaultItemAnimator());

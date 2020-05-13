@@ -31,6 +31,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.retrofit.RetrofitClient;
@@ -55,7 +56,8 @@ public class MapPointCenterLocation extends FragmentActivity implements OnMapRea
     private static final float DEFAULT_ZOOM = 15f;
     private Marker marker;
     private static double bigLatitude, bigLongitude;
-    private BigInteger serial_id;
+//    private BigInteger serial_id;
+    CompanyLoginData loginData;
     private SharedIt shr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +68,8 @@ public class MapPointCenterLocation extends FragmentActivity implements OnMapRea
         getLocationPermission();
 
         shr = new SharedIt(this);
-        serial_id = new BigInteger(shr.extractpreference("serial_id"));
-
+//        serial_id = new BigInteger(shr.extractpreference("serial_id"));
+        loginData = shr.getCompanyLoginData();
         initMap();
     }
     View.OnClickListener update_button_clicked = new View.OnClickListener() {
@@ -80,7 +82,7 @@ public class MapPointCenterLocation extends FragmentActivity implements OnMapRea
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .updateLocation(serial_id, bigLatitude, bigLongitude);
+                .updateLocation(loginData.getSerial_id(), bigLatitude, bigLongitude);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

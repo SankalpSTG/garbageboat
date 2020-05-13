@@ -36,6 +36,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.ImageClass;
 import com.latencot.platoon.model.SharedIt;
@@ -61,7 +62,8 @@ public class UploadFile extends AppCompatActivity {
     public int RESULT_LOAD_IMAGE = 1234;
     private Bitmap bitmap;
     private String stringImage;
-    private BigInteger serial_id;
+//    private BigInteger serial_id;
+    CompanyLoginData loginData;
     private SharedIt shr;
     private Uri file_uri;
     private String picturePath;
@@ -72,10 +74,11 @@ public class UploadFile extends AppCompatActivity {
         bt_upload_logo_image = findViewById(R.id.auf_submit);
         iv_logo_imageview = findViewById(R.id.auf_image_logo);
         rl_iv_front_end = findViewById(R.id.auf_image_front_end);
-
+        bt_upload_logo_image.setEnabled(false);
         shr = new SharedIt(this);
-        serial_id = new BigInteger(shr.extractpreference("serial_id"));
-        Toast.makeText(getApplicationContext(), serial_id.toString(), Toast.LENGTH_SHORT).show();
+//        serial_id = new BigInteger(shr.extractpreference("serial_id"));
+//        Toast.makeText(getApplicationContext(), serial_id.toString(), Toast.LENGTH_SHORT).show();
+        loginData = shr.getCompanyLoginData();
         rl_iv_front_end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,6 +126,7 @@ public class UploadFile extends AppCompatActivity {
 
                 iv_logo_imageview.setImageBitmap(myBitmap);
                 rl_iv_front_end.setVisibility(View.GONE);
+                bt_upload_logo_image.setEnabled(true);
             }
         }
     }
@@ -135,7 +139,7 @@ public class UploadFile extends AppCompatActivity {
     }
 
     public void uploadImage() throws URISyntaxException {
-        RequestBody extra_data = RequestBody.create(MediaType.parse("multipart/form-data"), serial_id.toString());
+        RequestBody extra_data = RequestBody.create(MediaType.parse("multipart/form-data"), loginData.getSerial_id().toString());
         File image_file = new File(picturePath);
         RequestBody file_data = RequestBody.create(MediaType.parse("multipart/form-data"), image_file);
         MultipartBody.Part file_image = MultipartBody.Part.createFormData("logo", image_file.getName(), file_data);

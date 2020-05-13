@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.retrofit.RetrofitClient;
@@ -37,7 +38,8 @@ public class FeedbackActivity extends AppCompatActivity {
     Button bt_submit;
     String category, header, description;
     float rating = 0;
-    BigInteger serial_id;
+//    BigInteger serial_id;
+    CompanyLoginData loginData;
     SharedIt shr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +47,9 @@ public class FeedbackActivity extends AppCompatActivity {
         setContentView(R.layout.activity_feedback);
 
         shr = new SharedIt(this);
-        serial_id = new BigInteger(shr.extractpreference("serial_id"));
+//        serial_id = new BigInteger(shr.extractpreference("serial_id"));
 
+        loginData = shr.getCompanyLoginData();
         et_header = findViewById(R.id.af_feedbackheader);
         et_description = findViewById(R.id.af_feedbackdescription);
         sp_category = findViewById(R.id.af_feedbackcategories);
@@ -95,7 +98,7 @@ public class FeedbackActivity extends AppCompatActivity {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .uploadFeedback(serial_id, rating, header, description, category);
+                .uploadFeedback(loginData.getSerial_id(), rating, header, description, category);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override

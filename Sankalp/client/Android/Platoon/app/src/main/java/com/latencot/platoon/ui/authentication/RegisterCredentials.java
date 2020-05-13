@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonParser;
 import com.latencot.platoon.R;
+import com.latencot.platoon.model.CompanyLoginData;
 import com.latencot.platoon.model.ErrorMessages;
 import com.latencot.platoon.model.SharedIt;
 import com.latencot.platoon.model.SharedItHelper;
@@ -26,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.math.BigInteger;
 
 public class RegisterCredentials extends AppCompatActivity {
     //EditText
@@ -77,9 +79,14 @@ public class RegisterCredentials extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), error_message, Toast.LENGTH_SHORT).show();
                         if(!error){
                             JSONObject data = message.getJSONObject("data");
-                            shr.addpreference(data.getString("serial_id"), SharedItHelper.credential_id);
-                            shr.addpreference(data.getString("verification_level"), SharedItHelper.verification_level);
-                            shr.addpreference(data.getString("account_level"), SharedItHelper.account_level);
+                            BigInteger id = new BigInteger(data.getString("serial_id"));
+                            int verification_level = data.getInt("verification_level");
+                            int account_level = data.getInt("account_level");
+                            CompanyLoginData logindata = new CompanyLoginData(id, verification_level, account_level);
+                            shr.saveCompanyLoginData(logindata);
+//                            shr.addpreference(data.getString("serial_id"), SharedItHelper.credential_id);
+//                            shr.addpreference(data.getString("verification_level"), SharedItHelper.verification_level);
+//                            shr.addpreference(data.getString("account_level"), SharedItHelper.account_level);
                             Intent i = new Intent(RegisterCredentials.this, RegisterUser.class);
                             startActivity(i);
                             finish();
